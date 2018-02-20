@@ -88,5 +88,6 @@
         ?>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/cabezote.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plantilla.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/slide.js"></script>
     </body>
 </html>
