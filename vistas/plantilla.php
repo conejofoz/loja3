@@ -30,6 +30,7 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plantilla.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/cabezote.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/slide.css">
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/bootstrap.min.js"></script>
     </head>
@@ -81,6 +82,8 @@
             } else {
                 include "modulos/error404.php";
             }
+        }else{
+            include "modulos/slide.php";
         }
         ?>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/cabezote.js"></script>
