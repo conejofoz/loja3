@@ -79,7 +79,7 @@ SLIDE
     font-family: 'Ubuntu Condensed', sans-serif;
     opacity: 1;
     top:-10%;
-    color: #333;
+    /*color: #333;*/
 }
 #slide .slideOpciones h2{
     text-transform: uppercase;
@@ -87,7 +87,7 @@ SLIDE
     font-family: 'Ubuntu Condensed', sans-serif;
     opacity: 1;
     top:-10%;
-    color: #777;
+    /*color: #777;*/
 }
 #slide .slideOpciones h3{
     text-transform: uppercase;
@@ -95,12 +95,11 @@ SLIDE
     font-family: 'Ubuntu Condensed', sans-serif;
     opacity: 1;
     top:-10%;
-    color:#888; 
+    /*color:#888;*/ 
 }
 #slide .slideOpciones button{
     border: 0px;
     margin-top: 10px;
-    padding: 10px;
     opacity: 1;
     top: -10%;
 }
@@ -172,6 +171,13 @@ paginacion
     opacity: 1;
 }
 
+#btnSlide{
+    width: 150px;
+    border: 0px;
+    font-size: 25px;
+    padding: 2px;
+}
+
 
 
 
@@ -187,11 +193,9 @@ breakpoint
 
 
 /*====================================================
-ESCRITORIO GRANDE O TABLET HORIZONTAL (SM revisamos em 1366px en adelante)
+ESCRITORIO GRANDE (SM revisamos em 1366px en adelante)
 ====================================================*/
 @media (min-width:1200px){
-    
-    
     #slide #retroceder{
         top:37%;
         padding:40px 15px 40px 10px;
@@ -202,33 +206,24 @@ ESCRITORIO GRANDE O TABLET HORIZONTAL (SM revisamos em 1366px en adelante)
         padding:40px 10px 40px 15px;
         font-size: 22px;
     }
-    
-    
     #slide .slideOpciones h1{
             font-size: 50px;
         margin-top: 5px;
-        
     }
     #slide .slideOpciones h2{
         font-size: 35px;
     }
     #slide .slideOpciones h3{
         font-size: 30px;
-        
     }
     #slide .slideOpciones button{
-       
-        margin-top: 10px;
         padding: 10px;
-        
     }
 }
 /*====================================================
 ESCRITORIO MEDIANO O TABLET HORIZONTAL (SM revisamos em 1024px)
 ====================================================*/
 @media (max-width:1199px) and (min-width:992px){
-    
-    
     #slide #retroceder{
         top:35%;
         padding:40px 15px 40px 10px;
@@ -239,25 +234,18 @@ ESCRITORIO MEDIANO O TABLET HORIZONTAL (SM revisamos em 1024px)
         padding:40px 10px 40px 15px;
         font-size:18px;
     }
-    
-    
     #slide .slideOpciones h1{
         font-size: 35px;
         margin-top: 5px;
-        
     }
     #slide .slideOpciones h2{
         font-size: 30px;
     }
     #slide .slideOpciones h3{
         font-size: 20px;
-        
     }
     #slide .slideOpciones button{
-       
-        margin-top: 10px;
         padding: 10px;
-        
     }
 }
 /*====================================================
@@ -291,8 +279,6 @@ ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos em 768px)
         margin-bottom: -5px;
     }
     #slide .slideOpciones button{
-       
-        margin-top: 10px;
         padding: 5px;
         
     }
@@ -318,7 +304,6 @@ MOVIL (XS revisamos em 320px)
         margin-bottom: -5px;
     }
     #slide .slideOpciones button{
-        font-size: 10px;
         margin-top: 10px;
         padding: 5px;
     }
