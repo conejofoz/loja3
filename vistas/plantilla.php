@@ -9,8 +9,11 @@
         <title>Tienda virtual</title>
 
         <?php
+        
+        $servidor = ruta::ctrRutaServidor();
+        
         $icono = ControladorPlantilla::ctrEstiloPlantilla();
-        echo '<link rel="icon" href="http://localhost/backend/' . $icono["icono"] . '">';
+        echo '<link rel="icon" href="'.$servidor.$icono["icono"] . '">';
 
         /*
          * mantener la ruta fixa del projeto
@@ -22,17 +25,30 @@
         ;
         ?>
 
-
+        <!--=========================================================
+        PLUGINS DE CSS
+        ==========================================================-->'
         <link rel="icon" href="http://localhost/backend/<?php echo $url; ?>vistas/img/plantilla/icono.png">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
+        
+        <!--=========================================================
+        FOLHAS DE ESTILO PERSONALIZADAS
+        ==========================================================-->
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plantilla.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/cabezote.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/slide.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/productos.css">
+        
+        <!--=========================================================
+        PLUGINS DE JAVASCRIPT
+        ==========================================================-->
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.easing.js"></script>
+
     </head>
     <body>
         <?php
@@ -84,11 +100,15 @@
             }
         }else{
             include "modulos/slide.php";
+            include "modulos/destacados.php";
         }
         ?>
+        
+        <!--=========================================================
+        PLUGINS DE JAVASCRIPT PERSONALIZADO
+        ==========================================================-->
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/cabezote.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plantilla.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/slide.js"></script>
-        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.easing.js"></script>
     </body>
 </html>

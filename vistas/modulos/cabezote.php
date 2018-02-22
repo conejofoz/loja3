@@ -1,3 +1,6 @@
+<?php
+$servidor = ruta::ctrRutaServidor();
+?>
 <!--=====================================
 =            Top            =
 ======================================-->
@@ -55,7 +58,7 @@
             ======================================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
                 <a href="#">
-                    <img src="http://localhost/backend/<?php echo $social["logo"]; ?>" class="img-responsive">
+                    <img src="<?php echo $servidor.$social["logo"]; ?>" class="img-responsive">
                 </a>
 
             </div>
