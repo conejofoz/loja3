@@ -11,6 +11,9 @@ var titulos3 = $("#slide h3");
 var btnVerProducto = $("#slide button");
 var detenerIntervalo = false;
 var toogle = false;
+//alterar o css de slides dinamicamente
+$("#slide ul li").css({"width":100/$("#slide ul li").length + "%"})
+$("#slide ul").css({"width":$("#slide ul li").length*100 + "%"})
 
 /*====================================================
  ANIMACION INICIAL
@@ -47,7 +50,7 @@ $("#paginacion li").click(function () {
  ====================================================*/
 function avanzar() {
 
-    if (item == 3) {
+    if (item == $("#slide ul li").length -1) { //conta os li pra saber quantos slides tem
         item = 0;
     } else {
         item++
@@ -69,7 +72,7 @@ $("#slide #avanzar").click(function () {
  ====================================================*/
 $("#slide #retroceder").click(function () {
     if (item == 0) {
-        item = 3;
+        item = $("#slide ul li").length -1;
     } else {
         item--
     }
