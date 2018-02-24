@@ -1,7 +1,7 @@
 <?php
 
 class ControladorSlide{
-    public function ctrMostrarSlide(){
+    static public function ctrMostrarSlide(){
         $tabla = "slide"; 
         $respuesta = ModeloSlide::mdlMostrarSlide($tabla);
         return $respuesta;
