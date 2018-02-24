@@ -108,6 +108,35 @@ VITRINE DE PRODUCTOS QUADRICULO
     color: #999;
     font-size: 12px;
 }
+.productos ul li h1 small{
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+}
+.productos ul li h1 small a{
+    color: #777;
+}
+
+
+
+
+
+
+
+/*===========================================
+VITRINE DE PRODUCTOS LISTA
+=============================================*/
+.productos ul li h1{
+    margin-top: -10px;
+}
+
+
+
+
+
+
+
+
 .oferta{
     text-decoration: line-through;
     color: #ccc;
