@@ -14,6 +14,8 @@ BANNER
 
 
 
+
+
 <!--=========================================================
 BARRA PRODUTOS GRATIS
 ==========================================================-->
@@ -21,7 +23,6 @@ BARRA PRODUTOS GRATIS
     <div class="container">
         <div class="row">
             <div class="col-xs-12 organizarProductos">
-
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default btnGrid" id="btnGrid0">
                         <i class="fa fa-th" aria-hidden="true"></i>
@@ -32,12 +33,9 @@ BARRA PRODUTOS GRATIS
                         <span class="col-xs-0 pull-right">LISTA</span>
                     </button>
                 </div>
-
             </div> <!--fim 12 colunas-->
-
         </div><!--fim row-->
     </div><!--fim container-->
-
 </div>
 
 
@@ -56,8 +54,6 @@ VITRINE DE PRODUTOS GRATIS
                 <div class="col-sm-6 col-xs-12">
                     <h1><small>ARTICULOS GRATUITOS</small></h1>
                 </div>
-
-
                 <!--=========================================-->
                 <div class="col-sm-6 col-xs-12">
                     <a href="articulos-gratis">
@@ -66,25 +62,20 @@ VITRINE DE PRODUTOS GRATIS
                         </button>
                     </a>
                 </div>
-
-
-
                 <!--=========================================-->
-
-
             </div>
-
             <!--forcar aparecer a linha hr-->
             <div class="clearfix"></div>
             <hr>
-
         </div><!--========FIM DE ROW================-->
 
+        
+        
 
         <!--=========================================================
         VITRINE DE PRODUTOS EM QUADRICULOS
         ==========================================================-->
-        <ul class="grid0" style="display: none">
+        <ul class="grid0">
             <!--Produto 1-->
             <li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
@@ -288,7 +279,7 @@ VITRINE DE PRODUTOS GRATIS
         <!--=========================================================
         VITRINE DE PRODUTOS EM LISTA
         ==========================================================-->
-        <ul class="list0">
+        <ul class="list0" style="display: none">
             <!--PRODUTO 1-->
             <li class="col-xs-12">
                 <!--==============================================-->
@@ -588,7 +579,7 @@ VITRINE DE PRODUTOS MAS VENDIDOS
         <!--=========================================================
         VITRINE DE PRODUTOS EM QUADRICULOS
         ==========================================================-->
-        <ul class="grid1" style="display: none">
+        <ul class="grid1">
             <!--Produto 1-->
             <li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
@@ -834,7 +825,7 @@ VITRINE DE PRODUTOS MAS VENDIDOS
         <!--=========================================================
         VITRINE DE PRODUTOS EM LISTA
         ==========================================================-->  
-        <ul class="list1">
+        <ul class="list1" style="display: none">
             <!--PRODUTO 1-->
             <li class="col-xs-12">
                 <!--==============================================-->
@@ -981,7 +972,7 @@ VITRINE DE PRODUTOS MAS VISTOS
         <!--=========================================================
         VITRINE DE PRODUTOS EM QUADRICULOS
         ==========================================================-->
-        <ul class="grid2" style="display: none">
+        <ul class="grid2">
             <!--Produto 1-->
             <li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
@@ -1270,7 +1261,7 @@ VITRINE DE PRODUTOS MAS VISTOS
         <!--=========================================================
         VITRINE DE PRODUTOS EM LISTA
         ==========================================================-->  
-        <ul class="list2">
+        <ul class="list2" style="display: none">
             <!--PRODUTO 1-->
             <li class="col-xs-12">
                 <!--==============================================-->
