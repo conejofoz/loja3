@@ -73,8 +73,10 @@ for(var i = 0; i < btnList.length; i++){
 		$(".list"+numero).hide();
 		$(".grid"+numero).show();
 
-		$("#btnGrid"+numero).removeClass("backColor").addClass("backColor");
-		$("#btnList"+numero).addClass("backColor").removeClass("backColor");
+		//$("#btnGrid"+numero).removeClass("btn btn-default");
+		$("#btnGrid"+numero).addClass("backColor");
+		//$("#btnGrid"+numero).css("background-color", "#fc510d");
+		$("#btnList"+numero).removeClass("backColor");
 //                var cla = $(this).attr("class");
 //                alert(cla);
 
@@ -99,4 +101,28 @@ for(var i = 0; i < btnList.length; i++){
 
 
 
+/*=============================================
+ EFECTOS CON EL SCROLL
+ =============================================*/
+$(window).scroll(function(){
+    var scrolly = window.pageYOffset;
+    
+    //    APLICAR O EFEITO SOLAMENT EM DISPOSITIVOS MAIORES QUE 768PX
+    if(window.matchMedia("(min-width:768px)").matches){
+        if(scrollY < ($(".banner").offset().top)){
+        $(".banner img").css({"margin-top":-scrolly/2+"px"})
+    } else {
+        scrolly = 0;
+    }
+    } 
+})
 
+
+
+$.scrollUp({
+    scrollText:"",
+    scrollSpeed:2000,
+    easingType:"easeOutQuint"
+});    
+
+        
