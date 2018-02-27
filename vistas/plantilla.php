@@ -94,7 +94,7 @@
             /*
              * lista blanca de urls amigaveis
              */
-            if ($ruta != null) {
+            if ($ruta != null || $rutas[0] == "articulos-gratis" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto") {
                 include "modulos/productos.php";
             } else {
                 include "modulos/error404.php";
