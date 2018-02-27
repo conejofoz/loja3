@@ -11,11 +11,7 @@ BANNER
     </div>
 </figure>
 
-<?php
-$productos = ControladorProductos::ctrMostrarProductos();
-var_dump($productos);
 
-?>
 
 
 

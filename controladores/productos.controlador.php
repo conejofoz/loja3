@@ -9,6 +9,9 @@ class ControladorProductos{
         return $respuesta;
     }
     
+    
+    
+    
     static public function ctrMostrarSubCategorias($item, $valor){
         $tabla = "subcategorias";
         
@@ -16,4 +19,16 @@ class ControladorProductos{
         
         return $respuesta;
     }
+    
+    
+    
+    /*
+    MOSTRAR PRODUTOS
+     */
+    public function ctrMostrarProductos(){
+        $tabla = "productos";
+        $respuesta = ModeloProductos::mdlMostrarProductos($tabla);
+    }
+        
+    
 }
