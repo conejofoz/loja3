@@ -64,6 +64,7 @@
          */
         $rutas = array();
         $ruta = null;
+        $infoProducto = null;
         if (isset($_GET["ruta"])) {
             echo $_GET["ruta"];
 
@@ -92,10 +93,24 @@
             
             
             /*
+             * urls amigaveis de produtos
+             */
+            $rutaProductos = ControladorProductos::ctrMostrarInfoProducto($item, $valor);
+            if($rutas[0] == $rutaProductos["ruta"]){
+                $infoProducto = $rutas[0];
+            }
+            
+            
+            
+            
+            
+            /*
              * lista blanca de urls amigaveis
              */
             if ($ruta != null || $rutas[0] == "articulos-gratis" || $rutas[0] == "lo-mas-vendido" || $rutas[0] == "lo-mas-visto") {
                 include "modulos/productos.php";
+            } else if($infoProducto != null) {
+                include "modulos/infoproducto.php";
             } else {
                 include "modulos/error404.php";
             }
