@@ -18,25 +18,27 @@ BANNER
 $servidor = ruta::ctrRutaServidor();
 $titulosModulos = array("ARTICULOS GRATUITOS", "LO MAS VENDIDO", "LO MAS VISTO");
 $rutasModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
+$base = 0;
+$tope = 4;
 
 
 if ($titulosModulos[0] == "ARTICULOS GRATUITOS") {
     $ordenar = "id";
     $item = "precio";
     $valor = 0;
-    $gratis = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor);
+    $gratis = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
 }
 if ($titulosModulos[1] == "LO MAS VENDIDO") {
     $ordenar = "ventas";
     $item = null;
     $valor = null;
-    $ventas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor);
+    $ventas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
 }
 if ($titulosModulos[2] == "LO MAS VISTO") {
     $ordenar = "vistas";
     $item = null;
     $valor = null;
-    $vistas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor);
+    $vistas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
 }
 
 $modulos = array($gratis, $ventas, $vistas);
