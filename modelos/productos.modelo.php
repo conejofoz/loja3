@@ -3,7 +3,10 @@
 require_once 'conexion.php';
 
 class ModeloProductos {
-
+        
+    /* ==========================================
+     * MOSTRAR CATEGORIAS
+    ========================================== */
     static public function mdlMostrarCategorias($tabla, $item, $valor) {
         if ($item != null) {
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
@@ -18,7 +21,12 @@ class ModeloProductos {
         $stmt->close();
         $stmt = null;
     }
+    
+    
 
+    /*==========================================
+     * MOSTRAR SUB-CATEGORIAS
+    ========================================== */
     static public function mdlMostrarSubCategorias($tabla, $item, $valor) {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
         $stmt->bindParam(":" . $item, $valor, PDO::PARAM_INT);
@@ -31,6 +39,9 @@ class ModeloProductos {
     
     
     
+    /*==========================================
+     * MOSTRAR PRODUTOS
+     ==========================================*/
     static public function mdlMostrarProductos($tabla, $ordenar, $item, $valor, $base, $tope) {
         if ($item != null) {
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY $ordenar DESC LIMIT $base, $tope");
@@ -38,7 +49,7 @@ class ModeloProductos {
             $stmt->execute();
             return $stmt->fetchAll();
         } else {
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $ordenar DESC LIMIT 4");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY $ordenar DESC LIMIT $base, $tope");
             $stmt->execute();
             return $stmt->fetchAll();
         }
@@ -49,6 +60,9 @@ class ModeloProductos {
 
 
     
+    /*==========================================
+     * MOSTRAR INFORMACAO PRODUTO 
+     ==========================================*/
     static public function mdlMostrarInfoProducto($tabla, $item, $valor){
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
         $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
@@ -57,5 +71,4 @@ class ModeloProductos {
         $stmt->close();
         $stmt = null;
     }
-
 }
