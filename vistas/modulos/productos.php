@@ -1,5 +1,6 @@
 <?php
 $servidor = ruta::ctrRutaServidor();
+$url = ruta::ctrRuta();
 ?>
 <!--=========================================================
 BANNER
@@ -58,9 +59,12 @@ LISTAR PRODUTOS
 <div class="container-fluid productos">
     <div class="container">
         <div class="row">
-            <ul class="breadcrumb fondoBreadcrumb lead">
-                <li><a href="#">INICIO</a></li>
-                <li class="active"><?php echo $rutas[0]; ?></li>
+            <!--
+            BREADCRUMB O MIGAS DE PÃO
+            -->
+            <ul class="breadcrumb text-uppercase fondoBreadcrumb">
+                <li><a href="<?php echo $url; ?>">INICIO</a></li>
+                <li class="active pagActiva"><?php echo $rutas[0]; ?></li>
             </ul>
             <?php
             if ($rutas[0] == "articulos-gratis") {
@@ -85,7 +89,7 @@ LISTAR PRODUTOS
 
                 $categoria = ControladorProductos::ctrMostrarCategorias($item1, $valor1);
 
-                
+
 
                 if (!$categoria) {
                     $subCategoria = ControladorProductos::ctrMostrarSubCategorias($item1, $valor1);
@@ -103,7 +107,8 @@ LISTAR PRODUTOS
             $base = 0;
             $tope = 12;
             $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope);
-            
+            $listaProductos = ControladorProductos::ctrListarProductos($ordenar, $item2, $valor2);
+
             if (!$productos) {
                 echo '<div class="col-xs-12 error404 text-center">
                         <h1><small>Oops!</small></h1>
@@ -112,7 +117,7 @@ LISTAR PRODUTOS
             } else {
                 echo '<ul class="grid0">';
                 foreach ($productos as $key => $value) {
-        echo '<li class="col-md-3 col-sm-6 col-xs-12">
+                    echo '<li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
                 <figure>
                     <a href="' . $value["ruta"] . '" class="pixelSubCategorias">
@@ -127,15 +132,15 @@ LISTAR PRODUTOS
                         <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br><span style="color:rgba(0,0,0,0)">-</span>';
 
-        if ($value["nuevo"] != 0) {
-            echo '<span class="label label-warning fontSize">Nuevo</span> ';
-        }
+                    if ($value["nuevo"] != 0) {
+                        echo '<span class="label label-warning fontSize">Nuevo</span> ';
+                    }
 
-        if ($value["oferta"] != 0) {
-            echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
-        }
+                    if ($value["oferta"] != 0) {
+                        echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+                    }
 
-        echo '</a>
+                    echo '</a>
                     </small>
                 </h4>
 
@@ -143,22 +148,22 @@ LISTAR PRODUTOS
                 <!--==============-->
                 <div class="col-xs-6 precio">';
 
-        if ($value["precio"] == 0) {
-            echo '<h2><small>GRATIS</small></h2>';
-        } else {
-            if ($value["oferta"] != 0) {
-                echo '<h2><small>
+                    if ($value["precio"] == 0) {
+                        echo '<h2><small>GRATIS</small></h2>';
+                    } else {
+                        if ($value["oferta"] != 0) {
+                            echo '<h2><small>
                             <strong class="oferta">USD $' . $value["precio"] . '</strong>
                         </small>
                         <small>
                             $' . $value["precioOferta"] . '
                         </small></h2>';
-            } else {
-                echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
-            }
-        }
+                        } else {
+                            echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                        }
+                    }
 
-        echo '</div>
+                    echo '</div>
 
 
                 <!--==============-->
@@ -170,9 +175,9 @@ LISTAR PRODUTOS
 
                         </button>';
 
-        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
-            if ($value["oferta"] != 0) {
-                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                    if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+                        if ($value["oferta"] != 0) {
+                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -183,10 +188,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-            } else {
+                        } else {
 
 
-                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -197,10 +202,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-            }
-        }
+                        }
+                    }
 
-        echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
+                    echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
@@ -211,18 +216,18 @@ LISTAR PRODUTOS
                     </div>
                 </div>
             </li>';
-    }
+                }
 
 
-    echo '</ul>
+                echo '</ul>
         
 
 
 <ul class="list0" style="display: none">';
-    foreach ($productos as $key => $value) {
+                foreach ($productos as $key => $value) {
 
 
-        echo '<!--PRODUTO 1-->
+                    echo '<!--PRODUTO 1-->
             <li class="col-xs-12">
                 <!--==============================================-->
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -242,17 +247,17 @@ LISTAR PRODUTOS
                             <a href="' . $value["titulo"] . '" class="pixelProducto">
                                 <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br>';
-        if ($value["nuevo"] != 0) {
-            echo '<span class="label label-warning fontSize">Nuevo</span> ';
-        }
+                    if ($value["nuevo"] != 0) {
+                        echo '<span class="label label-warning fontSize">Nuevo</span> ';
+                    }
 
-        if ($value["oferta"] != 0) {
-            echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
-        }
+                    if ($value["oferta"] != 0) {
+                        echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+                    }
 
 
 
-        echo '</a>
+                    echo '</a>
                         </small>
                     </h1>
                     <p class="text-muted">' . $value["titular"] . '</p>';
@@ -272,16 +277,16 @@ LISTAR PRODUTOS
                     }
 
 
-        echo '<div class="btn-group pull-left enlaces">
+                    echo '<div class="btn-group pull-left enlaces">
                         <button type="button" class="btn btn-default btn-xs deseos" 
                                 idProducto="' . $value["id"] . '" data-toggle="tooltip" title="Agregar a mi lista de deseos">
                             <i class="fa fa-heart" aria-hidden="true"></i>
 
                         </button>';
 
-                        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
-            if ($value["oferta"] != 0) {
-                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                    if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+                        if ($value["oferta"] != 0) {
+                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -292,10 +297,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-            } else {
+                        } else {
 
 
-                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -306,10 +311,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-            }
-        }
+                        }
+                    }
 
-                        echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
+                    echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
@@ -325,10 +330,45 @@ LISTAR PRODUTOS
                 <!--==============================================-->
                 <div class="col-xs-12"><hr></div>
             </li>';
-    }
-    echo '</ul>';
+                }
+                echo '</ul>';
             }
             ?>
+
+
+
+            <center>
+
+                <?php
+                if (count($listaProductos) != 0) {
+                    $pagProductos = ceil(count($listaProductos)/12);
+                    if($pagProductos > 4){
+                        
+                    } else {
+                        echo '<ul class="pagination">'; 
+                        for($i = 1; $i <= $pagProductos; $i ++){
+                            echo '<li><a href="#">'.$i.'</a></li>';
+                        }
+                        
+                        echo '</ul>';
+                    }
+                }
+                ?>
+
+
+
+
+
+<!--                <ul class="pagination">
+                    <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                </ul>-->
+            </center>
         </div>
     </div>
 </div>

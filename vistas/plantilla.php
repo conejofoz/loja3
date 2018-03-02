@@ -66,7 +66,7 @@
         $ruta = null;
         $infoProducto = null;
         if (isset($_GET["ruta"])) {
-            echo $_GET["ruta"];
+            //echo $_GET["ruta"];
 
             $rutas = explode("/", $_GET["ruta"]);
 
