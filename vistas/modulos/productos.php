@@ -59,14 +59,38 @@ LISTAR PRODUTOS
 <div class="container-fluid productos">
     <div class="container">
         <div class="row">
-            <!--
+            <!--============================================
             BREADCRUMB O MIGAS DE PÃO
-            -->
+            ==============================================-->
             <ul class="breadcrumb text-uppercase fondoBreadcrumb">
                 <li><a href="<?php echo $url; ?>">INICIO</a></li>
                 <li class="active pagActiva"><?php echo $rutas[0]; ?></li>
             </ul>
             <?php
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++
+             * CHAMANDO DE PAGINACAO
+             * ********************************************** */
+            if (isset($rutas[1])) {
+
+                $base = ($rutas[1] - 1) * 12;
+                $tope = 12;
+            } else {
+                $rutas[1] = 1;
+                $base = 0;
+                $tope = 12;
+            }
+
+
+
+
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++
+             * CHAMANDO PRODUTOS DE CATEGORIAS, SUBCATEGORIAS E DESTACADO
+             * ********************************************** */
+
+
+
+
+
             if ($rutas[0] == "articulos-gratis") {
 
                 $item2 = "precio";
@@ -104,8 +128,6 @@ LISTAR PRODUTOS
 
 
 
-            $base = 0;
-            $tope = 12;
             $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope);
             $listaProductos = ControladorProductos::ctrListarProductos($ordenar, $item2, $valor2);
 
@@ -127,6 +149,7 @@ LISTAR PRODUTOS
 
 
                 <!--==============-->
+                '.$value["id"].'
                 <h4>
                     <small>
                         <a href="' . $value["ruta"] . '" class="pixelProducto">
@@ -338,19 +361,44 @@ LISTAR PRODUTOS
 
 
             <center>
+                <!--PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+                INICIO DA PAGINACAO
+                PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP-->
 
                 <?php
                 if (count($listaProductos) != 0) {
-                    $pagProductos = ceil(count($listaProductos)/12);
-                    if($pagProductos > 4){
-                        
-                    } else {
-                        echo '<ul class="pagination">'; 
-                        for($i = 1; $i <= $pagProductos; $i ++){
-                            echo '<li><a href="#">'.$i.'</a></li>';
+
+                    $pagProductos = ceil(count($listaProductos) / 12);
+                    /* =============================================
+                     * QUANDO O NUMERO DE PAGINAS E MAIOR DO QUE 4
+                      ============================================ */
+                    if ($pagProductos > 4) {
+                        /* =============================================
+                         * BOTOES DAS PRIMEIRAS 4 PAGINAS E ULTIMA PAGINA
+                          ============================================ */
+                        if ($rutas[1] == 1) {
+                            echo '<ul class="pagination">';
+                            for ($i = 1; $i <= 4; $i ++) {
+                                echo '<li><a href="' . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                            }
+
+                            echo '<li class="disabled"><a>...</a></li>
+                              <li><a href="' . $rutas[0] . '/' . $pagProductos . '">' . $pagProductos . '</a></li>
+                              <li><a href="' . $rutas[0] . '/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>    
+                            </ul>';
                         }
-                        
-                        echo '</ul>';
+
+
+                        /* =============================================
+                         * QUANDO O NUMERO DE PAGINAS E MENOR OU IGUAL A 4
+                          ============================================ */
+                    } else {
+                        echo '<ul class="pagination">';
+                        for ($i = 1; $i <= $pagProductos; $i ++) {
+                            echo '<li><a href="#">' . $i . '</a></li>';
+                        }
+
+                        echo '';
                     }
                 }
                 ?>
@@ -358,16 +406,16 @@ LISTAR PRODUTOS
 
 
 
-
-<!--                <ul class="pagination">
-                    <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                </ul>-->
+                <!--                <ul class="pagination">
+                                    <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                <li class="disabled"><a>...</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                </ul>-->
             </center>
         </div>
     </div>
