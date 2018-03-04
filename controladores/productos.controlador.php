@@ -50,6 +50,18 @@ class ControladorProductos{
         $respuesta = ModeloProductos::mdlListarProductos($tabla, $ordenar, $item, $valor);
         return $respuesta;
     }
+    
+    
+    
+    
+        static public function ctrMostrarBanner($ruta){
+        $tabla = "banner";
+        
+        $respuesta = ModeloProductos::mdlMostrarBanner($tabla, $ruta);
+        
+        return $respuesta;
+    }
+  
         
     
 }

@@ -1,20 +1,30 @@
-<?php
-$servidor = ruta::ctrRutaServidor();
-?>
 <!--=========================================================
 BANNER
 ==========================================================-->
-<figure class="banner">
-    <img src="http://localhost/backend/vistas/img/banner/default.jpg" class="img-responsive" width="100%">
-
-    <div class="textoBanner textoDer">
-        <h1 style="color:#fff">OFERTAS ESPECIALES</h1>
-        <h2 style="color:#fff"><strong>50% off</strong></h2>
-        <h3 style="color:#fff">Termina em 31 de octubre</h3>
-    </div>
-</figure>
-
 <?php
+$servidor = ruta::ctrRutaServidor();
+
+$ruta = "sin-categoria";
+
+$banner = ControladorProductos::ctrMostrarBanner($ruta);
+
+$titulo1 = json_decode($banner["titulo1"], true);
+$titulo2 = json_decode($banner["titulo2"], true);
+$titulo3 = json_decode($banner["titulo3"], true);
+
+if ($banner != null) {
+
+    echo '<figure class="banner">
+    <img src="' . $servidor . $banner["img"] . '" class="img-responsive" width="100%">
+
+    <div class="textoBanner ' . $banner["estilo"] . '">
+        <h1 style="color:' . $titulo1["color"] . '">' . $titulo1["texto"] . '</h1>
+        <h2 style="color:' . $titulo2["color"] . '"><strong>' . $titulo2["texto"] . '</strong></h2>
+        <h3 style="color:' . $titulo3["color"] . '">' . $titulo3["texto"] . '</h3>
+    </div>
+</figure>';
+}
+
 $servidor = ruta::ctrRutaServidor();
 $titulosModulos = array("ARTICULOS GRATUITOS", "LO MAS VENDIDO", "LO MAS VISTO");
 $rutasModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
