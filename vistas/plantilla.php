@@ -113,6 +113,8 @@
                 include "modulos/productos.php";
             } else if($infoProducto != null) {
                 include "modulos/infoproducto.php";
+            } else if($rutas[0] == "buscador") {
+                include "modulos/buscador.php";
             } else {
                 include "modulos/error404.php";
             }
@@ -128,5 +130,6 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/cabezote.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plantilla.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/slide.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/buscador.js"></script>
     </body>
 </html>
