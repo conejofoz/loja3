@@ -119,7 +119,7 @@
             include "modulos/destacados.php";
         }
         ?>
-        
+        <input type="hidden" value="<?php echo $url; ?>" id="rutaOculta">
         <!--=========================================================
         PLUGINS DE JAVASCRIPT PERSONALIZADO
         ==========================================================-->

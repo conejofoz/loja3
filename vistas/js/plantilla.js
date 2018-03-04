@@ -2,13 +2,15 @@
  PLANTILLA
  =============================================*/
 
+var rutaOculta = $("#rutaOculta").val();
+
 //TOOLTIP
 $('[data-toggle="tooltip"]').tooltip();
 
 
 $.ajax({
 
-    url: "ajax/plantilla.ajax.php",
+    url: rutaOculta+"ajax/plantilla.ajax.php",
     success: function (respuesta) {
 
         //console.log(JSON.parse(respuesta).colorFondo);
@@ -140,3 +142,17 @@ if(pagActiva != null){
     var regPagActiva = pagActiva.replace(/-/g, " ");
     $(".pagActiva").html(regPagActiva);
 }
+
+
+
+
+
+/*=============================================
+ ENLACES PAGINACION
+ =============================================*/ 
+var url = window.location.href;
+var indice = url.split("/");//cria um array explodindo na barra /
+
+//não estava colorindo os botões//if(indice.pop() != "#"){
+    $("#item"+indice.pop()).addClass("active");
+//}
