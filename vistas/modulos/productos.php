@@ -28,8 +28,10 @@ BARRA DE PRODUTOS
                         Ordenar Productos <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Más reciente</a></li>
-                        <li><a href="#">Más antiguo</a></li>
+                        <?php 
+                        echo '<li><a href="'.$url.$rutas[0].'/1/recientes">Más reciente</a></li>
+                              <li><a href="'.$url.$rutas[0].'/1/antiguos">Más antiguo</a></li>';
+                        ?>
 
                     </ul>
                 </div>
@@ -71,6 +73,21 @@ LISTAR PRODUTOS
              * CHAMANDO DE PAGINACAO
              * ********************************************** */
             if (isset($rutas[1])) {
+                
+                //$_SESSION["ordenar"] = "DESC";
+                
+                if(isset($rutas[2])){
+                    if($rutas[2] == "antiguos"){
+                        $modo = "ASC";
+                        $_SESSION["ordenar"] = $modo;
+                    } else {
+                        $modo = "DESC";
+                        $_SESSION["ordenar"] = $modo;
+                    }
+                } else {
+                     $modo = $_SESSION["ordenar"];
+                    
+                }
 
                 $base = ($rutas[1] - 1) * 12;
                 $tope = 12;
@@ -78,6 +95,8 @@ LISTAR PRODUTOS
                 $rutas[1] = 1;
                 $base = 0;
                 $tope = 12;
+                $modo = "DESC";
+ 
             }
 
 
@@ -124,11 +143,10 @@ LISTAR PRODUTOS
                     $valor2 = $categoria["id"];
                 }
             }
+            
+           
 
-
-
-
-            $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope);
+            $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item2, $valor2, $base, $tope, $modo);
             $listaProductos = ControladorProductos::ctrListarProductos($ordenar, $item2, $valor2);
 
             if (!$productos) {

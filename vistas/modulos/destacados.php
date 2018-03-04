@@ -26,19 +26,22 @@ if ($titulosModulos[0] == "ARTICULOS GRATUITOS") {
     $ordenar = "id";
     $item = "precio";
     $valor = 0;
-    $gratis = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
+    $modo = "DESC";
+    $gratis = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 if ($titulosModulos[1] == "LO MAS VENDIDO") {
     $ordenar = "ventas";
     $item = null;
     $valor = null;
-    $ventas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
+    $modo = "DESC";
+    $ventas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 if ($titulosModulos[2] == "LO MAS VISTO") {
     $ordenar = "vistas";
     $item = null;
     $valor = null;
-    $vistas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope);
+    $modo = "DESC";
+    $vistas = $productos = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
 $modulos = array($gratis, $ventas, $vistas);
@@ -229,20 +232,20 @@ for ($i = 0; $i < count($titulosModulos); $i++) {
                         </small>
                     </h1>
                     <p class="text-muted">' . $value["titular"] . '</p>';
-                    if ($value["precio"] == 0) {
-                        echo '<h2><small>GRATIS</small></h2>';
-                    } else {
-                        if ($value["oferta"] != 0) {
-                            echo '<h2><small>
+        if ($value["precio"] == 0) {
+            echo '<h2><small>GRATIS</small></h2>';
+        } else {
+            if ($value["oferta"] != 0) {
+                echo '<h2><small>
                                         <strong class="oferta">USD $' . $value["precio"] . '</strong>
                                     </small>
                                     <small>
                                         $' . $value["precioOferta"] . '
                                     </small></h2>';
-                        } else {
-                            echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
-                        }
-                    }
+            } else {
+                echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+            }
+        }
 
 
         echo '<div class="btn-group pull-left enlaces">
@@ -252,7 +255,7 @@ for ($i = 0; $i < count($titulosModulos); $i++) {
 
                         </button>';
 
-                        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
             if ($value["oferta"] != 0) {
                 echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
@@ -282,7 +285,7 @@ for ($i = 0; $i < count($titulosModulos); $i++) {
             }
         }
 
-                        echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
+        echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
