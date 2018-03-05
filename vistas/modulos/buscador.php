@@ -11,8 +11,8 @@ BARRA DE PRODUTOS
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <?php
-                        echo '<li><a href="' . $url . $rutas[0] . '/1/recientes">Más reciente</a></li>
-                              <li><a href="' . $url . $rutas[0] . '/1/antiguos">Más antiguo</a></li>';
+                        echo '<li><a href="' . $url . $rutas[0] . '/1/recientes/'.$rutas[3].'">Más reciente</a></li>
+                              <li><a href="' . $url . $rutas[0] . '/1/antiguos/'.$rutas[3].'">Más antiguo</a></li>';
                         ?>
 
                     </ul>
