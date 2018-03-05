@@ -81,15 +81,28 @@ class ModeloProductos {
         $stmt->close();
         $stmt = null;
     }
-    
-    
-    
-    
+
     static public function mdlMostrarBanner($tabla, $ruta) {
         $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta = :ruta");
         $stmt->bindParam(":ruta", $ruta, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch();
+        $stmt->close();
+        $stmt = null;
+    }
+
+    static public function mdlBuscarProductos($tabla, $busqueda, $ordenar, $modo, $base, $tope) {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta LIKE '%$busqueda%' OR titulo LIKE '%$busqueda%' OR titular LIKE '%$busqueda%' OR descripcion LIKE '%$busqueda%' ORDER BY $ordenar $modo LIMIT $base, $tope ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+        $stmt->close();
+        $stmt = null;
+    }
+
+    static public function mdlListarProductosBusqueda($tabla, $busqueda) {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE ruta LIKE '%$busqueda%' OR titulo LIKE '%$busqueda%' OR titular LIKE '%$busqueda%' OR descripcion LIKE '%$busqueda%' ");
+        $stmt->execute();
+        return $stmt->fetchAll();
         $stmt->close();
         $stmt = null;
     }
