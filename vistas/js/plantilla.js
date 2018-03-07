@@ -10,7 +10,7 @@ $('[data-toggle="tooltip"]').tooltip();
 
 $.ajax({
 
-    url: rutaOculta+"ajax/plantilla.ajax.php",
+    url: rutaOculta + "ajax/plantilla.ajax.php",
     success: function (respuesta) {
 
         //console.log(JSON.parse(respuesta).colorFondo);
@@ -40,65 +40,65 @@ $.ajax({
  QUADRICULA O LISTA
  =============================================*/
 /*var btnList = $(".btnList");
-
-for(var i = 0; i < btnList.length; i++){
-    $("#btnGrid"+i).click(function(){
-        var numero = $(this).attr("id").substr(-1); //a variavel i se perde dentro de uma funcao
-        $(".list"+numero).hide();
-        $(".grid"+numero).show();
-        
-        // COLORIR O BOTAO SELECIONADO
-        $("#btnGrid"+numero).addClass("backColor");
-        //$("#btnList"+numero).removeClass("backColor");
-    });
-    
-    $("#btnList"+i).click(function(){
-        var numero = $(this).attr("id").substr(-1); //a variavel i se perde dentro de uma funcao
-        $(".list"+numero).show();
-        $(".grid"+numero).hide();
-        
-        // COLORIR O BOTAO SELECIONADO
-       // $("#btnGrid"+numero).removeClass("backColor");
-        $("#btnList"+numero).addClass("backColor");
-    });
-}*/
+ 
+ for(var i = 0; i < btnList.length; i++){
+ $("#btnGrid"+i).click(function(){
+ var numero = $(this).attr("id").substr(-1); //a variavel i se perde dentro de uma funcao
+ $(".list"+numero).hide();
+ $(".grid"+numero).show();
+ 
+ // COLORIR O BOTAO SELECIONADO
+ $("#btnGrid"+numero).addClass("backColor");
+ //$("#btnList"+numero).removeClass("backColor");
+ });
+ 
+ $("#btnList"+i).click(function(){
+ var numero = $(this).attr("id").substr(-1); //a variavel i se perde dentro de uma funcao
+ $(".list"+numero).show();
+ $(".grid"+numero).hide();
+ 
+ // COLORIR O BOTAO SELECIONADO
+ // $("#btnGrid"+numero).removeClass("backColor");
+ $("#btnList"+numero).addClass("backColor");
+ });
+ }*/
 
 
 
 
 var btnList = $(".btnList");
 
-for(var i = 0; i < btnList.length; i++){
+for (var i = 0; i < btnList.length; i++) {
 
-	$("#btnGrid"+i).click(function(){
-            
+    $("#btnGrid" + i).click(function () {
 
-		var numero = $(this).attr("id").substr(-1);
-                
 
-		$(".list"+numero).hide();
-		$(".grid"+numero).show();
+        var numero = $(this).attr("id").substr(-1);
 
-		//$("#btnGrid"+numero).removeClass("btn btn-default");
-		$("#btnGrid"+numero).addClass("backColor");
-		//$("#btnGrid"+numero).css("background-color", "#fc510d");
-		$("#btnList"+numero).removeClass("backColor");
+
+        $(".list" + numero).hide();
+        $(".grid" + numero).show();
+
+        //$("#btnGrid"+numero).removeClass("btn btn-default");
+        $("#btnGrid" + numero).addClass("backColor");
+        //$("#btnGrid"+numero).css("background-color", "#fc510d");
+        $("#btnList" + numero).removeClass("backColor");
 //                var cla = $(this).attr("class");
 //                alert(cla);
 
-	})
+    })
 
-	$("#btnList"+i).click(function(){
+    $("#btnList" + i).click(function () {
 
-		var numero = $(this).attr("id").substr(-1);
+        var numero = $(this).attr("id").substr(-1);
 
-		$(".list"+numero).show();
-		$(".grid"+numero).hide();
+        $(".list" + numero).show();
+        $(".grid" + numero).hide();
 
-		$("#btnGrid"+numero).removeClass("backColor");
-		$("#btnList"+numero).addClass("backColor");
+        $("#btnGrid" + numero).removeClass("backColor");
+        $("#btnList" + numero).addClass("backColor");
 
-	})
+    })
 
 }
 
@@ -110,35 +110,37 @@ for(var i = 0; i < btnList.length; i++){
 /*=============================================
  EFECTOS CON EL SCROLL
  =============================================*/
-$(window).scroll(function(){
+$(window).scroll(function () {
     var scrolly = window.pageYOffset;
-    
+
     //    APLICAR O EFEITO SOLAMENT EM DISPOSITIVOS MAIORES QUE 768PX
-    if(window.matchMedia("(min-width:768px)").matches){
-        if(scrollY < ($(".banner").offset().top)){
-        $(".banner img").css({"margin-top":-scrolly/2+"px"})
-    } else {
-        scrolly = 0;
+    if (window.matchMedia("(min-width:768px)").matches) {
+        if ($(".banner").html() != null) {
+            if (scrollY < ($(".banner").offset().top)) {
+                $(".banner img").css({"margin-top": -scrolly / 2 + "px"})
+            } else {
+                scrolly = 0;
+            }
+        }
     }
-    } 
 })
 
 
 
 $.scrollUp({
-    scrollText:"",
-    scrollSpeed:2000,
-    easingType:"easeOutQuint"
-});    
+    scrollText: "",
+    scrollSpeed: 2000,
+    easingType: "easeOutQuint"
+});
 
-  
-  
-  
+
+
+
 /*=============================================
  MIGAS E PÃO
- =============================================*/  
+ =============================================*/
 var pagActiva = $(".pagActiva").html();
-if(pagActiva != null){
+if (pagActiva != null) {
     var regPagActiva = pagActiva.replace(/-/g, " ");
     $(".pagActiva").html(regPagActiva);
 }
@@ -149,10 +151,10 @@ if(pagActiva != null){
 
 /*=============================================
  ENLACES PAGINACION
- =============================================*/ 
+ =============================================*/
 var url = window.location.href;
 var indice = url.split("/");//cria um array explodindo na barra /
 
 //não estava colorindo os botões//if(indice.pop() != "#"){
-    $("#item"+indice.pop()).addClass("active");
+$("#item" + indice.pop()).addClass("active");
 //}

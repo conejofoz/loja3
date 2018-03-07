@@ -35,6 +35,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/flexslider.css">
         
         <!--=========================================================
         FOLHAS DE ESTILO PERSONALIZADAS
@@ -43,6 +44,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/cabezote.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/slide.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/productos.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/infoproducto.css">
         
         <!--=========================================================
         PLUGINS DE JAVASCRIPT
@@ -51,6 +53,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.easing.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.scrollUp.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.flexslider.js"></script>
 
     </head>
     <body>
@@ -131,5 +134,6 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plantilla.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/slide.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/buscador.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/infoproducto.js"></script>
     </body>
 </html>
