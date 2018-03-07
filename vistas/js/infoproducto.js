@@ -49,4 +49,3 @@ $(".infoproducto figure.visor img").mousemove(function(event){
         "margin-top":-posY+"px"
     })
 })
-
