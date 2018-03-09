@@ -41,35 +41,27 @@ INFOPRODUCTO
             $item = "ruta";
             $valor = $rutas[0];
             $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item, $valor);
+            $multimedia = json_decode($infoProducto["multimedia"], true);
+            var_dump($infoProducto["multimedia"]);
             if ($infoProducto["tipo"] == "fisico") {
                 echo '<div class="col-md-5 col-sm-6 col-xs-12 visorImg">
-                <figure class="visor">
-                    <img id="lupa1" class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-01.jpg" alt="tennis verde 11">
-                    <img id="lupa2" class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-02.jpg" alt="tennis verde 11">
-                    <img id="lupa3" class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-03.jpg" alt="tennis verde 11">
-                    <img id="lupa4" class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-04.jpg" alt="tennis verde 11">
-                    <img id="lupa5" class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-05.jpg" alt="tennis verde 11">
-
-                </figure>
+                <figure class="visor">';
+                for($i = 0; $i < count($multimedia); $i++){
+                    echo '<img id="lupa'.($i+1).'" class="img-thumbnail" src="'.$servidor.$multimedia[$i]["foto"].'">'; 
+                }
+                
+                echo '</figure>
                 <div class="flexslider carousel">
-                    <ul class="slides">
-                        <li>
-                            <img value="1"class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-01.jpg" alt="tennis verde 11">
-                        </li>
-                        <li>
-                            <img value="2"class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-02.jpg" alt="tennis verde 11">
-                        </li>
-                        <li>
-                            <img value="3"class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-03.jpg" alt="tennis verde 11">
-                        </li>
-                        <li>
-                            <img value="4"class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-04.jpg" alt="tennis verde 11">
-                        </li>
-                        <li>
-                            <img value="5"class="img-thumbnail" src="http://localhost/backend/vistas/img/multimedia/tennis-verde/img-05.jpg" alt="tennis verde 11">
-                        </li>
-                        <!-- items mirrored twice, total of 12 -->
-                    </ul>
+                    <ul class="slides">';
+                
+                for($i = 0; $i < count($multimedia); $i++){
+                    echo '<li>
+                            <img value="'.($i+1).'"class="img-thumbnail" src="'.$servidor.$multimedia[$i]["foto"].'" alt="'.$infoProducto["titulo"].'">
+                        </li>'; 
+                }
+                
+                       
+                   echo '</ul>
                 </div>
             </div>';
             } else {

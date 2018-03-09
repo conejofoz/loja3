@@ -1,26 +1,7 @@
-[{
-	"red": "fa-fabacebook",
-	"estilo": "facebookBlanco",
-	"url": "http://facebook.com/"
-}, {
-	"red": "fa-youtube",
-	"estilo": "youtubeBlanco",
-	"url": "http://youtube.com/"
-}, {
-	"red": "fa-twitter",
-	"estilo": "twitterBlanco",
-	"url": "http://twitter.com/"
-}, {
-	"red": "fa-google-plus",
-	"estilo": "googleBlanco",
-	"url": "http://google.com/"
-}, {
-	"red": "fa-fabacebook",
-	"estilo": "facebookBlanco",
-	"url": "http://facebook.com/"
-}, {
-	"red": "fa-instagram",
-	"estilo": "instagramBlanco",
-	"url": "http://instagram.com/"
-   } 
+[
+{"foto": "vistas/img/multimedia/tennis-verde/img-01.jpg"},
+[{"foto": "vistas/img/multimedia/tennis-verde/img-02.jpg"},
+[{"foto": "vistas/img/multimedia/tennis-verde/img-03.jpg"},
+[{"foto": "vistas/img/multimedia/tennis-verde/img-04.jpg"},
+[{"foto": "vistas/img/multimedia/tennis-verde/img-05.jpg"}
 ]
