@@ -98,7 +98,11 @@ LISTAR PRODUTOS
                         $_SESSION["ordenar"] = $modo;
                     }
                 } else {
-                    $modo = $_SESSION["ordenar"];
+                    if(isset($_SESSION["ordenar"])){
+                        $modo = $_SESSION["ordenar"];
+                    } else {
+                        $modo = "DESC";
+                    }
                 }
 
                 $base = ($rutas[1] - 1) * 12;
@@ -171,7 +175,7 @@ LISTAR PRODUTOS
                     echo '<li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
                 <figure>
-                    <a href="' . $value["ruta"] . '" class="pixelSubCategorias">
+                    <a href="' .$url . $value["ruta"] . '" class="pixelSubCategorias">
                         <img src="' . $servidor . $value["portada"] . '" class="img-responsive">
                     </a>
                 </figure>
@@ -181,7 +185,7 @@ LISTAR PRODUTOS
                 ' . $value["id"] . '
                 <h4>
                     <small>
-                        <a href="' . $value["ruta"] . '" class="pixelProducto">
+                        <a href="' .$url . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br><span style="color:rgba(0,0,0,0)">-</span>';
 
                     if ($value["nuevo"] != 0) {
@@ -257,7 +261,7 @@ LISTAR PRODUTOS
                         }
                     }
 
-                    echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
+                    echo '<a href="' .$url . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
@@ -284,7 +288,7 @@ LISTAR PRODUTOS
                 <!--==============================================-->
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                     <figure>
-                        <a href="' . $value["ruta"] . '" class="pixelSubCategorias">
+                        <a href="' .$url . $value["ruta"] . '" class="pixelSubCategorias">
                         <img src="' . $servidor . $value["portada"] . '" class="img-responsive">
                     </a>
                     </figure>
@@ -297,7 +301,7 @@ LISTAR PRODUTOS
                     <h1>
                         <small>
                             <a href="' . $value["titulo"] . '" class="pixelProducto">
-                                <a href="' . $value["ruta"] . '" class="pixelProducto">
+                                <a href="' .$url . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br>';
                     if ($value["nuevo"] != 0) {
                         echo '<span class="label label-warning fontSize">Nuevo</span> ';
@@ -366,7 +370,7 @@ LISTAR PRODUTOS
                         }
                     }
 
-                    echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
+                    echo '<a href="' .$url . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
