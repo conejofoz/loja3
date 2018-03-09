@@ -205,68 +205,138 @@ INFOPRODUCTO
                         </span>';
                 }
             }
-            
+
             /* --==========================
               DESCRIÇÃO DO PRODUCTO
               ============================ */
             echo '<p>$' . $infoProducto["descripcion"] . '</p>';
             ?>
-            
+
             <!--==========================
             CARACTERISTICAS DO PRODUCTO
             ============================-->
             <hr>
             <div class="form-group row">
                 <?php
-                    if($infoProducto["detalles"] != null){
-                        
-                        $detalles = json_decode($infoProducto["detalles"], true);
-                        
-                        if($infoProducto["tipo"] == "fisico"){
-                            
-                            if($detalles["Talla"] != null){
-                                echo '<div class="col-md-3 col-xs-12">'
-                                . '<select class="form form-control selecionarDetalle" id="selecionarTalla">'
-                                        . '<option value="">Talla</option>';
-                                for($i = 0; $i <= count($detalles["Talla"]); $i++){
-                                    echo '<option value="'.$detalles["Talla"][$i].'">'.$detalles["Talla"][$i].'</option>';
-                                }
-                                echo '</select>'
-                                . '</div>';
-                                
+                if ($infoProducto["detalles"] != null) {
+
+                    $detalles = json_decode($infoProducto["detalles"], true);
+
+                    if ($infoProducto["tipo"] == "fisico") {
+
+                        if ($detalles["Talla"] != null) {
+                            echo '<div class="col-md-3 col-xs-12">'
+                            . '<select class="form form-control selecionarDetalle" id="selecionarTalla">'
+                            . '<option value="">Talla</option>';
+                            for ($i = 0; $i <= count($detalles["Talla"]); $i++) {
+                                echo '<option value="' . $detalles["Talla"][$i] . '">' . $detalles["Talla"][$i] . '</option>';
                             }
-                            if($detalles["Color"] != null){
-                                echo '<div class="col-md-3 col-xs-12">'
-                                . '<select class="form form-control selecionarColor" id="selecionarColor">'
-                                        . '<option value="">Color</option>';
-                                for($i = 0; $i <= count($detalles["Color"]); $i++){
-                                    echo '<option value="'.$detalles["Color"][$i].'">'.$detalles["Color"][$i].'</option>';
-                                }
-                                echo '</select>'
-                                . '</div>';
-                                
-                            }
-                            if($detalles["Marca"] != null){
-                                echo '<div class="col-md-3 col-xs-12">'
-                                . '<select class="form form-control selecionarMarca" id="selecionarMarca">'
-                                        . '<option value="">Marca</option>';
-                                for($i = 0; $i <= count($detalles["Marca"]); $i++){
-                                    echo '<option value="'.$detalles["Marca"][$i].'">'.$detalles["Marca"][$i].'</option>';
-                                }
-                                echo '</select>'
-                                . '</div>';
-                                
-                            }
-                            
-                        } else {
-                            
+                            echo '</select>'
+                            . '</div>';
                         }
-                        
+                        if ($detalles["Color"] != null) {
+                            echo '<div class="col-md-3 col-xs-12">'
+                            . '<select class="form form-control selecionarColor" id="selecionarColor">'
+                            . '<option value="">Color</option>';
+                            for ($i = 0; $i <= count($detalles["Color"]); $i++) {
+                                echo '<option value="' . $detalles["Color"][$i] . '">' . $detalles["Color"][$i] . '</option>';
+                            }
+                            echo '</select>'
+                            . '</div>';
+                        }
+                        if ($detalles["Marca"] != null) {
+                            echo '<div class="col-md-3 col-xs-12">'
+                            . '<select class="form form-control selecionarMarca" id="selecionarMarca">'
+                            . '<option value="">Marca</option>';
+                            for ($i = 0; $i <= count($detalles["Marca"]); $i++) {
+                                echo '<option value="' . $detalles["Marca"][$i] . '">' . $detalles["Marca"][$i] . '</option>';
+                            }
+                            echo '</select>'
+                            . '</div>';
+                        }
+                    } else {
+
+                        echo '<div class="col-xs-12">
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-play-circle"></i>'.$detalles["Clases"].'
+                                </li>
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-clock-o"></i>'.$detalles["Tiempo"].'
+                                </li>
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-check-circle"></i>'.$detalles["Nivel"].'
+                                </li>
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-info-circle"></i>'.$detalles["Acceso"].'
+                                </li>
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-desktop"></i>'.$detalles["Dispositivo"].'
+                                </li>
+                                <li>
+                                    <i style="margin-right:10px" class="fa fa-trophy"></i>'.$detalles["Certificado"].'
+                                </li>
+                            </div>';
                     }
+                }
+                /* --==========================
+                ENTREGA
+                ============================ */
+                if($infoProducto["entrega"] == 0){
+                    if($infoProducto["precio"] == 0){
+                        echo '<h4 class="col-xs-12">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' inscritos'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                 
+                    } else {
+                    echo '<h4 class="col-xs-12">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                    }
+                } else {
+                    if($infoProducto["precio"] == 0){
+                    echo '<h4 class="col-xs-12">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' solicitudes'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                }else{
+                    echo '<h4 class="col-xs-12">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                }
+                }
                 ?>
             </div>
+             <!--==========================
+            BOTONES DE COMPRA
+            ============================-->
+             <div class="row text-center">
+                 
+             </div>
 
-            
+
+
+
 
 
 
