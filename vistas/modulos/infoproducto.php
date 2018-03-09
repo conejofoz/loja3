@@ -82,7 +82,7 @@ INFOPRODUCTO
             }
             ?>
 
-            
+
 
 
 
@@ -94,62 +94,181 @@ INFOPRODUCTO
             <!--==========================
             PRODUTO
             ============================-->
-            
+
             <?php
-                if($infoProducto["tipo"] == "fisico"){
-                    echo '<div class="col-md-7 col-sm-6 col-xs-12">';
+            if ($infoProducto["tipo"] == "fisico") {
+                echo '<div class="col-md-7 col-sm-6 col-xs-12">';
+            } else {
+                echo '<div class="col-sm-6 col-xs-12">';
+            }
+            ?>
+
+
+
+
+            <!--==========================
+            CONTINUAR COMPRANDO
+            ============================-->
+            <div class="col-xs-6">
+                <h6>
+                    <a href="javascript:history.back()" class="text-muted">
+                        <i class="fa fa-reply"></i>Continuar comprando
+                    </a>
+                </h6> 
+
+            </div>
+            <!--==========================
+            COMPARTIR EN REDES SOCIALES
+            ============================-->
+            <div class="col-xs-6">
+                <h6>
+                    <a href="#" class="dropdown-toggle pull-right text-muted" data-toggle="dropdown">
+                        <i class="fa fa-plus"></i>Compartir
+                    </a>
+                    <ul class="dropdown-menu pull-right compartirRedes">
+                        <li>
+                            <p class="btnFacebook">
+                                <i class="fa fa-facebook"></i>
+                                Facebook
+                            </p>
+                        </li>
+                        <li>
+                            <p class="btnGoogle">
+                                <i class="fa fa-google"></i>
+                                Google
+                            </p>
+                        </li>
+                    </ul>
+                </h6> 
+
+            </div>
+
+            <div class="clearfix"></div>
+
+
+
+            <!--==========================
+            ESPACIO PARA O PRODUCTO
+            ============================-->
+
+            <?php
+            /* --==========================
+              TITULO DO PRODUCTO
+              ============================ */
+            if ($infoProducto["oferta"] == 0) {
+                if ($infoProducto["nuevo"] == 0) {
+
+
+                    echo '<h1 class="text-muted text-uppercase">' . $infoProducto["titulo"] . '</h1>';
                 } else {
-                    echo '<div class="col-sm-6 col-xs-12">'; 
+                    echo '<h1 class="text-muted text-uppercase">' . $infoProducto["titulo"] . '
+                <br>
+                <small>
+                    <span class="label label-warning">NUEVO</span>
+                </small>
+                </h1>';
                 }
+            } else {
+                if ($infoProducto["nuevo"] == 0) {
+                    echo '<h1 class="text-muted text-uppercase">' . $infoProducto["titulo"] . '
+                <br>
+                <small>
+                    <span class="label label-warning">' . $infoProducto["descuentoOferta"] . '% off</span>
+                </small>
+                </h1>';
+                } else {
+                    echo '<h1 class="text-muted text-uppercase">' . $infoProducto["titulo"] . '
+                <br>
+                <small>
+                    <span class="label label-warning">' . $infoProducto["descuentoOferta"] . '% off</span>
+                        <span class="label label-warning">NUEVO</span>
+                </small>
+                </h1>';
+                }
+            }
+            /* --==========================
+              PRECIO DO PRODUCTO
+              ============================ */
+            if ($infoProducto["precio"] == 0) {
+                echo '<h2 class="text-muted">GRATIS</h2>';
+            } else {
+                if ($infoProducto["precio"] == 0) {
+                    echo '<h2 class="text-muted">USD ' . $infoProducto["precio"] . '</h2>';
+                } else {
+                    echo '<h2 class="text-muted">
+                            <span>
+                                <strong class="oferta">USD $' . $infoProducto["precio"] . '</strong>
+                           </span>
+                        </h2>
+                        <span>
+                            $' . $infoProducto["precioOferta"] . '
+                        </span>';
+                }
+            }
+            
+            /* --==========================
+              DESCRIÇÃO DO PRODUCTO
+              ============================ */
+            echo '<p>$' . $infoProducto["descripcion"] . '</p>';
             ?>
             
+            <!--==========================
+            CARACTERISTICAS DO PRODUCTO
+            ============================-->
+            <hr>
+            <div class="form-group row">
+                <?php
+                    if($infoProducto["detalles"] != null){
+                        
+                        $detalles = json_decode($infoProducto["detalles"], true);
+                        
+                        if($infoProducto["tipo"] == "fisico"){
+                            
+                            if($detalles["Talla"] != null){
+                                echo '<div class="col-md-3 col-xs-12">'
+                                . '<select class="form form-control selecionarDetalle" id="selecionarTalla">'
+                                        . '<option value="">Talla</option>';
+                                for($i = 0; $i <= count($detalles["Talla"]); $i++){
+                                    echo '<option value="'.$detalles["Talla"][$i].'">'.$detalles["Talla"][$i].'</option>';
+                                }
+                                echo '</select>'
+                                . '</div>';
+                                
+                            }
+                            if($detalles["Color"] != null){
+                                echo '<div class="col-md-3 col-xs-12">'
+                                . '<select class="form form-control selecionarColor" id="selecionarColor">'
+                                        . '<option value="">Color</option>';
+                                for($i = 0; $i <= count($detalles["Color"]); $i++){
+                                    echo '<option value="'.$detalles["Color"][$i].'">'.$detalles["Color"][$i].'</option>';
+                                }
+                                echo '</select>'
+                                . '</div>';
+                                
+                            }
+                            if($detalles["Marca"] != null){
+                                echo '<div class="col-md-3 col-xs-12">'
+                                . '<select class="form form-control selecionarMarca" id="selecionarMarca">'
+                                        . '<option value="">Marca</option>';
+                                for($i = 0; $i <= count($detalles["Marca"]); $i++){
+                                    echo '<option value="'.$detalles["Marca"][$i].'">'.$detalles["Marca"][$i].'</option>';
+                                }
+                                echo '</select>'
+                                . '</div>';
+                                
+                            }
+                            
+                        } else {
+                            
+                        }
+                        
+                    }
+                ?>
+            </div>
+
             
 
 
-                <!--==========================
-                CONTINUAR COMPRANDO
-                ============================-->
-                <div class="col-xs-6">
-                    <h6>
-                        <a href="javascript:history.back()" class="text-muted">
-                            <i class="fa fa-reply"></i>Continuar comprando
-                        </a>
-                    </h6> 
-
-                </div>
-                <!--==========================
-                COMPARTIR EN REDES SOCIALES
-                ============================-->
-                <div class="col-xs-6">
-                    <h6>
-                        <a href="#" class="dropdown-toggle pull-right text-muted" data-toggle="dropdown">
-                            <i class="fa fa-plus"></i>Compartir
-                        </a>
-                        <ul class="dropdown-menu pull-right compartirRedes">
-                            <li>
-                                <p class="btnFacebook">
-                                    <i class="fa fa-facebook"></i>
-                                    Facebook
-                                </p>
-                            </li>
-                            <li>
-                                <p class="btnGoogle">
-                                    <i class="fa fa-google"></i>
-                                    Google
-                                </p>
-                            </li>
-                        </ul>
-                    </h6> 
-
-                </div>
-
-                <div class="clearfix"></div>
-
-
-
-                <!--==========================
-                ESPACIO PARA O PRODUCTO
-                ============================-->
 
 
 
@@ -157,13 +276,13 @@ INFOPRODUCTO
 
 
 
-                <!--==========================
-                ZONA DE LUPA
-                ============================-->
-                <figure class="lupa">
-                    <img src="" alt="">
-                </figure>
-            </div>
+            <!--==========================
+            ZONA DE LUPA
+            ============================-->
+            <figure class="lupa">
+                <img src="" alt="">
+            </figure>
         </div>
     </div>
+</div>
 </div>
