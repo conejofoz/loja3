@@ -283,7 +283,15 @@ INFOPRODUCTO
                 ============================ */
                 if($infoProducto["entrega"] == 0){
                     if($infoProducto["precio"] == 0){
-                        echo '<h4 class="col-xs-12">'
+                        echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' inscritos'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                        echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
                             . '<hr>'
                             . '<span class="label label-default" style="font-weight:100">'
                                 . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
@@ -293,7 +301,15 @@ INFOPRODUCTO
                             . '</h4>';
                  
                     } else {
-                    echo '<h4 class="col-xs-12">'
+                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
                             . '<hr>'
                             . '<span class="label label-default" style="font-weight:100">'
                                 . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
@@ -304,7 +320,16 @@ INFOPRODUCTO
                     }
                 } else {
                     if($infoProducto["precio"] == 0){
-                    echo '<h4 class="col-xs-12">'
+                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                            . '<hr>'
+                            . '<span class="label label-default" style="font-weight:100">'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' solicitudes'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
+                            . '</span>'
+                            . '</h4>';
+                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
                             . '<hr>'
                             . '<span class="label label-default" style="font-weight:100">'
                                 . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
@@ -314,7 +339,7 @@ INFOPRODUCTO
                             . '</span>'
                             . '</h4>';
                 }else{
-                    echo '<h4 class="col-xs-12">'
+                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
                             . '<hr>'
                             . '<span class="label label-default" style="font-weight:100">'
                                 . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
@@ -323,6 +348,15 @@ INFOPRODUCTO
                                 . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
                             . '</span>'
                             . '</h4>';
+                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
+                            . '<hr>'
+                            . '<small>'
+                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                                . $infoProducto["entrega"] .' dias habiles para la entrega <br> '
+                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas <br>'
+                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
+                            . '</small>'
+                            . '</h4>';
                 }
                 }
                 ?>
@@ -330,7 +364,7 @@ INFOPRODUCTO
              <!--==========================
             BOTONES DE COMPRA
             ============================-->
-             <div class="row">
+             <div class="row botonesCompra">
                  <?php
                     if($infoProducto["precio"] == 0){
                         echo '<div class="col-md-6 col-xs-12">';
@@ -343,7 +377,7 @@ INFOPRODUCTO
                     } else {
                         if($infoProducto["tipo"] == "virtual"){
                         echo '<div class="col-md-6 col-xs-12">
-                     <button class="btn btn-default btn-block btn-lg">COMPRAR AHORA</button>
+                     <button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
                  </div>
                  <div class="col-md-6 col-xs-12">
                      <button class="btn btn-default btn-block btn-lg backColor">
@@ -353,9 +387,9 @@ INFOPRODUCTO
                  </div>';
                         } else {
                             
-                 echo '<div class="col-md-6 col-xs-12">
+                 echo '<div class="col-lg-6 col-md-8 col-xs-12">
                      <button class="btn btn-default btn-block btn-lg backColor">
-                         ADICIONAR AL CARRITO
+                         <small>ADICIONAR AL CARRITO</small>
                          <i class="fa fa-shopping-cart"></i>
                      </button>
                  </div>';
