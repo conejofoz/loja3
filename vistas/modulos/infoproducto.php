@@ -42,26 +42,28 @@ INFOPRODUCTO
             $valor = $rutas[0];
             $infoProducto = ControladorProductos::ctrMostrarInfoProducto($item, $valor);
             $multimedia = json_decode($infoProducto["multimedia"], true);
-            var_dump($infoProducto["multimedia"]);
+            //var_dump($infoProducto["multimedia"]);
+            //var_dump($multimedia[0]["foto"]);
+            //exit;
             if ($infoProducto["tipo"] == "fisico") {
                 echo '<div class="col-md-5 col-sm-6 col-xs-12 visorImg">
                 <figure class="visor">';
-                for($i = 0; $i < count($multimedia); $i++){
-                    echo '<img id="lupa'.($i+1).'" class="img-thumbnail" src="'.$servidor.$multimedia[$i]["foto"].'">'; 
+                for ($i = 0; $i < count($multimedia); $i++) {
+                    echo '<img id="lupa' . ($i + 1) . '" class="img-thumbnail" src="' . $servidor . $multimedia[$i]["foto"] . '">';
                 }
-                
+
                 echo '</figure>
                 <div class="flexslider carousel">
                     <ul class="slides">';
-                
-                for($i = 0; $i < count($multimedia); $i++){
+
+                for ($i = 0; $i < count($multimedia); $i++) {
                     echo '<li>
-                            <img value="'.($i+1).'"class="img-thumbnail" src="'.$servidor.$multimedia[$i]["foto"].'" alt="'.$infoProducto["titulo"].'">
-                        </li>'; 
+                            <img value="' . ($i + 1) . '"class="img-thumbnail" src="' . $servidor . $multimedia[$i]["foto"] . '" alt="' . $infoProducto["titulo"] . '">
+                        </li>';
                 }
-                
-                       
-                   echo '</ul>
+
+
+                echo '</ul>
                 </div>
             </div>';
             } else {
@@ -69,7 +71,7 @@ INFOPRODUCTO
                  * VISOR DE VIDEOS
                   ================= */
                 echo '<div class="col-sm-6 col-xs-12">'
-                . '<iframe class="videoPresentacion" src="https://www.youtube.com/embed/N4aY6yX-MaM?rel=0&autoplay=1" width="100%" frameborder="0" allowfullscreen></iframe>'
+                . '<iframe class="videoPresentacion" src="https://www.youtube.com/embed/' . $infoProducto["multimedia"] . '?rel=0&autoplay=1" width="100%" frameborder="0" allowfullscreen></iframe>'
                 . '</div>';
             }
             ?>
@@ -250,124 +252,123 @@ INFOPRODUCTO
 
                         echo '<div class="col-xs-12">
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-play-circle"></i>'.$detalles["Clases"].'
+                                    <i style="margin-right:10px" class="fa fa-play-circle"></i>' . $detalles["Clases"] . '
                                 </li>
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-clock-o"></i>'.$detalles["Tiempo"].'
+                                    <i style="margin-right:10px" class="fa fa-clock-o"></i>' . $detalles["Tiempo"] . '
                                 </li>
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-check-circle"></i>'.$detalles["Nivel"].'
+                                    <i style="margin-right:10px" class="fa fa-check-circle"></i>' . $detalles["Nivel"] . '
                                 </li>
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-info-circle"></i>'.$detalles["Acceso"].'
+                                    <i style="margin-right:10px" class="fa fa-info-circle"></i>' . $detalles["Acceso"] . '
                                 </li>
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-desktop"></i>'.$detalles["Dispositivo"].'
+                                    <i style="margin-right:10px" class="fa fa-desktop"></i>' . $detalles["Dispositivo"] . '
                                 </li>
                                 <li>
-                                    <i style="margin-right:10px" class="fa fa-trophy"></i>'.$detalles["Certificado"].'
+                                    <i style="margin-right:10px" class="fa fa-trophy"></i>' . $detalles["Certificado"] . '
                                 </li>
                             </div>';
                     }
                 }
                 /* --==========================
-                ENTREGA
-                ============================ */
-                if($infoProducto["entrega"] == 0){
-                    if($infoProducto["precio"] == 0){
+                  ENTREGA
+                  ============================ */
+                if ($infoProducto["entrega"] == 0) {
+                    if ($infoProducto["precio"] == 0) {
                         echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' inscritos'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
-                            . '</span>'
-                            . '</h4>';
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' inscritos'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
                         echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' inscritos'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
-                            . '</span>'
-                            . '</h4>';
-                 
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' inscritos'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
                     } else {
-                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
-                            . '</span>'
-                            . '</h4>';
-                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
-                            . '</span>'
-                            . '</h4>';
+                        echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
+                        echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
                     }
                 } else {
-                    if($infoProducto["precio"] == 0){
-                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
-                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' solicitudes'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
-                            . '</span>'
-                            . '</h4>';
-                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
-                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventasGratis"].' solicitudes'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistasGratis"].' personas'
-                            . '</span>'
-                            . '</h4>';
-                }else{
-                    echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
-                            . '<hr>'
-                            . '<span class="label label-default" style="font-weight:100">'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
-                                . $infoProducto["entrega"] .' dias habiles para la entrega | '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
-                            . '</span>'
-                            . '</h4>';
-                    echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
-                            . '<hr>'
-                            . '<small>'
-                                . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
-                                . $infoProducto["entrega"] .' dias habiles para la entrega <br> '
-                                . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>'.$infoProducto["ventas"].' ventas <br>'
-                                . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por '.$infoProducto["vistas"].' personas'
-                            . '</small>'
-                            . '</h4>';
-                }
+                    if ($infoProducto["precio"] == 0) {
+                        echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                        . $infoProducto["entrega"] . ' dias habiles para la entrega | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' solicitudes'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
+                        echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                        . $infoProducto["entrega"] . ' dias habiles para la entrega | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' solicitudes'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
+                    } else {
+                        echo '<h4 class="col-md-12 col-sm-0 col-xs-0">'
+                        . '<hr>'
+                        . '<span class="label label-default" style="font-weight:100">'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                        . $infoProducto["entrega"] . ' dias habiles para la entrega | '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '</span>'
+                        . '</h4>';
+                        echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
+                        . '<hr>'
+                        . '<small>'
+                        . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
+                        . $infoProducto["entrega"] . ' dias habiles para la entrega <br> '
+                        . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas <br>'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '</small>'
+                        . '</h4>';
+                    }
                 }
                 ?>
             </div>
-             <!--==========================
-            BOTONES DE COMPRA
-            ============================-->
-             <div class="row botonesCompra">
-                 <?php
-                    if($infoProducto["precio"] == 0){
-                        echo '<div class="col-md-6 col-xs-12">';
-                            if($infoProducto["tipo"] == "virtual"){
-                               echo '<button class="btn btn-default btn-block btn-lg backColor">ACCEDER AHORA</button>';
-                            } else {
-                               echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>'; 
-                            }
-                              echo '</div>';
+            <!--==========================
+           BOTONES DE COMPRA
+           ============================-->
+            <div class="row botonesCompra">
+                <?php
+                if ($infoProducto["precio"] == 0) {
+                    echo '<div class="col-md-6 col-xs-12">';
+                    if ($infoProducto["tipo"] == "virtual") {
+                        echo '<button class="btn btn-default btn-block btn-lg backColor">ACCEDER AHORA</button>';
                     } else {
-                        if($infoProducto["tipo"] == "virtual"){
+                        echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>';
+                    }
+                    echo '</div>';
+                } else {
+                    if ($infoProducto["tipo"] == "virtual") {
                         echo '<div class="col-md-6 col-xs-12">
                      <button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
                  </div>
@@ -377,32 +378,18 @@ INFOPRODUCTO
                          <i class="fa fa-shopping-cart"></i>
                      </button>
                  </div>';
-                        } else {
-                            
-                 echo '<div class="col-lg-6 col-md-8 col-xs-12">
+                    } else {
+
+                        echo '<div class="col-lg-6 col-md-8 col-xs-12">
                      <button class="btn btn-default btn-block btn-lg backColor">
                          <small>ADICIONAR AL CARRITO</small>
                          <i class="fa fa-shopping-cart"></i>
                      </button>
                  </div>';
-                        }
                     }
-                 ?>
-                 
-                 
-             </div>
-
-
-
-
-
-
-
-
-
-
-
-
+                }
+                ?>
+            </div>
 
             <!--==========================
             ZONA DE LUPA
@@ -410,7 +397,107 @@ INFOPRODUCTO
             <figure class="lupa">
                 <img src="" alt="">
             </figure>
+
+
         </div>
     </div>
+    <!--==========================
+            COMENTARIOS
+    ============================-->
+    <br>
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>COMENTARIOS 4</a></li>
+            <li><a>Ver mas</a></li>
+            <li class="pull-right"><a class="text-muted">PROMEDIO DE CALIFICACION: 3.5 | 
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star-half-o text-success"></i>   
+                    <i class="fa fa-star-o text-success"></i>   
+                </a></li>
+        </ul>
+        <br>
+        <div class="row comentarios">
+            <div class="panel-group col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-uppercase">
+                        Silvio Coelho
+                        <span class="text-right">
+                            <img class="img-circle" src="<?php echo $url;?>vistas/img/usuarios/40/944.jpg" width="20%">
+                        </span>
+                    </div>
+                    <div class="panel-body"><small>$Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Alias voluptatem cum consectetur nobis quod, excepturi recusandae, itaque facere minima officiis autem illum, perferendis provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Al</small></div>
+                    <div class="panel-footer">
+                        <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star-half-o text-success"></i>   
+                    <i class="fa fa-star-o text-success"></i> 
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-group col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-uppercase">
+                        Silvio Coelho
+                        <span class="text-right">
+                            <img class="img-circle" src="<?php echo $url;?>vistas/img/usuarios/40/944.jpg" width="20%">
+                        </span>
+                    </div>
+                    <div class="panel-body"><small>$Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Alias voluptatem cum consectetur nobis quod, excepturi recusandae, itaque facere minima officiis autem illum, perferendis provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Al</small></div>
+                    <div class="panel-footer">
+                        <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star-half-o text-success"></i>   
+                    <i class="fa fa-star-o text-success"></i> 
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-group col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-uppercase">
+                        Silvio Coelho
+                        <span class="text-right">
+                            <img class="img-circle" src="<?php echo $url;?>vistas/img/usuarios/40/944.jpg" width="20%">
+                        </span>
+                    </div>
+                    <div class="panel-body"><small>$Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Alias voluptatem cum consectetur nobis quod, excepturi recusandae, itaque facere minima officiis autem illum, perferendis provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Al</small></div>
+                    <div class="panel-footer">
+                        <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star-half-o text-success"></i>   
+                    <i class="fa fa-star-o text-success"></i> 
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-group col-md-3 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-uppercase">
+                        Silvio Coelho
+                        <span class="text-right">
+                            <img class="img-circle" src="<?php echo $url;?>vistas/img/usuarios/40/944.jpg" width="20%">
+                        </span>
+                    </div>
+                    <div class="panel-body"><small>$Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Alias voluptatem cum consectetur nobis quod, excepturi recusandae, itaque facere minima officiis autem illum, perferendis provident! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto maxime quas modi, eveniet fugiat. Al</small></div>
+                    <div class="panel-footer">
+                        <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star text-success"></i>   
+                    <i class="fa fa-star-half-o text-success"></i>   
+                    <i class="fa fa-star-o text-success"></i> 
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
 </div>
 </div>
