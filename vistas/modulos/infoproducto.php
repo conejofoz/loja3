@@ -30,7 +30,7 @@ BREADCRUMB INFOPRODUCTO
 <!--========================================================
 INFOPRODUCTO
 =========================================================-->
-<div class="container-fluid infoproducto">
+<div class="container-fluid infoProducto">
     <div class="container">
         <div class="row">
 
@@ -282,7 +282,7 @@ INFOPRODUCTO
                         . '<span class="label label-default" style="font-weight:100">'
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' inscritos'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistasGratis"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                         echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
@@ -290,7 +290,7 @@ INFOPRODUCTO
                         . '<span class="label label-default" style="font-weight:100">'
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' inscritos'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistasGratis"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                     } else {
@@ -299,7 +299,7 @@ INFOPRODUCTO
                         . '<span class="label label-default" style="font-weight:100">'
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistas"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                         echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
@@ -307,7 +307,7 @@ INFOPRODUCTO
                         . '<span class="label label-default" style="font-weight:100">'
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> Entrega inmediata | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistas"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                     }
@@ -319,7 +319,7 @@ INFOPRODUCTO
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
                         . $infoProducto["entrega"] . ' dias habiles para la entrega | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' solicitudes'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistasGratis"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                         echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
@@ -328,7 +328,7 @@ INFOPRODUCTO
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
                         . $infoProducto["entrega"] . ' dias habiles para la entrega | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventasGratis"] . ' solicitudes'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistasGratis"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistasGratis"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                     } else {
@@ -338,7 +338,7 @@ INFOPRODUCTO
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
                         . $infoProducto["entrega"] . ' dias habiles para la entrega | '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistas"] . ' </span> personas'
                         . '</span>'
                         . '</h4>';
                         echo '<h4 class="col-lg-0 col-md-0 col-xs-12">'
@@ -347,7 +347,7 @@ INFOPRODUCTO
                         . '<i class="fa fa-clock-o" style="margin-right:5px"></i> '
                         . $infoProducto["entrega"] . ' dias habiles para la entrega <br> '
                         . '<i class="fa fa-shopping-cart" style="margin:0px 5px"></i>' . $infoProducto["ventas"] . ' ventas <br>'
-                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por ' . $infoProducto["vistas"] . ' personas'
+                        . '<i class="fa fa-eye" style="margin:0px 5px"></i>Visto por <span class="vistas" tipo="'.$infoProducto["precio"].'"> ' . $infoProducto["vistas"] . ' </span> personas'
                         . '</small>'
                         . '</h4>';
                     }
