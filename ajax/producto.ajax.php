@@ -5,7 +5,7 @@ require_once "../modelos/productos.modelo.php";
 
 class AjaxProductos {
 
-    public $contador;
+    public $valor;
     public $item;
     public $ruta;
 
@@ -13,10 +13,10 @@ class AjaxProductos {
         
         $datos = array(
             "valor"=>$this->valor,
-            "item"=>$this->item,
             "ruta"=>$this->ruta
             );
-        $respuesta = ControladorPlantilla::ctrEstiloPlantilla($datos);
+        $item = $this->item;
+        $respuesta = ControladorProductos::ctrActualizarVistaProducto($datos, $item);
         //print_r($respuesta);
         //exit;
 

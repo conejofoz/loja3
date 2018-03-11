@@ -73,13 +73,31 @@ $(window).on("load", function(){
     //EVALUAMOS LA RUTA PARA DEFINIR EL PRODUCTO A ACTUALIZAR
     var urlActual = location.pathname;
     var ruta = urlActual.split("/");
-    console.log("ruta", ruta.pop());
-    console.log("url atual", urlActual);
-    
+ //   var rutaxx = ruta.pop();
+//    console.log("ruta", ruta.pop());
+//    console.log("url atual", urlActual);
+//    console.log("rutaxx: ", rutaxx);
+//obs:como a não funcionava ruta.pop() eu criei uma variavel auxliar e funcionou
+//mais acontece que quando se usa ruta.pop() no console ela ja altera e quando usa denovo já tem outro valor
+//quando comentei o console funcionou e já não precisei da variavel auxiliar
+//estou falando desta linha: datos.append("ruta", ruta.pop());
     var datos = new FormData();
     
     datos.append("valor", contador);
     datos.append("item", item);
     datos.append("ruta", ruta.pop());
+    
+    $.ajax({
+        url:rutaOculta+"ajax/producto.ajax.php",
+        method:"POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta){
+            console.log("respuesta", respuesta);
+            
+        }
+    });
  
 })
