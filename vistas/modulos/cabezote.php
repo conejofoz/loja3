@@ -170,16 +170,82 @@ $url = ruta::ctrRuta();
 
 
 
-        
-        
+
+
         <div class="modal-body modalTitulo">
             <h3 class="backColor">REGISTRAR-SE</h3>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            
+            <!--================================
+            REGISTRO EM FACEBOOK
+            =================================-->
+            <div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+                <p>
+                    <i class="fa fa-facebook"></i>
+                    Registro con Facebook
+                </p>
+            </div>
+
+            <!--================================
+            REGISTRO EM GOOGLE
+            =================================-->
+            <div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+                <p>
+                    <i class="fa fa-google"></i>
+                    Registro con Google
+                </p>
+            </div>
+
+            <!--================================
+            REGISTRO DIRECTO
+            =================================-->
+            <form method="post" onsubmit="return registroUsuario()">
+                <hr>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input type="text" class="form-control text-uppercase" id="regUsuario" name="regUsuario" placeholder="Nome Completo" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </span>
+                        <input type="email" class="form-control" id="regEmail" name="regEmail" placeholder="Correio eletronico" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                        </span>
+                        <input type="password" class="form-control" id="regPassword" name="regPassword" placeholder="Senha" required>
+                    </div>
+                </div>
+                
+                
+                <div class="checkbox">
+                    <label> 
+                        <input type="checkbox" id="regTerminos">
+                    <small>
+                        Al registrarse, usted acepta nuestras condiciones de uso y políticas de privacidad
+                    </small>
+                    </label>
+                </div>
+                <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
+                    
+
+
+            </form>
+
         </div>
-        
+
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            Ya tienes una cuenta registrada? | <strong><a href="#modalIngreso" data-dismiss="modal" data-toggle="modal">Ingresar</a></strong>
         </div>
 
 
