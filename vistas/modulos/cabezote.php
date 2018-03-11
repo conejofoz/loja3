@@ -20,10 +20,10 @@ $url = ruta::ctrRuta();
                     $jsonRedesSociales = json_decode($social["redesSociales"], true);
                     foreach ($jsonRedesSociales as $key => $value) {
                         echo '<li>
-						          		<a href="' . $value["url"] . '" target="_blank">
-											<i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
-										</a>
-									</li>';
+				<a href="' . $value["url"] . '" target="_blank">
+                                    <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
+				</a>
+                            </li>';
                     }
                     ?>
 
@@ -59,7 +59,7 @@ $url = ruta::ctrRuta();
             ======================================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
                 <a href="<?php echo $url; ?>">
-                    <img src="<?php echo $servidor.$social["logo"]; ?>" class="img-responsive">
+                    <img src="<?php echo $servidor . $social["logo"]; ?>" class="img-responsive">
                 </a>
 
             </div>
@@ -127,7 +127,7 @@ $url = ruta::ctrRuta();
 
                 echo '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                 <h4>
-                    <a href="'. $url . $value["ruta"] . '" class="pixelCategorias">' . $value["categoria"] . '</a>
+                    <a href="' . $url . $value["ruta"] . '" class="pixelCategorias">' . $value["categoria"] . '</a>
                 </h4>
                 <hr>
                 <ul>';
@@ -137,7 +137,7 @@ $url = ruta::ctrRuta();
                 $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 
                 foreach ($subcategorias as $key => $value) {
-                    echo '<li><a href="'. $url  . $value["ruta"] . '" class="pixelSubCategorias">' . $value["subcategoria"] . '</a></li>';
+                    echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias">' . $value["subcategoria"] . '</a></li>';
                 }
                 echo '
                 </ul>
@@ -163,6 +163,28 @@ $url = ruta::ctrRuta();
 
 </header>
 
+
+<!--VENTANA MODAL PARA EL REGISTRO-->
+<div id="modalRegistro" class="modal fade modalFormulario" role="dialog">
+    <div class="modal-content modal-dialog">
+
+
+
+        
+        
+        <div class="modal-body modalTitulo">
+            <h3 class="backColor">REGISTRAR-SE</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+
+    </div>
+</div>
 
 
 

@@ -95,6 +95,31 @@ header #categorias hr{
 
 
 /*=============================================
+VENTANAS MODALES
+=============================================*/
+.modalTitulo{
+    padding: 5px 0px;
+    
+}
+.modalTitulo h3{
+    text-align: center;
+    margin-top: -5px;
+    padding: 15px 0px;
+    border-radius: 5px 5px 0px 0px;
+    
+}
+.modalFormulario .close{
+    position: absolute;
+    right: 27px;
+    top: 15px;
+    color: white;
+}
+
+
+
+
+
+/*=============================================
 ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
 =============================================*/
 
