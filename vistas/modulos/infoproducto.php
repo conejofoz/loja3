@@ -30,7 +30,7 @@ BREADCRUMB INFOPRODUCTO
 <!--========================================================
 INFOPRODUCTO
 =========================================================-->
-<div class="container-fluid infoProducto">
+<div class="container-fluid infoproducto">
     <div class="container">
         <div class="row">
 
