@@ -36,6 +36,7 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/flexslider.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/sweetalert.css">
         
         <!--=========================================================
         FOLHAS DE ESTILO PERSONALIZADAS
@@ -54,6 +55,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.easing.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.scrollUp.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.flexslider.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.sweetalert.js"></script>
 
     </head>
     <body>

@@ -173,7 +173,7 @@ $url = ruta::ctrRuta();
 
 
         <div class="modal-body modalTitulo">
-            <h3 class="backColor">REGISTRAR-SE</h3>
+            <h3 class="backColorModal">REGISTRAR-SE</h3>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <!--================================
             REGISTRO EM FACEBOOK
@@ -198,7 +198,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO DIRECTO
             =================================-->
-            <form method="post" action="formulario.php" onsubmit="return registroUsuario()">
+            <form method="post" onsubmit="return registroUsuario()">
                 <hr>
                 <div class="form-group">
                     <div class="input-group">
@@ -236,6 +236,13 @@ $url = ruta::ctrRuta();
                     </small>
                     </label>
                 </div>
+                
+                <?php
+                    $registro = new ControladorUsuarios();
+                    $registro -> ctrRegistroUsuario();
+                ?>
+                
+                
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
                     
 
