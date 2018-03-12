@@ -198,7 +198,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO DIRECTO
             =================================-->
-            <form method="post" onsubmit="return registroUsuario()">
+            <form method="post" action="formulario.php" onsubmit="return registroUsuario()">
                 <hr>
                 <div class="form-group">
                     <div class="input-group">
@@ -230,7 +230,7 @@ $url = ruta::ctrRuta();
                 
                 <div class="checkbox">
                     <label> 
-                        <input type="checkbox" id="regTerminos">
+                        <input type="checkbox" id="regPoliticas">
                     <small>
                         Al registrarse, usted acepta nuestras condiciones de uso y políticas de privacidad
                     </small>

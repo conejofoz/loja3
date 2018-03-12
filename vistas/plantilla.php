@@ -135,5 +135,6 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/slide.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/buscador.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/infoproducto.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/usuarios.js"></script>
     </body>
 </html>
