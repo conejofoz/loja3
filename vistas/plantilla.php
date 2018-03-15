@@ -55,7 +55,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.easing.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.scrollUp.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.flexslider.js"></script>
-        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.sweetalert.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/sweetalert.min.js"></script>
 
     </head>
     <body>
