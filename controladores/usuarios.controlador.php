@@ -12,6 +12,8 @@ class ControladorUsuarios {
                     preg_match('/^[a-zA-Z0-9]+$/', $_POST["regPassword"])) {
 
                 $encriptar = crypt($_POST["regPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                
+                $encriptarEmail = md5($_POST["regEmail"]);
 
                 $datos = array(
                     "nombre" => $_POST["regUsuario"],
@@ -19,7 +21,8 @@ class ControladorUsuarios {
                     "email" => $_POST["regEmail"],
                     "modo" => "directo",
                     "foto" => "",
-                    "verificacion" => 1
+                    "verificacion" => 1,
+                    "emailEncriptado" =>$encriptarEmail
                 );
 
                 $tabla = "usuarios";
@@ -31,6 +34,8 @@ class ControladorUsuarios {
                      * VERIFICAR CORREIO ELETRONICO
                      */
                     date_default_timezone_set("America/Sao_Paulo");
+                    $url = ruta::ctrRuta();
+                    
                     $mail = new PHPMailer;
                     $mail->isMail();
                     $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
@@ -38,28 +43,42 @@ class ControladorUsuarios {
                     $mail->Subject = "Por favor verifique su dirección de correio eletrónico";
                     $mail->addAddress($_POST["regEmail"]);
                     $mail->msgHTML('<div style="width: 100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px">
-            <center>
-                <img style="padding: 20px; width: 10%" src="http://tutorialesatualcance.com/tienda/logo.png">
-            </center>
-            <div style="position: relative; margin: auto; width: 600px; background: white; padding: 20px;">
-                <center>
-                    <img style="padding: 20px; width: 15%" src="http://tutorialesatualcance.com/tienda/icon-email.png">
-                    <h3 style="font-weight: 100; color: #999">VERIFIQUE SU DIRECCIÓN DE CORREIO ELETRÓNICO</h3>
-                    <hr style="border: 1px solid #ccc; width: 80%">
-                    <h4 style="font-weight: 100; color: #999">Para comenzar a usar su cuenta de Tienda Virtual, debe confirmar su dirección de correio electrónico</h4>
-                    <a href="http://localhost/loja3/verificar/123fff" target="_blank" style="text-decoration: none">
-                        <div style="line-height: 60px; background: #0aa; width: 60%; color: white">Verifique su dirección de correio electrónico</div>
-                    </a>
-                    <br>
-                    <hr style="border: 1px solid #ccc; width: 80%">
-                    <h5 style="font-weight: 100; color: #999">Si no se inscribió en esta cuenta, puede ignorar este correo eletrónico y la cuenta se eliminará.</h5>
-                </center>
-            </div>
-        </div>');
-
-
-
-                    echo '<script> '
+                    <center>
+                        <img style="padding: 20px; width: 10%" src="http://tutorialesatualcance.com/tienda/logo.png">
+                    </center>
+                    <div style="position: relative; margin: auto; width: 600px; background: white; padding: 20px;">
+                        <center>
+                            <img style="padding: 20px; width: 15%" src="http://tutorialesatualcance.com/tienda/icon-email.png">
+                            <h3 style="font-weight: 100; color: #999">VERIFIQUE SU DIRECCIÓN DE CORREIO ELETRÓNICO</h3>
+                            <hr style="border: 1px solid #ccc; width: 80%">
+                            <h4 style="font-weight: 100; color: #999">Para comenzar a usar su cuenta de Tienda Virtual, debe confirmar su dirección de correio electrónico</h4>
+                            <a href="'.$url.'verificar/'.$encriptarEmail.'" target="_blank" style="text-decoration: none">
+                                <div style="line-height: 60px; background: #0aa; width: 60%; color: white">Verifique su dirección de correio electrónico</div>
+                            </a>
+                            <br>
+                            <hr style="border: 1px solid #ccc; width: 80%">
+                            <h5 style="font-weight: 100; color: #999">Si no se inscribió en esta cuenta, puede ignorar este correo eletrónico y la cuenta se eliminará.</h5>
+                        </center>
+                    </div>
+                    </div>');
+                    $envio = $mail->Send();
+                    
+                    if(!envio){
+                        echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR!",'
+                . 'text: "Ha ocurrido un problema enviando verificación de correo electrónico a '.$_POST["regEmail"].$mail->ErrorInfo.'",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+                    } else {
+                        echo '<script> '
                     . 'swal({'
                     . 'title:"OK!", '
                     . 'text: "Por favor revise la bandeja de entrada o la carpeta de SPAM de su correo electrónico ' . $_POST["regEmail"] . ' para verificar la cuenta", '
@@ -72,6 +91,11 @@ class ControladorUsuarios {
                     . '} '
                     . '}); '
                     . '</script> ';
+                    }
+
+
+
+                    
                 } else {
                     echo "erro em adicionar usuario";
                     exit;
