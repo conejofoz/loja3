@@ -37,6 +37,7 @@ class ControladorUsuarios {
                     $url = ruta::ctrRuta();
                     
                     $mail = new PHPMailer;
+                    $mail->CharSet = 'UTF-8';
                     $mail->isMail();
                     $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
                     $mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales');
