@@ -40,7 +40,7 @@ $url = ruta::ctrRuta();
                         if(isset($_SESSION["validarSesion"])){
                             if($_SESSION["validarSesion"] == "ok"){
                                 if($_SESSION["modo"] == "directo"){
-                                    if($_SESSION["foto"] == ""){
+                                    if($_SESSION["foto"] != ""){
                                         echo '<li>'
                                                 . '<img class="img-circle" src="'.$url.$_SESSION["foto"].'" width="10%">'
                                             . '</li>';
@@ -50,9 +50,9 @@ $url = ruta::ctrRuta();
                                             . '</li>';
                                     }
                                     echo '<li> | </li>
-                                            <li><a href="'.$url.'perfil"></a>Ver Perfil</li>
+                                            <li><a href="'.$url.'perfil">Ver Perfil</a></li>
                                             <li> | </li>
-                                            <li><a href="'.$url.'salir"></a>Salir</li>';
+                                            <li><a href="'.$url.'salir">Salir</a></li>';
                                 }
                             }
                         } else {
@@ -269,6 +269,8 @@ $url = ruta::ctrRuta();
                 
                 
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
+                
+                
                     
 
 
@@ -355,6 +357,10 @@ $url = ruta::ctrRuta();
                 
                 
                 <input type="submit" class="btn btn-default backColor btn-block btnIngreso" value="ENVIAR"> 
+                <br>
+                <center>
+                    <a href="#modalPassword" data-dismiss="modal" data-toggle="modal">Olvidaste tu contraseña?</a> 
+                </center>
                     
 
 
@@ -369,6 +375,93 @@ $url = ruta::ctrRuta();
 
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--================================
+VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
+=================================-->
+
+<div id="modalPassword" class="modal fade modalFormulario" role="dialog">
+    <div class="modal-content modal-dialog">
+
+
+
+
+
+        <div class="modal-body modalTitulo">
+            <h3 class="backColorModal">SOLICITUD DE NUEVA CONTRASEÑA</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!--================================
+            OLVIDO DE CONTRASEÑA
+            =================================-->
+            
+            <form method="post">
+                <label class="text-muted">Escribe el correo electrónico con el que estás registrado y allí te enviaremos una nueva contraseña</label>
+                
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                        </span>
+                        
+                        <input type="email" class="form-control" id="passEmail" name="passEmail" placeholder="Correio eletronico" required>
+                    </div>
+                </div>
+
+                
+                
+                
+                
+                <?php
+                    $password = new ControladorUsuarios();
+                    $password -> ctrOlvidoPassword();
+                ?>
+                
+                
+                <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
+                
+
+
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+            No tienes una cuenta registrada? | <strong><a href="#modalRegistro" data-dismiss="modal" data-toggle="modal">Registrarse</a></strong>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

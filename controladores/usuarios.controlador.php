@@ -238,5 +238,79 @@ class ControladorUsuarios {
         } 
     }
     
+    
+    
+/*====================================
+* OUVIDO CONTRASEÑA
+ =====================================*/ 
+ public function ctrOlvidoPassword(){
+     if(isset($_POST["passEmail"])){
+         if (preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["passEmail"])){
+             /*====================================
+            * GERAR UNA CONTRASEÑA ALEATORIA
+            =====================================*/ 
+             function generarPassword($longitud){
+                 $key = "";
+                 $pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+                 $max = strlen($pattern)-1;
+                 
+                 for($i = 0; $i < $longitud; $i++){
+                     $key .= $pattern{mt_rand(0,$max)};
+                 }
+                 return $key;
+             }
+             
+             $nuevaPassWord = generarPassword(11);
+             
+             $encriptar = crypt($nuevaPassWord, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+             
+             $tabla = "usuarios";
+             $item1 = "email";
+             $valor1 = $_POST["passEmail"];
+             $respuesta1 = ModelUsuarios::mdlMostrarUsuario($tabla, $item1, $valor1);
+             if($respuesta1){
+                 $id = $respuesta1["id"];
+                 $item2 = "password";
+                 $valor2 = $encriptar;
+                 $respuesta2 = ModelUsuarios::mdlActualizarUsuario($tabla, $id, $item2, $valor2);
+                 if($respuesta2 == "ok"){
+                     
+                 }
+             } else {
+                 echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR!",'
+                . 'text: "El correo electrónico no se no existe en el sistema!",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+             }
+             
+             
+             
+         } else {
+             echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR!",'
+                . 'text: "Error al enviar el correo electrónico, no se permitem caracteres especiales!",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+         }
+     }
+ }
+    
 
 }

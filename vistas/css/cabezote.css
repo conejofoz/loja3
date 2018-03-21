@@ -98,7 +98,8 @@ header #categorias hr{
 VENTANAS MODALES
 =============================================*/
 .backColorModal{
-    background: #00193A;
+    /*background: #00193A;*/
+    background: #6B8E23;
     color: #fff;
 }
 .modalTitulo{

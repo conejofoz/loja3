@@ -29,7 +29,7 @@
 
         <!--=========================================================
         PLUGINS DE CSS
-        ==========================================================-->'
+        ==========================================================-->
         <link rel="icon" href="http://localhost/backend/<?php echo $url; ?>vistas/img/plantilla/icono.png">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/font-awesome.min.css">
@@ -118,7 +118,7 @@
                 include "modulos/productos.php";
             } else if($infoProducto != null) {
                 include "modulos/infoproducto.php";
-            } else if($rutas[0] == "buscador" || $rutas[0] == "verificar") {
+            } else if($rutas[0] == "buscador" || $rutas[0] == "verificar" || $rutas[0] == "salir"){
                 include "modulos/".$rutas[0].".php";
             } else {
                 include "modulos/error404.php";
