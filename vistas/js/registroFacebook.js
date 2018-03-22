@@ -82,7 +82,9 @@ function testApi(){
                 contentType:false,
                 processData:false,
                 success:function(respuesta){
-                    console.log("respuesta", respuesta);
+                    if(respuesta == "ok"){
+                        window.location = localStorage.getItem("rutaActual");
+                    }
                 }
                 
             })
