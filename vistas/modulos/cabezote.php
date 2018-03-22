@@ -59,7 +59,7 @@ $url = ruta::ctrRuta();
                                 echo '<li> | </li>
                                             <li><a href="'.$url.'perfil">Ver Perfil</a></li>
                                             <li> | </li>
-                                            <li><a href="'.$url.'salir">Salir</a></li>';
+                                            <li><a href="'.$url.'salir" class="salir">Salir</a></li>';
                             }
                         } else {
                             echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>

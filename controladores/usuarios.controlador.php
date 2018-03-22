@@ -368,11 +368,22 @@ class ControladorUsuarios {
 
     static public function ctrRegistroRedesSociales($datos) {
         $tabla = "usuarios";
-        $respuesta1 = ModelUsuarios::mdlRegistraUsuario($tabla, $datos);
+        $item = "email";
+        $valor = $datos["email"];
+        $emailRepetido = false;
+        
+        $respuesta0 = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+        
+        if($respuesta0){
+            $emailRepetido = true;
+        } else {
+            $respuesta1 = ModelUsuarios::mdlRegistraUsuario($tabla, $datos);
+        }
+        
+        
 
-        if ($respuesta1 == "ok") {
-            $item = "email";
-            $valor = $datos["email"];
+        if ($emailRepetido || $respuesta1 == "ok") {
+            
 
             $respuesta2 = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
@@ -389,6 +400,8 @@ class ControladorUsuarios {
                 $_SESSION["modo"] = $respuesta2["modo"];
                 
                 echo "ok";
+            } else {
+                echo "";
             }
         }
     }
