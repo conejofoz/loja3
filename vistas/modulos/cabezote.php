@@ -203,7 +203,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM FACEBOOK
             =================================-->
-            <div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+            <div class="col-sm-6 col-xs-12 facebook">
                 <p>
                     <i class="fa fa-facebook"></i>
                     Registro con Facebook
@@ -213,7 +213,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM GOOGLE
             =================================-->
-            <div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+            <div class="col-sm-6 col-xs-12 google">
                 <p>
                     <i class="fa fa-google"></i>
                     Registro con Google
@@ -305,7 +305,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM FACEBOOK
             =================================-->
-            <div class="col-sm-6 col-xs-12 facebook" id="btnFacebookRegistro">
+            <div class="col-sm-6 col-xs-12 facebook">
                 <p>
                     <i class="fa fa-facebook"></i>
                     Ingreso por Facebook
@@ -315,7 +315,7 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM GOOGLE
             =================================-->
-            <div class="col-sm-6 col-xs-12 google" id="btnGoogleRegistro">
+            <div class="col-sm-6 col-xs-12 google">
                 <p>
                     <i class="fa fa-google"></i>
                     Ingreso por Google

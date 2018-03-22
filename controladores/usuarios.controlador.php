@@ -19,6 +19,7 @@ class ControladorUsuarios {
                     "nombre" => $_POST["regUsuario"],
                     "password" => $encriptar,
                     "email" => $_POST["regEmail"],
+                    "foto" => "",
                     "modo" => "directo",
                     "foto" => "",
                     "verificacion" => 1,
@@ -386,6 +387,18 @@ class ControladorUsuarios {
                 . '</script>';
          }
      }
+ }
+ 
+ 
+ 
+ /*
+  * REGISTRO CON REDES SOCIALES
+  */
+ static public function ctrRegistroRedesSociales($datos){
+     $tabla = "usuarios";
+     $respuesta = ModelUsuarios::mdlRegistraUsuario($tabla, $datos);
+     return $respuesta;
+     
  }
     
 
