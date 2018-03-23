@@ -61,8 +61,6 @@ if($cliente->getAccessToken()){
 }
 
 
-
-
 ?>
 
 
