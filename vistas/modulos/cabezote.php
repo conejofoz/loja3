@@ -1,7 +1,78 @@
 <?php
 $servidor = ruta::ctrRutaServidor();
 $url = ruta::ctrRuta();
+
+/* ===============================================
+ * API DE GOOGLE
+  ================================================ */
+
+/* ===============================================
+ * CRIAR O OBJETO DA API GOOGLE
+  ================================================ */
+$cliente = new Google_Client();
+$cliente->setAuthConfig('modelos/client_secret.json');
+$cliente->setAccessType("offline");
+$cliente->setScopes(['profile', 'email']);
+
+/* ===============================================
+ * RUTA PARA EL LOGIN DE GOOGLE
+  ================================================ */
+$rutaGoogle = $cliente->createAuthUrl();
+
+
+/* ===============================================
+ * RECIBIMOS LA VARIABLE GET DE GOOGLE LLAMADA CODE
+  ================================================ */
+if(isset($_GET["code"])){
+    $token = $cliente->authenticate($_GET["code"]);
+    
+    $cliente->setAccessToken($token);
+}
+
+
+/* ===============================================
+ * RECIBIMOS LOS DATOS CIFRADOS DE GOOGLE EN UN ARRAY
+  ================================================ */
+if($cliente->getAccessToken()){
+    $item = $cliente->verifyIdToken();
+    
+    
+    $datos = array(
+        "nombre"=>$item["name"],
+        "email"=>$item["email"],
+        "foto"=>$item["picture"],
+        "password"=>"null",
+        "modo"=>"google",
+        "verificacion"=>0,
+        "emailEncriptado"=>"null"
+    );
+    
+    $respuesta = ControladorUsuarios::ctrRegistroRedesSociales($datos);
+    
+    
+        echo '<script>'
+                . 'setTimeout(function(){ '
+                . 'window.location = localStorage.getItem("rutaActual"); '
+                . '},1000); '
+           . '</script>';
+        
+    
+    
+}
+
+
+
+
 ?>
+
+
+
+
+
+
+
+
+
 <!--=====================================
 =            Top            =
 ======================================-->
@@ -14,18 +85,18 @@ $url = ruta::ctrRuta();
             ======================================-->
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
                 <ul>
-                    <?php
-                    $social = ControladorPlantilla::ctrEstiloPlantilla();
+<?php
+$social = ControladorPlantilla::ctrEstiloPlantilla();
 
-                    $jsonRedesSociales = json_decode($social["redesSociales"], true);
-                    foreach ($jsonRedesSociales as $key => $value) {
-                        echo '<li>
+$jsonRedesSociales = json_decode($social["redesSociales"], true);
+foreach ($jsonRedesSociales as $key => $value) {
+    echo '<li>
 				<a href="' . $value["url"] . '" target="_blank">
                                     <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
 				</a>
                             </li>';
-                    }
-                    ?>
+}
+?>
 
 
                 </ul>
@@ -36,38 +107,36 @@ $url = ruta::ctrRuta();
             ======================================-->
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
                 <ul>
-                    <?php
-                        if(isset($_SESSION["validarSesion"])){
-                            if($_SESSION["validarSesion"] == "ok"){
-                                if($_SESSION["modo"] == "directo"){
-                                    if($_SESSION["foto"] != ""){
-                                        echo '<li>'
-                                                . '<img class="img-circle" src="'.$url.$_SESSION["foto"].'" width="10%">'
-                                            . '</li>';
-                                    } else {
-                                        echo '<li>'
-                                                . '<img class="img-circle" src="'.$servidor.'vistas/img/usuarios/default/anonymous.png" width="10%">'
-                                            . '</li>';
-                                    }
-                                    
-                                } 
-                                if($_SESSION["modo"] == "facebook"){
-                                    echo '<li>'
-                                                . '<img class="img-circle" src="'.$_SESSION["foto"].'" width="10%">'
-                                            . '</li>';
-                                }
-                                echo '<li> | </li>
-                                            <li><a href="'.$url.'perfil">Ver Perfil</a></li>
+<?php
+if (isset($_SESSION["validarSesion"])) {
+    if ($_SESSION["validarSesion"] == "ok") {
+        if ($_SESSION["modo"] == "directo") {
+            if ($_SESSION["foto"] != "") {
+                echo '<li>'
+                . '<img class="img-circle" src="' . $url . $_SESSION["foto"] . '" width="10%">'
+                . '</li>';
+            } else {
+                echo '<li>'
+                . '<img class="img-circle" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="10%">'
+                . '</li>';
+            }
+        } else {
+            echo '<li>'
+            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+            . '</li>';
+        }
+        echo '<li> | </li>
+                                            <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
                                             <li> | </li>
-                                            <li><a href="'.$url.'salir" class="salir">Salir</a></li>';
-                            }
-                        } else {
-                            echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+                                            <li><a href="' . $url . 'salir" class="salir">Salir</a></li>';
+    }
+} else {
+    echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
                                  <li><a href="#" data-toggle="modal">|</a></li>
                                  <li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>';
-                        }
-                    ?>
-                    
+}
+?>
+
                 </ul>
             </div>
         </div>
@@ -149,37 +218,37 @@ $url = ruta::ctrRuta();
         ======================================-->
         <div class="col-xs-12 backColor" id="categorias">
 
-            <?php
-            $item = null;
-            $valor = null;
-            $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
+<?php
+$item = null;
+$valor = null;
+$categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
 
-            foreach ($categorias as $key => $value) {
+foreach ($categorias as $key => $value) {
 
-                echo '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    echo '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                 <h4>
                     <a href="' . $url . $value["ruta"] . '" class="pixelCategorias">' . $value["categoria"] . '</a>
                 </h4>
                 <hr>
                 <ul>';
 
-                $item = "id_categoria";
-                $valor = $value["id"];
-                $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
+    $item = "id_categoria";
+    $valor = $value["id"];
+    $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 
-                foreach ($subcategorias as $key => $value) {
-                    echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias">' . $value["subcategoria"] . '</a></li>';
-                }
-                echo '
+    foreach ($subcategorias as $key => $value) {
+        echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias">' . $value["subcategoria"] . '</a></li>';
+    }
+    echo '
                 </ul>
 
             </div>';
-            }
+}
 
 
 
-            ;
-            ?>
+;
+?>
 
 
 
@@ -219,12 +288,14 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM GOOGLE
             =================================-->
-            <div class="col-sm-6 col-xs-12 google">
-                <p>
-                    <i class="fa fa-google"></i>
-                    Registro con Google
-                </p>
-            </div>
+            <a href="<?php echo $rutaGoogle; ?>">
+                <div class="col-sm-6 col-xs-12 google">
+                    <p>
+                        <i class="fa fa-google"></i>
+                        Registro con Google
+                    </p>
+                </div>
+            </a>
 
             <!--================================
             REGISTRO DIRECTO
@@ -257,27 +328,27 @@ $url = ruta::ctrRuta();
                         <input type="password" class="form-control" id="regPassword" name="regPassword" placeholder="Senha" required>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="checkbox">
                     <label> 
                         <input type="checkbox" id="regPoliticas">
-                    <small>
-                        Al registrarse, usted acepta nuestras condiciones de uso y políticas de privacidad
-                    </small>
+                        <small>
+                            Al registrarse, usted acepta nuestras condiciones de uso y políticas de privacidad
+                        </small>
                     </label>
                 </div>
-                
-                <?php
-                    $registro = new ControladorUsuarios();
-                    $registro -> ctrRegistroUsuario();
-                ?>
-                
-                
+
+<?php
+$registro = new ControladorUsuarios();
+$registro->ctrRegistroUsuario();
+?>
+
+
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
-                
-                
-                    
+
+
+
 
 
             </form>
@@ -321,19 +392,21 @@ $url = ruta::ctrRuta();
             <!--================================
             REGISTRO EM GOOGLE
             =================================-->
-            <div class="col-sm-6 col-xs-12 google">
-                <p>
-                    <i class="fa fa-google"></i>
-                    Ingreso por Google
-                </p>
-            </div>
+            <a href="<?php echo $rutaGoogle; ?>">
+                <div class="col-sm-6 col-xs-12 google">
+                    <p>
+                        <i class="fa fa-google"></i>
+                        Ingreso por Google
+                    </p>
+                </div>
+            </a>
 
             <!--================================
             INGRESO DIRECTO
             =================================-->
             <form method="post">
                 <hr>
-                
+
 
                 <div class="form-group">
                     <div class="input-group">
@@ -352,22 +425,22 @@ $url = ruta::ctrRuta();
                         <input type="password" class="form-control" id="ingPassword" name="ingPassword" placeholder="Senha" required>
                     </div>
                 </div>
-                
-                
-                
-                
-                <?php
-                    $ingreso = new ControladorUsuarios();
-                    $ingreso -> ctrIngresoUsuario();
-                ?>
-                
-                
+
+
+
+
+<?php
+$ingreso = new ControladorUsuarios();
+$ingreso->ctrIngresoUsuario();
+?>
+
+
                 <input type="submit" class="btn btn-default backColor btn-block btnIngreso" value="ENVIAR"> 
                 <br>
                 <center>
                     <a href="#modalPassword" data-dismiss="modal" data-toggle="modal">Olvidaste tu contraseña?</a> 
                 </center>
-                    
+
 
 
             </form>
@@ -415,33 +488,33 @@ VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
             <!--================================
             OLVIDO DE CONTRASEÑA
             =================================-->
-            
+
             <form method="post">
                 <label class="text-muted">Escribe el correo electrónico con el que estás registrado y allí te enviaremos una nueva contraseña</label>
-                
+
 
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-envelope"></i>
                         </span>
-                        
+
                         <input type="email" class="form-control" id="passEmail" name="passEmail" placeholder="Correio eletronico" required>
                     </div>
                 </div>
 
-                
-                
-                
-                
-                <?php
-                    $password = new ControladorUsuarios();
-                    $password -> ctrOlvidoPassword();
-                ?>
-                
-                
+
+
+
+
+<?php
+$password = new ControladorUsuarios();
+$password->ctrOlvidoPassword();
+?>
+
+
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
-                
+
 
 
             </form>
