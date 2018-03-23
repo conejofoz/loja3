@@ -26,6 +26,8 @@ $rutaGoogle = $cliente->createAuthUrl();
 if(isset($_GET["code"])){
     $token = $cliente->authenticate($_GET["code"]);
     
+    $_SESSION['id_token_google'] = $token;
+    
     $cliente->setAccessToken($token);
 }
 
@@ -108,6 +110,9 @@ foreach ($jsonRedesSociales as $key => $value) {
 <?php
 if (isset($_SESSION["validarSesion"])) {
     if ($_SESSION["validarSesion"] == "ok") {
+        
+        
+        
         if ($_SESSION["modo"] == "directo") {
             if ($_SESSION["foto"] != "") {
                 echo '<li>'
@@ -118,15 +123,42 @@ if (isset($_SESSION["validarSesion"])) {
                 . '<img class="img-circle" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="10%">'
                 . '</li>';
             }
+            echo '<li> | </li>
+                  <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
+                  <li> | </li>
+                  <li><a href="' . $url . 'salir">Salir</a></li>';
+
+        }
+        
+        
+        if ($_SESSION["modo"] == "facebook") {
+            echo '<li>'
+            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+            . '</li> '
+                    . '<li> | </li>
+              <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
+              <li> | </li>
+              <li><a href="' . $url . 'salir" class="salir">Salir</a></li>';
+        }
+        
+        
+        if ($_SESSION["modo"] == "google") {
+            echo '<li>'
+            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+            . '</li> '
+                    . '<li> | </li>
+              <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
+              <li> | </li>
+              <li><a href="' . $url . 'salir">Salir</a></li>';
         } else {
             echo '<li>'
             . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
             . '</li>';
         }
-        echo '<li> | </li>
-                                            <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
-                                            <li> | </li>
-                                            <li><a href="' . $url . 'salir" class="salir">Salir</a></li>';
+        
+        
+        
+        
     }
 } else {
     echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
