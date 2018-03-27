@@ -375,11 +375,11 @@ class ControladorUsuarios {
         $respuesta0 = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
         if ($respuesta0) {
-            if($respuesta0["modo"] != $datos["modo"]){
+            if ($respuesta0["modo"] != $datos["modo"]) {
                 echo '<script>'
                 . 'swal({'
                 . 'title:"ERROR!",'
-            . 'text: "Error el correo electrónico '.$datos["email"].'ya está registrado en el sistema con un método diferente a Google!",'
+                . 'text: "Error el correo electrónico ' . $datos["email"] . 'ya está registrado en el sistema con un método diferente a Google!",'
                 . 'type:"error",'
                 . 'confirmButtonText:"Cerrar",'
                 . 'closeOnConfirm:false},'
@@ -430,6 +430,75 @@ class ControladorUsuarios {
             } else {
 
                 echo "";
+            }
+        }
+    }
+
+    /* =====================================================
+     * ACTUALIZAR PERFIL
+      ===================================================== */
+
+    public function ctrActualizarPerfil() {
+
+        if (isset($_POST["editarNombre"])) {
+
+            if ($_POST["editarPassword"] == "") {
+                $password = $_POST["passUsuario"]; //senha oculta no formulario
+            } else {
+                $password = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+            }
+
+            $datos = array(
+                "nombre" => $_POST["editarNombre"],
+                "email" => $_POST["editarEmail"],
+                "password" => $password,
+                "foto" => "",
+                "id" => $_POST["idUsuario"]
+            );
+
+            $tabla = "usuarios";
+
+            $respuesta = ModelUsuarios::mdlActualizarPerfil($tabla, $datos);
+
+            if ($respuesta == "ok") {
+                
+                $_SESSION["validarSesion"] = "ok";
+                $_SESSION["id"] = $datos["id"];
+                $_SESSION["nombre"] = $datos["nombre"];
+                $_SESSION["foto"] = $datos["foto"];
+                $_SESSION["email"] = $datos["email"];
+                $_SESSION["password"] = $datos["password"];
+                $_SESSION["modo"] = $_POST["modoUsuario"];
+                
+                echo '<script>'
+                . 'swal({'
+                . 'title:"OK!",'
+                . 'text: "Su cuenta ha sido actualizada correctamente!",'
+                . 'type:"success",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+            } else {
+                //echo $respuesta;
+                //exit;
+                echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR!",'
+                . 'text: "' . $respuesta. '",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
             }
         }
     }

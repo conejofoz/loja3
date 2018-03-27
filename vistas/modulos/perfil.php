@@ -86,6 +86,11 @@ SESÍON PERFIL
                             <figure id="imgPerfil">
                                 <?php
                                 if ($_SESSION["modo"] == "directo") {
+                                    
+                                    echo '<input type="hidden" value="'.$_SESSION["id"].'" name="idUsuario">';
+                                    echo '<input type="hidden" value="'.$_SESSION["password"].'" name="passUsuario">';
+                                    echo '<input type="hidden" value="'.$_SESSION["foto"].'" name="fotoUsuario">';
+                                    echo '<input type="hidden" value="'.$_SESSION["modo"].'" name="modoUsuario">';
 
                                     if ($_SESSION["foto"] != "") {
                                         echo '<img src="' . $url . $_SESSION["foto"] . '" class="img-thumbnail">';
@@ -150,6 +155,11 @@ SESÍON PERFIL
                             }
                             ?>
                         </div>
+                        
+                        <?php
+                            $actualizarPerfil = new ControladorUsuarios();
+                            $actualizarPerfil->ctrActualizarPerfil();
+                        ?>
 
                     </form>
                     <button class="btn btn-danger btn-md pull-right">Eliminar Cuenta</button>
