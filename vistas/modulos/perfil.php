@@ -107,10 +107,16 @@ SESÍON PERFIL
                             <?php
                             if ($_SESSION["modo"] == "directo") {
                                 
-                                echo '<button class="btn btn-default">Cambiar foto de perfil</button>';
+                                echo '<button type="button" class="btn btn-default" id="btnCambiarFoto">Cambiar foto de perfil</button>';
 
                             }
                             ?>
+                            
+                            <div id="subirImagen">
+                                <input type="file" class="form-control" id="datosImagen" name="datosImagen">
+                                <img class="previsualizar">
+                                
+                            </div>
 
                         </div>
                         <div class="col-md-9 col-sm-8 col-xs-12">
@@ -170,10 +176,5 @@ SESÍON PERFIL
         </div>
     </div>
 </div>
-<label class="control-label text-muted text-uppercase" for="editarNombre">Nombre:</label>
-<div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-    <input type="text" class="form-control" id="editarNombre" name="editar" value="" readonly >
-</div>
-<br>
+
 
