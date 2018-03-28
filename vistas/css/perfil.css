@@ -23,6 +23,10 @@ PERFIL
     padding: 40px;
     cursor: pointer;
 }
+#perfil #subirImagen img{
+    width: 100%;
+    padding: 10px;
+}
 #perfil #subImagen #dadosImagen{
     height: 65px;
 }

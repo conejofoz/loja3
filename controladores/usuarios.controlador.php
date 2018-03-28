@@ -441,6 +441,48 @@ class ControladorUsuarios {
     public function ctrActualizarPerfil() {
 
         if (isset($_POST["editarNombre"])) {
+            
+            /*VALIDAR IMAGEN*/
+            $ruta = "";
+            if(isset($_FILES["datosImagen"]["tmp_name"])){
+                
+                $directorio = "vistas/img/usuarios/".$_POST["idUsuario"];
+                
+                /*PRIMERO PREGUTAMOS SE EXISTE IMAGEN NA BD*/
+                
+                if(!empty($_POST["fotoUsuario"])){
+                    
+                    unlink($_POST["fotoUsuario"]);
+                    
+                } else {
+                    
+                    mkdir($directorio, 0755);
+                    
+                }
+                
+                /*GUARDAMOS LA IMAGEN EN EL DIRECTORIO*/
+                
+                $aleatorio = mt_rand(100, 999);
+                
+                $ruta = "vistas/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".jpg";
+                
+                /*MODIFICAMOS TAMAÑO DE LA FOTO*/
+                
+                list($ancho, $alto) = getimagesize($_FILES["datosImagen"]["tmp_name"]);
+                
+                $nuevoAncho = 500;
+                $nuevoAlto = 500;
+                $origen = imagecreatefromjpeg($_FILES["datosImagen"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAlto, $nuevoAncho);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, $ruta);
+                
+                
+                
+                
+                
+                
+            }
 
             if ($_POST["editarPassword"] == "") {
                 $password = $_POST["passUsuario"]; //senha oculta no formulario
@@ -452,7 +494,7 @@ class ControladorUsuarios {
                 "nombre" => $_POST["editarNombre"],
                 "email" => $_POST["editarEmail"],
                 "password" => $password,
-                "foto" => "",
+                "foto" => $ruta,
                 "id" => $_POST["idUsuario"]
             );
 
