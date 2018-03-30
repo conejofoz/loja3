@@ -90,7 +90,7 @@ SESÍON PERFIL
                                 
                                 //var_dump($productos);
                                 foreach ($productos as $key => $value2){
-                                echo '<div class="panel panel-default">
+                                echo   '<div class="panel panel-default">
                                             <div class="panel-body">
                                                 <div class="col-md-2 col-sm-6 col-xs-12">
                                                     <figure>
@@ -112,53 +112,80 @@ SESÍON PERFIL
                                                         if($value1["envio"] == 0){
                                                             
                                                             echo '<div class="progress">
-                                                                <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Despachado</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-clock-o"> Enviando</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-clock-o"> Entregado</i>
-                                                                </div>
-                                                            </div>';
+                                                                    <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Despachado</i>
+                                                                    </div>
+                                                                    <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
+                                                                       <i class="fa fa-clock-o"> Enviando</i>
+                                                                    </div>
+                                                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
+                                                                       <i class="fa fa-clock-o"> Entregado</i>
+                                                                    </div>
+                                                                  </div>';
                                                         }
                                                         
                                                         if($value1["envio"] == 1){
                                                             
                                                             echo '<div class="progress">
-                                                                <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Despachado</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Enviando</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-clock-o"> Entregado</i>
-                                                                </div>
-                                                            </div>';
+                                                                     <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Despachado</i>
+                                                                     </div>
+                                                                     <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Enviando</i>
+                                                                     </div>
+                                                                     <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-clock-o"> Entregado</i>
+                                                                     </div>
+                                                                  </div>';
                                                         }
                                                         
                                                         if($value1["envio"] == 2){
                                                             
                                                             echo '<div class="progress">
-                                                                <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Despachado</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Enviando</i>
-                                                                </div>
-                                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
-                                                                    <i class="fa fa-check"> Entregado</i>
-                                                                </div>
-                                                            </div>';
+                                                                     <div class="progress-bar progress-bar-info" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Despachado</i>
+                                                                     </div>
+                                                                     <div class="progress-bar progress-bar-default" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Enviando</i>
+                                                                     </div>
+                                                                     <div class="progress-bar progress-bar-success" role="progressbar" style="width: 33.33%">
+                                                                        <i class="fa fa-check"> Entregado</i>
+                                                                     </div>
+                                                                  </div>';
                                                         }
                                                         
                                                     }
                                 
-                                          echo '</div>
+                                                echo '<h4 class="pull-right"><smaill>Comprado el '.substr($value1["fecha"],0,10).'</small></h4>
+                                                </div>
+                                                
+                                                <div class="col-md-4 col-xs-12">
+                                                    <div class="pull-right">
+                                                        <a href="#modalComentarios" data-toggle="modal" idComentario="">
+                                                            <button class="btn btn-default backColor">Calificar Producto</button>
+                                                        </a>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="pull-right">
+                                                        <h3 class="text-right">
+                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                            <i class="fa fa-star-o text-success" aria-hidden="true"></i>
+                                                        </h3>
+                                                        <small>
+                                                            <p class="panel panel-default" style="padding: 5px">
+                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                                                                Cupiditate minus, consectetur beatae fugit odio iure 
+                                                                repudiandae quia distinctio, id ducimus molestiae. 
+                                                                Obcaecati, unde. Illo molestiae dolorum, saepe nisi enim iusto.
+                                                            </p> 
+                                                        </small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                      </div>';
+                                        </div>';
                                 }
                             }
                         }
@@ -169,7 +196,7 @@ SESÍON PERFIL
                     
                     
                     
-                    
+                       
                 </div>
 
 
@@ -285,3 +312,53 @@ SESÍON PERFIL
 </div>
 
 
+
+
+
+
+
+<!--VENTANA MODAL PARA COMENTARIOS-->
+<div id="modalComentarios" class="modal fade modalFormulario" role="dialog">
+    <div class="modal-content modal-dialog">
+        <div class="modal-body modalTitulo">
+            <h3 class="backColor">CALIFICA ESTE PRODUCTO</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <form method="post">
+                <h1 class="text-center" id="estrellas">
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                    <i class="fa fa-star text-success" aria-hidden="true"></i>
+                        
+                </h1>
+                
+                <div class="form-group text-center">
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="0.5">0.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="1.0">1.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="1.5">1.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="2.0">2.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="2.5">2.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="3.0">3.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="3.5">3.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="4.0">4.0</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="4.5">4.5</label>
+                    <label class="radio-inline"><input type="radio" name="puntaje" value="5.0" checked>5.0</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment" class="text-muted">
+                        Tu oínión acerca de este producto: <span><small>(máximo 300 caracteres)</small></span>
+                    </label>
+                    <textarea class="form-control" rows="5" id="comentario" name="comentario" maxlength="300" required></textarea>
+                    <br>
+                    <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR">
+                </div>
+                
+            </form>
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+    </div>
+</div>
