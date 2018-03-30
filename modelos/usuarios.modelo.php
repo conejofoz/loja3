@@ -139,6 +139,30 @@ class ModelUsuarios {
         $stmt->close();
         $stmt = null;
     }
+    
+    
+    
+    
+
+    /* =====================================================
+     * MOSTRAR COMENTARIOS EN PERFIL
+      ==================================================== */
+
+    static public function mdlMostrarComentariosPerfil($tabla, $datos) {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE "
+                . "id_usuario = :id_usuario AND "
+                . "id_producto = :id_producto ");
+        $stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
+        $stmt->bindParam(":id_producto", $datos["idProducto"], PDO::PARAM_INT);
+        $stmt->execute();
+
+        if ($stmt->execute()) {
+            return $stmt->fetch();
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    
 
 
 }

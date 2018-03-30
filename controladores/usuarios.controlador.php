@@ -557,5 +557,18 @@ class ControladorUsuarios {
         $respuesta = ModelUsuarios::mdlMostrarCompras($tabla, $item, $valor);
         return $respuesta;
     }
+    
+    
+    
+    /* ==========================================================================
+     * MOSTRAR COMENTARIOS EN PERFIL
+      ========================================================================= */
+
+    static public function ctrMostrarComentariosPerfil($datos) {
+        $tabla = "comentarios";
+        $respuesta = ModelUsuarios::mdlMostrarComentariosPerfil($tabla, $datos);
+        return $respuesta;
+    }
+    
 
 }
