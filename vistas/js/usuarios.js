@@ -4,7 +4,7 @@
 
 var rutaActual = location.href;
 
-$(".btnIngreso, .facebook, .google").click(function(){
+$(".btnIngreso, .facebook, .google").click(function () {
     localStorage.setItem("rutaActual", rutaActual);
 })
 
@@ -15,7 +15,7 @@ $(".btnIngreso, .facebook, .google").click(function(){
 /*
  * FORMATAR OS CAMPOS
  */
-$("input").focus(function(){
+$("input").focus(function () {
     $(".alert").remove();
 })
 
@@ -36,16 +36,16 @@ $("#regEmail").change(function () {
     var datos = new FormData();
     datos.append("validarEmail", email);
     $.ajax({
-        url:rutaOculta + "ajax/usuarios.ajax.php",
+        url: rutaOculta + "ajax/usuarios.ajax.php",
         method: "POST",
         data: datos,
         cache: false,
         contentType: false,
         processData: false,
-        success:function (respuesta) {
+        success: function (respuesta) {
             console.log("respuesta...:", respuesta);
             // assim não funciona pq a resposta false vem como uma string e não como bollean if(!respuesta){
-            
+
             if (respuesta == "false") {
 
                 $(".alert").remove(); // olho: não é alert do js é classe css
@@ -81,7 +81,7 @@ function registroUsuario() {
     var nombre = $("#regUsuario").val();
     if (nombre != "") {
         var expresion = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
-        
+
         if (!expresion.test(nombre)) {
             $("#regUsuario").parent().before('<div class="alert alert-warning"><strong>ATENCIÓN:</strong>No se permite numeros ni caracteres especialies</div>');
             return false;
@@ -98,17 +98,17 @@ function registroUsuario() {
      * VALIDAR EL EMAIL
      */
     var email = $("#regEmail").val();
-    
+
     if (email != "") {
-        
+
         var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-        
+
         if (!expresion.test(email)) {
             $("#regEmail").parent().before('<div class="alert alert-warning"><strong>ATENCIÓN:</strong>Escriba correctamente el correio electrónico</div>');
             return false;
         }
-        
-        if(validarEmailRepetido){
+
+        if (validarEmailRepetido) {
             $("#regEmail").parent().before('<div class="alert alert-danger"><strong>ERROR:</strong>El correo electrónico ya existe en la base de datos, por favor ingrese otro diferente </div>');
             return false;
         }
@@ -156,19 +156,19 @@ function registroUsuario() {
 /*=======================================================
  * CAMBIAR FOTO
  * ====================================================*/
-$("#btnCambiarFoto").click(function(){
+$("#btnCambiarFoto").click(function () {
     $("#imgPerfil").toggle();
     $("#subirImagen").toggle();
 })
 
-$("#datosImagen").change(function(){
-    
+$("#datosImagen").change(function () {
+
     var imagen = this.files[0];
-    
-    if(imagen["type"] != "image/jpeg"){
-        
+
+    if (imagen["type"] != "image/jpeg") {
+
         $("#datosImagen").val("");
-        
+
         swal({
             title: "ERROR!",
             text: "La imagen debe estar en formato JPG!",
@@ -177,15 +177,13 @@ $("#datosImagen").change(function(){
             closeOnConfirm: false},
                 function (isConfirm) {
                     if (isConfirm) {
-                        window.location = rutaOculta+"perfil";
+                        window.location = rutaOculta + "perfil";
                     }
                 });
-    }
-    
-    else if(Number(imagen["size"]) > 2000000){
-        
+    } else if (Number(imagen["size"]) > 2000000) {
+
         $("#datosImagen").val("");
-        
+
         swal({
             title: "ERROR!",
             text: "La imagen no debe pesar más de 2 MB!",
@@ -194,19 +192,19 @@ $("#datosImagen").change(function(){
             closeOnConfirm: false},
                 function (isConfirm) {
                     if (isConfirm) {
-                        window.location = rutaOculta+"perfil";
+                        window.location = rutaOculta + "perfil";
                     }
                 });
     } else {
-        
+
         var datosImagen = new FileReader;
         datosImagen.readAsDataURL(imagen);
-        
-        $(datosImagen).on("load", function(event){
+
+        $(datosImagen).on("load", function (event) {
             var rutaImagen = event.target.result;
             $(".previsualizar").attr("src", rutaImagen);
         })
-        
+
 //        swal({
 //            title: "Correcto!",
 //            text: "La imagen se subió correctamente!",
@@ -219,9 +217,140 @@ $("#datosImagen").change(function(){
 //                    }
 //                });
     }
-    
-    
+
+
 })
 
 
+
+
+
+/* ===================================================
+ * COMENTARIOS 
+ * ==================================================*/
+$(".calificarProducto").click(function () {
+    var idComentario = $(this).attr("idComentario");
+    $("#idComentario").val(idComentario);
+})
+
+$("input[name='puntaje']").change(function () {
+
+    var puntaje = $(this).val();
+
+    switch (puntaje) {
+
+        case "0.5":
+            $("#estrellas").html('<i class="fa fa-star-half-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "1.0":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "1.5":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "2.0":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "2.5":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "3.0":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "3.5":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "4.0":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "4.5":
+            $("#estrellas").html('<i class="fa fa-star-half text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i> ');
+            break;
+
+        case "5.0":
+            $("#estrellas").html('<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star text-success" aria-hidden="true"></i> ');
+            break;
+
+    }
+
+})
+
+
+
+
+/*==============================================
+ * VALIDAR COMENTARIO
+ * ============================================*/
+function validarComentario(){
+    
+    var comentario = $("#comentario").val();
+    
+    if(comentario != ""){
+        
+        var expresion = /^[,\\.\\a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]*$/;
+        
+        if(!expresion.test(comentario)){
+            
+            $("#comentario").parent().before('<div class="alert alert-danger"><strong>ERROR:</strong>No se permitem caracteres especiales</div>');
+            
+            return false;
+        }
+    } else {
+        
+        $("#comentario").parent().before('<div class="alert alert-danger"><strong>ERROR:</strong>Campo obrigatório</div>');
+            
+        return false;
+        
+    }
+    
+    return true;
+}
 

@@ -165,12 +165,13 @@ SESÍON PERFIL
                                                     "idUsuario" => $_SESSION["id"],
                                                     "idProducto" => $value2["id"]
                                                 );
+                                                
                                                 $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
                                                 
                                                 var_dump($comentarios);
                                                 
                                               echo '<div class="pull-right">
-                                <a href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
+                                                    <a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
                                                             <button class="btn btn-default backColor">Calificar Producto</button>
                                                         </a>
                                                     </div>
@@ -418,7 +419,11 @@ SESÍON PERFIL
         <div class="modal-body modalTitulo">
             <h3 class="backColor">CALIFICA ESTE PRODUCTO</h3>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <form method="post">
+            
+            <form method="post" onsubmit="return validarComentario()">
+                
+                <input type="hidden" value="" id="idComentario">
+                
                 <h1 class="text-center" id="estrellas">
                     <i class="fa fa-star text-success" aria-hidden="true"></i>
                     <i class="fa fa-star text-success" aria-hidden="true"></i>
