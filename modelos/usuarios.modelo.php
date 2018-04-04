@@ -106,11 +106,10 @@ class ModelUsuarios {
             $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
             $stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
             $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
-            
+
             $stmt->execute();
 
             return "ok";
-            
         } catch (PDOException $e) {
             //$stmt->close();
             //$stmt = null;
@@ -120,10 +119,7 @@ class ModelUsuarios {
             $stmt = null;
         }
     }
-    
-    
-    
-    
+
     /* =====================================================
      * MOSTRAR COMPRAS
       ==================================================== */
@@ -139,10 +135,6 @@ class ModelUsuarios {
         $stmt->close();
         $stmt = null;
     }
-    
-    
-    
-    
 
     /* =====================================================
      * MOSTRAR COMENTARIOS EN PERFIL
@@ -162,7 +154,29 @@ class ModelUsuarios {
         $stmt->close();
         $stmt = null;
     }
-    
 
+    /* ========================================
+     * ACTUALIZAR COMENTARIO 
+      ========================================= */
+
+    static public function mdlActualizarComentario($tabla, $datos) {
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET "
+                . "calificacion = :calificacion, "
+                . "comentario = :comentario "
+                . "WHERE "
+                . "id = :id ");
+
+        $stmt->bindParam(":calificacion", $datos["calificacion"], PDO::PARAM_STR);
+        $stmt->bindParam(":comentario", $datos["comentario"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 
 }

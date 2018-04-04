@@ -168,7 +168,7 @@ SESÍON PERFIL
                                                 
                                                 $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
                                                 
-                                                var_dump($comentarios);
+                                                //var_dump($comentarios);
                                                 
                                               echo '<div class="pull-right">
                                                     <a class="calificarProducto" href="#modalComentarios" data-toggle="modal" idComentario="'.$comentarios["id"].'">
@@ -422,7 +422,7 @@ SESÍON PERFIL
             
             <form method="post" onsubmit="return validarComentario()">
                 
-                <input type="hidden" value="" id="idComentario">
+                <input type="hidden" value="" id="idComentario" name="idComentario">
                 
                 <h1 class="text-center" id="estrellas">
                     <i class="fa fa-star text-success" aria-hidden="true"></i>
@@ -454,6 +454,10 @@ SESÍON PERFIL
                     <br>
                     <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR">
                 </div>
+                
+                <?php
+                    $actualizarComentario = ControladorUsuarios::ctrActualizarComentario();
+                ?>
                 
             </form>
         </div>

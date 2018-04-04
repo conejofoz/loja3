@@ -441,47 +441,39 @@ class ControladorUsuarios {
     public function ctrActualizarPerfil() {
 
         if (isset($_POST["editarNombre"])) {
-            
-            /*VALIDAR IMAGEN*/
+
+            /* VALIDAR IMAGEN */
             $ruta = "";
-            if(isset($_FILES["datosImagen"]["tmp_name"])){
-                
-                $directorio = "vistas/img/usuarios/".$_POST["idUsuario"];
-                
-                /*PRIMERO PREGUTAMOS SE EXISTE IMAGEN NA BD*/
-                
-                if(!empty($_POST["fotoUsuario"])){
-                    
+            if (isset($_FILES["datosImagen"]["tmp_name"])) {
+
+                $directorio = "vistas/img/usuarios/" . $_POST["idUsuario"];
+
+                /* PRIMERO PREGUTAMOS SE EXISTE IMAGEN NA BD */
+
+                if (!empty($_POST["fotoUsuario"])) {
+
                     unlink($_POST["fotoUsuario"]);
-                    
                 } else {
-                    
+
                     mkdir($directorio, 0755);
-                    
                 }
-                
-                /*GUARDAMOS LA IMAGEN EN EL DIRECTORIO*/
-                
+
+                /* GUARDAMOS LA IMAGEN EN EL DIRECTORIO */
+
                 $aleatorio = mt_rand(100, 999);
-                
-                $ruta = "vistas/img/usuarios/".$_POST["idUsuario"]."/".$aleatorio.".jpg";
-                
-                /*MODIFICAMOS TAMAÑO DE LA FOTO*/
-                
+
+                $ruta = "vistas/img/usuarios/" . $_POST["idUsuario"] . "/" . $aleatorio . ".jpg";
+
+                /* MODIFICAMOS TAMAÑO DE LA FOTO */
+
                 list($ancho, $alto) = getimagesize($_FILES["datosImagen"]["tmp_name"]);
-                
+
                 $nuevoAncho = 500;
                 $nuevoAlto = 500;
                 $origen = imagecreatefromjpeg($_FILES["datosImagen"]["tmp_name"]);
                 $destino = imagecreatetruecolor($nuevoAlto, $nuevoAncho);
                 imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                 imagejpeg($destino, $ruta);
-                
-                
-                
-                
-                
-                
             }
 
             if ($_POST["editarPassword"] == "") {
@@ -503,7 +495,7 @@ class ControladorUsuarios {
             $respuesta = ModelUsuarios::mdlActualizarPerfil($tabla, $datos);
 
             if ($respuesta == "ok") {
-                
+
                 $_SESSION["validarSesion"] = "ok";
                 $_SESSION["id"] = $datos["id"];
                 $_SESSION["nombre"] = $datos["nombre"];
@@ -511,7 +503,7 @@ class ControladorUsuarios {
                 $_SESSION["email"] = $datos["email"];
                 $_SESSION["password"] = $datos["password"];
                 $_SESSION["modo"] = $_POST["modoUsuario"];
-                
+
                 echo '<script>'
                 . 'swal({'
                 . 'title:"OK!",'
@@ -531,7 +523,7 @@ class ControladorUsuarios {
                 echo '<script>'
                 . 'swal({'
                 . 'title:"ERROR!",'
-                . 'text: "' . $respuesta. '",'
+                . 'text: "' . $respuesta . '",'
                 . 'type:"error",'
                 . 'confirmButtonText:"Cerrar",'
                 . 'closeOnConfirm:false},'
@@ -544,10 +536,7 @@ class ControladorUsuarios {
             }
         }
     }
-    
-    
-    
-    
+
     /* ==========================================================================
      * MOSTRAR COMPRAS
       ========================================================================= */
@@ -557,9 +546,7 @@ class ControladorUsuarios {
         $respuesta = ModelUsuarios::mdlMostrarCompras($tabla, $item, $valor);
         return $respuesta;
     }
-    
-    
-    
+
     /* ==========================================================================
      * MOSTRAR COMENTARIOS EN PERFIL
       ========================================================================= */
@@ -569,6 +556,76 @@ class ControladorUsuarios {
         $respuesta = ModelUsuarios::mdlMostrarComentariosPerfil($tabla, $datos);
         return $respuesta;
     }
-    
+
+    /* ==========================================================================
+     * ATUALIZAR COMENTARIOS
+      ========================================================================= */
+
+    static public function ctrActualizarComentario() {
+
+        if (isset($_POST["idComentario"])) {
+
+            if (preg_match('/^[,\\.\\a-z-A-Z0-9ñÑãáéíóúÁÉÍÓÚ ]+$/', $_POST["comentario"])) {
+
+                if ($_POST["comentario"] != "") {
+
+                    $tabla = "comentarios";
+
+                    $datos = array(
+                        "id" => $_POST["idComentario"],
+                        "calificacion" => $_POST["puntaje"],
+                        "comentario" => $_POST["comentario"]
+                    );
+
+
+                    $respuesta = ModelUsuarios::mdlActualizarComentario($tabla, $datos);
+
+                    if ($respuesta == "ok") {
+                        echo '<script>'
+                        . 'swal({'
+                        . 'title:"GRACIAS POR COMPARTIR SU OPINIÓN!",'
+                        . 'text: "Su calificación y comentario ha sido guardado!",'
+                        . 'type:"success",'
+                        . 'confirmButtonText:"Cerrar",'
+                        . 'closeOnConfirm:false},'
+                        . 'function(isConfirm){'
+                        . 'if(isConfirm){'
+                        . 'history.back();'
+                        . '}'
+                        . '});'
+                        . '</script>';
+                    }
+                } else {
+                    echo '<script>'
+                    . 'swal({'
+                    . 'title:"ERROR AL ENVIAR SU CALIFICACIÓN!",'
+                    . 'text: "El comentario no puede estar vacío!",'
+                    . 'type:"error",'
+                    . 'confirmButtonText:"Cerrar",'
+                    . 'closeOnConfirm:false},'
+                    . 'function(isConfirm){'
+                    . 'if(isConfirm){'
+                    . 'history.back();'
+                    . '}'
+                    . '});'
+                    . '</script>';
+                }
+            } else {
+                echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR AL ENVIAR SU CALIFICACIÓN!",'
+                . 'text: "El comentario no puede llevar caracteres especialies!",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+            }
+        }
+    }
 
 }
