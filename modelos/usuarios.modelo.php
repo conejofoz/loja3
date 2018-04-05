@@ -154,7 +154,7 @@ class ModelUsuarios {
             }
         } else {
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE "
-                    . "id_producto = :id_producto ");
+                    . "id_producto = :id_producto ORDER BY Rand() ");
             $stmt->bindParam(":id_producto", $datos["idProducto"], PDO::PARAM_INT);
             $stmt->execute();
 
