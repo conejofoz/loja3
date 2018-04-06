@@ -715,11 +715,6 @@ INFOPRODUCTO
         } else {
             echo '<ul class = "grid0">';
 
-
-
-
-
-
             foreach ($relacionados as $key => $value) {
                 echo '<li class = "col-md-3 col-sm-6 col-xs-12">
                 <!-- === === === === == -->

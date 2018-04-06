@@ -303,8 +303,135 @@ SESÍON PERFIL
             LISTA DE DESEJOS
             ===============================================-->
             <div id="deseos" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Some content in menu 1.</p>
+                <?php
+                    
+                    $item = $_SESSION["id"];
+                    
+                    $deseos = ControladorUsuarios::ctrMostrarDeseos($item);
+                    
+                    if(!$deseos){
+                        echo '<div class="col-xs-12 text-center error404">
+                                <h1><small>Oops!</small></h1>
+                                <h2>Aún no tienes productos en su lista de deseos</h2>
+                                </div>'; 
+                    } else {
+                        foreach ($deseos as $key => $value1) {
+                            $ordenar = "id";
+                            $valor = $value1["id_producto"];
+                            $item = "id";
+                            
+                            $productos = ControladorProductos::ctrListarProductos($ordenar, $item, $valor);
+                            
+                                        echo '<ul class = "grid0">';
+
+            foreach ($productos as $key => $value2) {
+                echo '<li class = "col-md-3 col-sm-6 col-xs-12">
+                <!-- === === === === == -->
+                <figure>
+                <a href = "' . $url . $value2["ruta"] . '" class = "pixelSubCategorias">
+                <img src = "' . $servidor . $value2["portada"] . '" class = "img-responsive">
+                </a>
+                </figure>
+
+
+                <!-- === === === === == -->
+                <h4>
+                <small>
+                <a href = "' . $url . $value2["ruta"] . '" class = "pixelProducto">
+                ' . $value2["titulo"] . '<br><span style = "color:rgba(0,0,0,0)">-</span>';
+
+                if ($value2["nuevo"] != 0) {
+                    echo '<span class = "label label-warning fontSize">Nuevo</span> ';
+                }
+
+                if ($value2["oferta"] != 0) {
+                    echo '<span class = "label label-warning fontSize">' . $value2["descuentoOferta"] . '% off</span>';
+                }
+
+                echo '</a>
+                </small>
+                </h4>
+
+
+                <!-- === === === === == -->
+                <div class = "col-xs-6 precio">';
+
+                if ($value2["precio"] == 0) {
+                    echo '<h2 style="margin-top:-10px"><small>GRATIS</small></h2>';
+                } else {
+                    if ($value2["oferta"] != 0) {
+                        echo '<h2 style="margin-top:-10px"><small>
+                <strong class = "oferta" style="font-size:12px">USD $' . $value2["precio"] . '</strong>
+                </small>
+                <small>
+                $' . $value2["precioOferta"] . '
+                </small></h2>';
+                    } else {
+                        echo '<h2 style="margin-top:-10px"><small>USD $' . $value2["precio"] . '</small></h2>';
+                    }
+                }
+
+                echo '</div>
+
+
+                <!-- === === === === == -->
+                <div class = "col-xs-6 enlaces">
+                <div class = "btn-group pull-right">
+                <button type = "button" class = "btn btn-danger btn-xs quitarDeseos"
+                idDeseo = "' . $value1["id"] . '" data-toggle = "tooltip" title = "Quitar de mi lista de deseos">
+                <i class = "fa fa-heart" aria-hidden = "true"></i>
+
+                </button>';
+
+                if ($value2["tipo"] == "virtual" && $value["precio"] != 0) {
+                    if ($value2["oferta"] != 0) {
+                        echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
+                idProducto = "' . $value2["id"] . '"
+                imagen = "' . $servidor . $value2["portada"] . '"
+                titulo = "' . $value2["titulo"] . '"
+                precio = "' . $value2["precioOferta"] . '"
+                tipo = "' . $value2["tipo"] . '"
+                peso = "' . $value2["peso"] . '"
+                data-toggle = "tooltip"
+                title = "Agregar al carrito de compras">
+                <i class = "fa fa-shopping-cart" aria-hidden = "true"></i>
+                </button>';
+                    } else {
+
+
+                        echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
+                idProducto = "' . $value2["id"] . '"
+                imagen = "' . $servidor . $value["portada"] . '"
+                titulo = "' . $value2["titulo"] . '"
+                precio = "' . $value2["precio"] . '"
+                tipo = "' . $value2["tipo"] . '"
+                peso = "' . $value2["peso"] . '"
+                data-toggle = "tooltip"
+                title = "Agregar al carrito de compras">
+                <i class = "fa fa-shopping-cart" aria-hidden = "true"></i>
+                </button>';
+                    }
+                }
+
+                echo '<a href = "' . $url . $value2["ruta"] . '" class = "pixelProducto">
+                <button type = "button" class = "btn btn-default btn-xs"
+                data-toggle = "tooltip" title = "Ver producto">
+                <i class = "fa fa-eye" aria-hidden = "true"></i>
+
+                </button>
+                </a>
+
+                </div>
+                </div>
+                </li>';
+            }
+
+
+            echo '</ul>';
+
+                        }
+                    }
+                ?>
             </div>
 
 

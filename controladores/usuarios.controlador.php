@@ -636,7 +636,18 @@ class ControladorUsuarios {
     static public function ctrAgregarDeseo($datos) {
         $tabla = "deseos";
         
-        $respuesta = ModelUsuarios::mdlAgregarDeseos($tabla, $datos);
+        $respuesta = ModelUsuarios::mdlAgregarDeseo($tabla, $datos);
+        
+        return $respuesta;
+    }
+    
+    /*
+     * MOSTRAR LISTA DE DESEOS
+     */
+    static public function ctrMostrarDeseos($item) {
+        $tabla = "deseos";
+        
+        $respuesta = ModelUsuarios::mdlMostrarDeseos($tabla, $item);
         
         return $respuesta;
     }

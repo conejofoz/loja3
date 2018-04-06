@@ -381,9 +381,11 @@ $(".deseos").click(function(){
                 });
     } else {
         
+        $(this).addClass("btn-danger");
+        
         var datos = new FormData();
-        datos.append("id_usuario", idUsuario);
-        datos.append("id_producto", idProducto);
+        datos.append("idUsuario", idUsuario);
+        datos.append("idProducto", idProducto);
         
         $.ajax({
             url:rutaOculta+"ajax/usuarios.ajax.php",
