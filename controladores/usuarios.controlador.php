@@ -652,6 +652,17 @@ class ControladorUsuarios {
         return $respuesta;
     }
     
+    /*
+     * QUITAR PRODUCTO DA LISTA DE DESEOS
+     */
+    static public function ctrQuitarDeseo($datos) {
+        $tabla = "deseos";
+        
+        $respuesta = ModelUsuarios::mdlQuitarDeseo($tabla, $datos);
+        
+        return $respuesta;
+    }
+    
     
     
     

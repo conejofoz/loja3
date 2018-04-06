@@ -377,7 +377,7 @@ SESÍON PERFIL
                 <!-- === === === === == -->
                 <div class = "col-xs-6 enlaces">
                 <div class = "btn-group pull-right">
-                <button type = "button" class = "btn btn-danger btn-xs quitarDeseos"
+                <button type = "button" class = "btn btn-danger btn-xs quitarDeseo"
                 idDeseo = "' . $value1["id"] . '" data-toggle = "tooltip" title = "Quitar de mi lista de deseos">
                 <i class = "fa fa-heart" aria-hidden = "true"></i>
 

@@ -221,5 +221,25 @@ class ModelUsuarios {
             return $stmt->fetchAll();
         $stmt->close();
     }
+    
+    
+    
+    
+    /*
+     * QUITAR PRODUCTOS DA LISTA DE DESEOS
+     */
+
+    static public function mdlQuitarDeseo($tabla, $datos) {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+        $stmt->bindParam(":id", $datos, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 
 }

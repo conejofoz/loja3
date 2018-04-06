@@ -400,3 +400,32 @@ $(".deseos").click(function(){
         })
     }
 })
+
+
+
+/*================================================================
+ * BORRAR PRODUCTOS DA LISTA DE DESEJOS
+================================================================= */
+$(".quitarDeseo").click(function(){
+    
+    var idDeseo = $(this).attr("idDeseo");
+    
+    $(this).parent().parent().parent().remove();
+    
+    var datos = new FormData();
+        datos.append("idDeseo", idDeseo);
+        
+        $.ajax({
+            url:rutaOculta+"ajax/usuarios.ajax.php",
+            method:"POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(respuesta){
+                console.log("respuesta", respuesta);
+            }
+        })
+    
+    
+})
