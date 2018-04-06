@@ -3,6 +3,22 @@ $servidor = ruta::ctrRutaServidor();
 $url = ruta::ctrRuta();
 
 /* ===============================================
+ * INICIO DE SESION USUARIO
+  ================================================ */
+if(isset($_SESSION["validarSesion"])){
+    
+    if($_SESSION["validarSesion"] == "ok"){
+        
+        echo '<script>'
+                . 'localStorage.setItem("usuario", "'.$_SESSION["id"].'");'
+            . '</script>';
+        
+    }
+}
+
+
+
+/* ===============================================
  * API DE GOOGLE
   ================================================ */
 
