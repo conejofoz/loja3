@@ -447,10 +447,10 @@ SESÍON PERFIL
                                 <?php
                                 if ($_SESSION["modo"] == "directo") {
 
-                                    echo '<input type="hidden" value="' . $_SESSION["id"] . '" name="idUsuario">';
+                                    echo '<input type="hidden" value="' . $_SESSION["id"] . '" id="idUsuario" name="idUsuario">';
                                     echo '<input type="hidden" value="' . $_SESSION["password"] . '" name="passUsuario">';
-                                    echo '<input type="hidden" value="' . $_SESSION["foto"] . '" name="fotoUsuario">';
-                                    echo '<input type="hidden" value="' . $_SESSION["modo"] . '" name="modoUsuario">';
+                                    echo '<input type="hidden" value="' . $_SESSION["foto"] . '" name="fotoUsuario" id="fotoUsuario">';
+                                    echo '<input type="hidden" value="' . $_SESSION["modo"] . '" name="modoUsuario" id="modoUsuario">';
 
                                     if ($_SESSION["foto"] != "") {
                                         echo '<img src="' . $url . $_SESSION["foto"] . '" class="img-thumbnail">';
@@ -525,7 +525,11 @@ SESÍON PERFIL
                             ?>
 
                     </form>
-                    <button class="btn btn-danger btn-md pull-right">Eliminar Cuenta</button>
+                    <button class="btn btn-danger btn-md pull-right" id="eliminarUsuario">Eliminar Cuenta</button>
+                    <?php
+                            $borrarUsuario = new ControladorUsuarios();
+                            $borrarUsuario->ctrEliminarUsuario();
+                            ?>
                 </div>
             </div>
 

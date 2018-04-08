@@ -429,3 +429,37 @@ $(".quitarDeseo").click(function(){
     
     
 })
+
+
+
+
+/*
+ * BORRAR USUARIO
+ */
+$("#eliminarUsuario").click(function(){
+    
+    var id = $("#idUsuario").val();
+    
+    if($("#modoUsuario").val() != ""){
+        
+        if($("#fotoUsuario").val() != ""){
+            
+            var foto = $("#fotoUsuario").val();
+        }
+    }
+    
+    swal({
+            title: "Está usted seguro(a) de eliminar su cuenta?",
+            text: "Si borrar esta cuenta ya no se puede recuperar!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si, borrar cuenta!",
+            closeOnConfirm: false},
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location = "index.php?ruta=perfil&id="+id+"&foto="+foto;
+                    }
+                });
+    
+})

@@ -241,5 +241,80 @@ class ModelUsuarios {
         $stmt->close();
         $stmt = null;
     }
+    
+    
+    
+    /*=========================================================
+     * ELIMINAR USUARIO
+     =========================================================*/
+    static public function mdlEliminarUsuario($tabla, $id) {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
+        $stmt->bindParam(":id", $datos, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    
+    
+    
+    /*=========================================================
+     * ELIMINAR COMENTARIOS DO USUARIO
+     =========================================================*/
+    static public function mdlEliminarComentarios($tabla, $id) {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_usuario = :id_usuario");
+
+        $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    
+    
+    
+    /*=========================================================
+     * ELIMINIAR COMPRAS DE USUARIO
+     =========================================================*/
+     static public function mdlEliminarCompras($tabla, $id) {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_usuario = :id_usuario");
+
+        $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    
+    
+    
+    /*=========================================================
+     * ELIMINAR LISTA DE DESEOS DE USUARIO
+     =========================================================*/
+    
+     static public function mdlEliminarListaDeseos($tabla, $id) {
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_usuario = :id_usuario");
+
+        $stmt->bindParam(":id_usuario", $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+    
+    
 
 }

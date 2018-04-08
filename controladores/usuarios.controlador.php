@@ -665,7 +665,50 @@ class ControladorUsuarios {
     
     
     
-    
+    /*
+     * ELIMINAR USUARIO
+     */
+    public function ctrEliminarUsuario(){
+        if(isset($_GET["id"])){
+            $tabla1 = "usuarios";
+            $tabla2 = "comentarios";
+            $tabla3 = "compras";
+            $tabla4 = "deseos";
+            
+            $id = $_GET["id"];
+            
+            if($_GET["foto"] != ""){
+                
+                unlink($_GET["foto"]);
+                rmdir('vistas/img/usuarios/'.$_GET["id"]);
+                
+            }
+            
+            $respuesta = ModelUsuarios::mdlEliminarUsuario($tabla1, $id);
+            ModelUsuarios::mdlEliminarUsuario($tabla2, $id);
+            ModelUsuarios::mdlEliminarCompras($tabla3, $id);
+            ModelUsuarios::mdlEliminarListaDeseos($tabla4, $id);
+            
+            if($respuesta == "ok"){
+                echo '<script>'
+                        . 'swal({'
+                        . 'title:"SU CUENTA HA SIDO BORRADA!",'
+                        . 'text: "Debe registrarse nuevamente si desea ingresar!",'
+                        . 'type:"success",'
+                        . 'confirmButtonText:"Cerrar",'
+                        . 'closeOnConfirm:false},'
+                        . 'function(isConfirm){'
+                        . 'if(isConfirm){'
+                        . 'window.location = "'.$url.'";'
+                        . '}'
+                        . '});'
+                        . '</script>';
+            }
+            
+            
+            
+        }
+    }
     
     
     
