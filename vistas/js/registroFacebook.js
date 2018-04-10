@@ -133,22 +133,55 @@ function testApi() {
  * SALIR DE FACEBOOK
  */
 
-$(".salir").click(function (e) {
-    e.preventDefault();
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            FB.logout(function (response) {
-                deleteCookie("fblo_339960536495158");
+//$(".salir").click(function(e) {
+//    e.preventDefault();
+//    FB.getLoginStatus(function(response){
+//        if (response.status === 'connected') {
+//            FB.logout(function(response){
+//                deleteCookie("fblo_339960536495158");
+//
+//                setTimeOut(function(){
+//                    window.location = rutaOculta + "salir";
+//                }, 500)
+//            });
+//
+//            function deleteCooke(name){
+//                document.cookie = name + '=;Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+//            }
+//        }
+//    })
+//})
 
-                setTimeOut(function () {
-                    window.location = rutaOculta + "Salir";
-                }, 500)
-            });
+$(".salir").click(function(e){
 
-            function deleteCooke(name) {
-                document.cookie = name + '=;Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            }
-        }
-    })
+	e.preventDefault();
+        
+	 FB.getLoginStatus(function(response){
+
+	 	 if(response.status === 'connected'){     
+	 	 
+	 	 	FB.logout(function(response){
+
+	 	 		deleteCookie("fblo_339960536495158");
+
+	 	 		console.log("salir");
+
+	 	 		setTimeout(function(){
+
+	 	 			window.location=rutaOculta+"salir";
+
+	 	 		},500)
+
+	 	 	});
+
+	 	 	function deleteCookie(name){
+
+	 	 		 document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+	 	 	}
+
+	 	 }
+
+	 })
+
 })
-

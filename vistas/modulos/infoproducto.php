@@ -373,7 +373,13 @@ INFOPRODUCTO
                      <button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
                  </div>
                  <div class="col-md-6 col-xs-12">
-                     <button class="btn btn-default btn-block btn-lg backColor">
+                     <button class="btn btn-default btn-block btn-lg backColor agregarCarrito"
+                idProducto = "' . $infoProducto["id"] . '"
+                imagen = "' . $servidor . $infoProducto["portada"] . '"
+                titulo = "' . $infoProducto["titulo"] . '"
+                precio = "' . $infoProducto["precioOferta"] . '"
+                tipo = "' . $infoProducto["tipo"] . '"
+                peso = "' . $infoProducto["peso"] . '">
                          ADICIONAR AL CARRITO
                          <i class="fa fa-shopping-cart"></i>
                      </button>
@@ -381,7 +387,13 @@ INFOPRODUCTO
                     } else {
 
                         echo '<div class="col-lg-6 col-md-8 col-xs-12">
-                     <button class="btn btn-default btn-block btn-lg backColor">
+                     <button class="btn btn-default btn-block btn-lg backColor  agregarCarrito"
+                idProducto = "' . $infoProducto["id"] . '"
+                imagen = "' . $servidor . $infoProducto["portada"] . '"
+                titulo = "' . $infoProducto["titulo"] . '"
+                precio = "' . $infoProducto["precioOferta"] . '"
+                tipo = "' . $infoProducto["tipo"] . '"
+                peso = "' . $infoProducto["peso"] . '">
                          <small>ADICIONAR AL CARRITO</small>
                          <i class="fa fa-shopping-cart"></i>
                      </button>

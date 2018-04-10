@@ -250,7 +250,7 @@ class ModelUsuarios {
     static public function mdlEliminarUsuario($tabla, $id) {
         $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
-        $stmt->bindParam(":id", $datos, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             return "ok";
         } else {

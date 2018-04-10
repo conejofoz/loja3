@@ -2,9 +2,9 @@
 
 class ruta{
     static public function ctrRuta(){
-        return "http://localhost/loja3/";
+        return "https://localhost/loja3/";
     }
     static public function ctrRutaServidor(){
-        return "http://localhost/backend/";
+        return "https://localhost/backend/";
     }
 }

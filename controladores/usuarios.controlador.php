@@ -685,7 +685,7 @@ class ControladorUsuarios {
             }
             
             $respuesta = ModelUsuarios::mdlEliminarUsuario($tabla1, $id);
-            ModelUsuarios::mdlEliminarUsuario($tabla2, $id);
+            ModelUsuarios::mdlEliminarComentarios($tabla2, $id);
             ModelUsuarios::mdlEliminarCompras($tabla3, $id);
             ModelUsuarios::mdlEliminarListaDeseos($tabla4, $id);
             
@@ -699,7 +699,7 @@ class ControladorUsuarios {
                         . 'closeOnConfirm:false},'
                         . 'function(isConfirm){'
                         . 'if(isConfirm){'
-                        . 'window.location = "'.$url.'";'
+                        . 'window.location = "'.$url.'salir";'
                         . '}'
                         . '});'
                         . '</script>';
