@@ -141,6 +141,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/infoproducto.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/usuarios.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/registroFacebook.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/carrito-de-compras.js"></script>
         
         
 <script>
