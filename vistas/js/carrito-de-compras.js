@@ -82,7 +82,8 @@ if (localStorage.getItem("listaProductos") != null) {
         /*
          * EVITAR ALTERAR A QUANTIDADE EN PRODUTOS VIRTUAIS
          */
-        $(".cantidadItem[tipo='virutal']").attr("readonly", "true");
+        $(".cantidadItem[tipo='virtual']").attr("readonly", "true");
+        console.log("tipo", item.tipo);
 
     }
 } else {
