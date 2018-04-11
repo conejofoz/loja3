@@ -66,47 +66,47 @@ TABLA CARRITO DE COMPRAS
             CUERPO CARRITO DE COMPRAS
             ==================================================-->
             <div class="panel-body cuerpoCarrito">
-                
-                
-                
+
+
+
             </div>
-            
-            
-            
-            
-            
-            
-            
-               
-            </div><!-- fim panel body-->
-            
-            
-            
-            
-            <!--=========================
-            SUMA DEL TOTAL DE PRODUCTOS
-            ==========================-->
-            <div class="panel-body sumaCarrito">
-                <div class="col-md-4 col-sm-6 col-xs-12 pull-right well">
-                    <div class="col-xs-6">
-                        <h4>TOTAL:</h4>
-                    </div>
-                    <div class="col-xs-6">
-                        <h4 class="sumaSubTotal">
-                            <strong>USD $<span>21</span></strong>
-                        </h4>
-                    </div>
-                    
+
+
+
+
+
+
+
+
+        </div><!-- fim panel body-->
+
+
+
+
+        <!--=========================
+        SUMA DEL TOTAL DE PRODUCTOS
+        ==========================-->
+        <div class="panel-body sumaCarrito">
+            <div class="col-md-4 col-sm-6 col-xs-12 pull-right well">
+                <div class="col-xs-6">
+                    <h4>TOTAL:</h4>
                 </div>
-            </div>
-            
-            
-            <!--=========================
-            BOTÓN CHECKOUT
-            ==========================-->
-            <div class="panel-heading cabeceraCheckout">
-                <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+                <div class="col-xs-6">
+                    <h4 class="sumaSubTotal">
+                        <strong>USD $<span>21</span></strong>
+                    </h4>
+                </div>
+
             </div>
         </div>
+
+
+        <!--=========================
+        BOTÓN CHECKOUT
+        ==========================-->
+        <div class="panel-heading cabeceraCheckout">
+            <button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button>
+        </div>
     </div>
+</div>
 </div>
