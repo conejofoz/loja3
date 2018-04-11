@@ -66,109 +66,18 @@ TABLA CARRITO DE COMPRAS
             CUERPO CARRITO DE COMPRAS
             ==================================================-->
             <div class="panel-body cuerpoCarrito">
-                <div class="row itemCarrito">
-                    <div class="col-sm-1 col-xs-12">
-                        <br>
-                        <center>
-                            <button class="btn btn-default backColor">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </center>
-                    </div>
-
-
-                    <div class="col-sm-1 col-xs-12">
-                        <figure>
-                            <img src="http://localhost/backend/vistas/img/productos/cursos/curso02.jpg" class="img-thumbnail">
-                        </figure>
-                    </div>
-
-
-                    <div class="col-sm-4 col-xs-12">
-                        <br>
-                        <p class="tituloCarritoCompra text-left">Jarra BKY-025 Azul Claro</p>
-                    </div>
-
-
-                    <div class="col-md-2 col-sm-1 col-xs-12">
-                        <br>
-                        <p class="precioCarritoCompra text-center">USD $<span>10</span></p>
-                    </div>
-
-
-                    <div class="col-md-2 col-sm3 col-xs-8">
-                        <br>
-                        <div class="col-xs-8">
-                            <center>
-                                <input type="number" class="form-control" min="1" value="1" readonly>
-                            </center>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-md2 col-sm-1 col-xs-4 text-center">
-                        <br>
-                        <p>
-                            <strong>USD $<span>10,00</span></strong>
-                        </p>
-                    </div>
-                    
-                    
-                </div><!-- fim item-->
-                <div class="clearfix"></div><hr>
                 
                 
-                <div class="row itemCarrito">
-                    <div class="col-sm-1 col-xs-12">
-                        <br>
-                        <center>
-                            <button class="btn btn-default backColor">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </center>
-                    </div>
-
-
-                    <div class="col-sm-1 col-xs-12">
-                        <figure>
-                            <img src="http://localhost/backend/vistas/img/productos/cursos/curso02.jpg" class="img-thumbnail">
-                        </figure>
-                    </div>
-
-
-                    <div class="col-sm-4 col-xs-12">
-                        <br>
-                        <p class="tituloCarritoCompra text-left">Jarra BKY-025 Azul Claro</p>
-                    </div>
-
-
-                    <div class="col-md-2 col-sm-1 col-xs-12">
-                        <br>
-                        <p class="precioCarritoCompra text-center">USD $<span>10</span></p>
-                    </div>
-
-
-                    <div class="col-md-2 col-sm3 col-xs-8">
-                        <br>
-                        <div class="col-xs-8">
-                            <center>
-                                <input type="number" class="form-control" min="1" value="1">
-                            </center>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="col-md2 col-sm-1 col-xs-4 text-center">
-                        <br>
-                        <p>
-                            <strong>USD $<span>10,00</span></strong>
-                        </p>
-                    </div>
-                    
-                    
-                </div><!-- fim item-->
-                <div class="clearfix"></div><hr>
                 
+            </div>
+            
+            
+            
+            
+            
+            
+            
+               
             </div><!-- fim panel body-->
             
             
