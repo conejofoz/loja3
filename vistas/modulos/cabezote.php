@@ -253,7 +253,7 @@ if (isset($_SESSION["validarSesion"])) {
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
                 </a>
-                <p>TU CESTA <span class="cantidadCesta"></span><br>U$D $<span class="sumaCesta">20</span></p>
+                <p>TU CESTA <span class="cantidadCesta"></span><br>U$D $<span class="sumaCesta"></span></p>
 
             </div>
 

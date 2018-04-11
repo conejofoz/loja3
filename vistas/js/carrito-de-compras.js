@@ -4,6 +4,24 @@
  * 
  */
 /*===================================================================
+ * VISUALIZAR LA CESTA DEL CARRITO
+ ================================================================== */
+if (localStorage.getItem("cantidadCesta") != null) {
+
+    $(".cantidadCesta").html(localStorage.getItem("cantidadCesta"));
+    $(".sumaCesta").html(localStorage.getItem("sumaCesta"));
+
+} else {
+    $(".cantidadCesta").html("0");
+    $(".sumaCesta").html("0");
+}
+
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
  * VISUALIZAR LOS PRODUCTOS EN LA PAGINA CARRITO DE COMPRAS
  ================================================================== */
 
@@ -48,7 +66,7 @@ if (localStorage.getItem("listaProductos") != null) {
                 '<br>' +
                 '<div class="col-xs-8">' +
                 '<center>' +
-                '<input type="number" class="form-control" min="1" value="' + item.cantidad + '">' +
+                '<input type="number" class="form-control cantidadItem" min="1" value="' + item.cantidad + '" tipo="' + item.tipo + '">' +
                 '</center>' +
                 '</div>' +
                 '</div>' +
@@ -61,7 +79,20 @@ if (localStorage.getItem("listaProductos") != null) {
                 '</div><!-- fim item-->' +
                 '<div class="clearfix"></div><hr>');
 
+        /*
+         * EVITAR ALTERAR A QUANTIDADE EN PRODUTOS VIRTUAIS
+         */
+        $(".cantidadItem[tipo='virutal']").attr("readonly", "true");
+
     }
+} else {
+    /*
+     * SE O CARRINHO ESTÁ VAZIO
+     */
+    $(".cuerpoCarrito").html('<div class="well">Aún no hay productos en el carrito de compras.</div>');
+    $(".sumaCarrito").hide();
+    $(".cabeceraCheckout").hide();
+
 }
 
 
@@ -162,6 +193,17 @@ $(".agregarCarrito").click(function () {
         console.log("listaCarrito", listaCarrito);
 
         localStorage.setItem("listaProductos", JSON.stringify(listaCarrito));
+
+        /*
+         * ACTUALIZAR CESTA
+         */
+        var cantidadCesta = Number($(".cantidadCesta").html()) + 1;
+        var sumaCesta = Number($(".sumaCesta").html()) + Number(precio);
+        $(".cantidadCesta").html(cantidadCesta);
+        $(".sumaCesta").html(sumaCesta);
+        localStorage.setItem("cantidadCesta", cantidadCesta);
+        localStorage.setItem("sumaCesta", sumaCesta);
+
 
         /*
          * MOSTRAR ALERTA QUE O PRODUTO FOI ADICIONADO AO CARRINHO
