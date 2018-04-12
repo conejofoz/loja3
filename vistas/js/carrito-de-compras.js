@@ -276,6 +276,8 @@ $(".quitarItemCarrito").click(function () {
                 "cantidad": cantidadArray});
         }
         localStorage.setItem("listaProductos", JSON.stringify(listaCarrito));
+        sumaSubtotales();
+        cestaCarrito(listaCarrito.length);
     } else {
         /*
          * SI YA NO QUEDAN PRODUCTOS HAY QUE REMOVER TODO
@@ -349,6 +351,8 @@ $(".cantidadItem").change(function () {
     }
     
     localStorage.setItem("listaProductos", JSON.stringify(listaCarrito));
+    sumaSubtotales();
+    cestaCarrito(listaCarrito.length);
 
 })
 
@@ -377,5 +381,74 @@ for(var i = 0; i < precioCarritoCompra.length; i++){
     var idProductoArray = $(cantidadItem[i]).attr("idProducto");
     
     $(".subTotal" + idProductoArray).html('<strong>USD $<span>' + (cantidadItemArray * precioCarritoCompraArray) + '</span></strong>');
+    
+    sumaSubtotales();
+    cestaCarrito(precioCarritoCompra.length);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
+ * SUMA DE TODOS LOS SUBTOTALES
+ ================================================================== */
+function sumaSubtotales(){
+    
+}
+
+
+
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
+ * ACTUALIZAR CESTA AL CAMBIAR CANTIDAD
+ ================================================================== */
+function cestaCarrito(cantidadProductos){
+    /*
+     * SI HAY PRODUCTOS EN EL CARRITO
+     */
+    if(cantidadProductos !=0){
+        var cantidadItem = $(".cuerpoCarrito .cantidadItem");
+        
+        var arraySumaCantidades = [];
+        
+        for(var i = 0; i < cantidadItem.length; i++){
+            var cantidadItemArray = $(cantidadItem[i]).val();
+            arraySumaCantidades.push(Number(cantidadItemArray));
+        }
+        
+        function sumaArrayCantidades(total, numero){
+            return total + numero;
+        }
+        
+        var sumaTotalCantidades = arraySumaCantidades.reduce(sumaArrayCantidades);
+        $(".cantidadCesta").html(sumaTotalCantidades);
+        localStorage.setItem("cantidadCesta", sumaTotalCantidades);
+        
+        
+        
+    } 
+}
