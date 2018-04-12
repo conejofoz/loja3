@@ -72,7 +72,7 @@ if (localStorage.getItem("listaProductos") != null) {
                 '</div>' +
                 '<div class="col-md2 col-sm-1 col-xs-4 text-center">' +
                 '<br>' +
-                '<p class="subTotal' + item.idProducto + '">' +
+                '<p class="subTotal' + item.idProducto + ' subtotales">' +
                 '<strong>USD $<span>' + item.precio + '</span></strong>' +
                 '</p>' +
                 '</div>' +
@@ -407,6 +407,29 @@ for(var i = 0; i < precioCarritoCompra.length; i++){
  ================================================================== */
 function sumaSubtotales(){
     
+    var subtotales = $(".subtotales span");
+    var arraySumaSubtotales = [];
+    
+    for(var i = 0; i < subtotales.length; i++){
+        
+        var subtotalesArray = $(subtotales[i]).html();
+        arraySumaSubtotales.push(Number(subtotalesArray));
+        
+    }
+    
+    function sumaArraySubtotales(total, numero){
+         
+        return total + numero;
+         
+    }
+    
+    var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales);
+    
+    $(".sumaSubTotal").html('<strong>USD $<span>'+sumaTotal+'</span></strong>');
+    
+    $(".sumaCesta").html(sumaTotal);
+    
+    localStorage.setItem("sumaCesta", sumaTotal);
 }
 
 

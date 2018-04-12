@@ -93,7 +93,7 @@ TABLA CARRITO DE COMPRAS
                 </div>
                 <div class="col-xs-6">
                     <h4 class="sumaSubTotal">
-                        <strong>USD $<span>21</span></strong>
+                        
                     </h4>
                 </div>
 
