@@ -18,3 +18,12 @@ and open the template in the editor.
     height: 66px;
 }
 
+
+/*
+CHECKOUT
+*/
+.contenidoCheckout, .contenidoCheckout .row{
+    padding: 0px 20px;
+    
+}
+
