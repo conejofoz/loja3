@@ -117,7 +117,7 @@ TABLA CARRITO DE COMPRAS
 
                 if ($_SESSION["validarSesion"] == "ok") {
 
-                    echo '<a href="#modalCheckout" data-toggle="modal"><button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button></a>';
+                    echo '<a id="btnCheckout" idUsuario="'.$_SESSION["id"].'" href="#modalCheckout" data-toggle="modal"><button class="btn btn-default backColor btn-lg pull-right">REALIZAR PAGO</button></a>';
                 }
             } else {
 

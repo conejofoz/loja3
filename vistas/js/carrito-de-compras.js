@@ -489,3 +489,26 @@ function cestaCarrito(cantidadProductos){
 /*===================================================================
  * CHECKOUT
  ================================================================== */
+$(".btnCheckout").click(function(){
+    var idUsuario = $(this).attr("idUsuario");
+    //ESSAS VARIAVEIS SÃO ARRAYS DE TODOS OS ITENS DA PAGINA...DEPOIS COM FOR CAPITURA OS VALORES DELAS
+    var peso = $(".cuerpoCarrito button"); //no tobão tem o atributo peso //variavel peso é todos os botões
+    var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
+    var cantidad = $("cuerpoCarrito .cantidadItem");
+    var subtotal = $(".cuerpoCarrito .subtotales span");
+    
+    for(var i = 0; i < peso.length; i++){ //podia ser qualquer um desses itens...cada produto tem um atributo peso no botão
+        var pesoArray = $(peso[i]).attr("peso");
+        var tituloArray = $(titulo[i]).html();
+        var cantidadArray = $(cantidad[i]).val();
+        var subtotalArray = $(subtotal[i]).html();
+        /*
+         * MOSTRAR PRODUCTOS DEFINITIVOS A COMPRAR
+         */
+        $(".listaProductos table.tablaProductos tbody").append('<tr>'+
+                                                                    '<td>'+tituloArray+'</td>'+
+                                                                    '<td>'+cantidadArray+'</td>'+
+                                                                    '<td><span>'+subtotalArray+'</span></td>'+
+                                                               '</tr>');
+    }
+})
