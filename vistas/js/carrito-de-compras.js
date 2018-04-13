@@ -349,7 +349,7 @@ $(".cantidadItem").change(function () {
             "peso": pesoArray,
             "cantidad": cantidadArray});
     }
-    
+
     localStorage.setItem("listaProductos", JSON.stringify(listaCarrito));
     sumaSubtotales();
     cestaCarrito(listaCarrito.length);
@@ -374,14 +374,14 @@ $(".cantidadItem").change(function () {
 var precioCarritoCompra = $(".cuerpoCarrito .precioCarritoCompra span");
 var cantidadItem = $(".cuerpoCarrito .cantidadItem");
 
-for(var i = 0; i < precioCarritoCompra.length; i++){
-    
+for (var i = 0; i < precioCarritoCompra.length; i++) {
+
     var precioCarritoCompraArray = $(precioCarritoCompra[i]).html();
     var cantidadItemArray = $(cantidadItem[i]).val();
     var idProductoArray = $(cantidadItem[i]).attr("idProducto");
-    
+
     $(".subTotal" + idProductoArray).html('<strong>USD $<span>' + (cantidadItemArray * precioCarritoCompraArray) + '</span></strong>');
-    
+
     sumaSubtotales();
     cestaCarrito(precioCarritoCompra.length);
 }
@@ -405,30 +405,30 @@ for(var i = 0; i < precioCarritoCompra.length; i++){
 /*===================================================================
  * SUMA DE TODOS LOS SUBTOTALES
  ================================================================== */
-function sumaSubtotales(){
-    
+function sumaSubtotales() {
+
     var subtotales = $(".subtotales span");
     var arraySumaSubtotales = [];
-    
-    for(var i = 0; i < subtotales.length; i++){
-        
+
+    for (var i = 0; i < subtotales.length; i++) {
+
         var subtotalesArray = $(subtotales[i]).html();
         arraySumaSubtotales.push(Number(subtotalesArray));
-        
+
     }
-    
-    function sumaArraySubtotales(total, numero){
-         
+
+    function sumaArraySubtotales(total, numero) {
+
         return total + numero;
-         
+
     }
-    
+
     var sumaTotal = arraySumaSubtotales.reduce(sumaArraySubtotales);
-    
-    $(".sumaSubTotal").html('<strong>USD $<span>'+sumaTotal+'</span></strong>');
-    
+
+    $(".sumaSubTotal").html('<strong>USD $<span>' + sumaTotal + '</span></strong>');
+
     $(".sumaCesta").html(sumaTotal);
-    
+
     localStorage.setItem("sumaCesta", sumaTotal);
 }
 
@@ -449,31 +449,31 @@ function sumaSubtotales(){
 /*===================================================================
  * ACTUALIZAR CESTA AL CAMBIAR CANTIDAD
  ================================================================== */
-function cestaCarrito(cantidadProductos){
+function cestaCarrito(cantidadProductos) {
     /*
      * SI HAY PRODUCTOS EN EL CARRITO
      */
-    if(cantidadProductos !=0){
+    if (cantidadProductos != 0) {
         var cantidadItem = $(".cuerpoCarrito .cantidadItem");
-        
+
         var arraySumaCantidades = [];
-        
-        for(var i = 0; i < cantidadItem.length; i++){
+
+        for (var i = 0; i < cantidadItem.length; i++) {
             var cantidadItemArray = $(cantidadItem[i]).val();
             arraySumaCantidades.push(Number(cantidadItemArray));
         }
-        
-        function sumaArrayCantidades(total, numero){
+
+        function sumaArrayCantidades(total, numero) {
             return total + numero;
         }
-        
+
         var sumaTotalCantidades = arraySumaCantidades.reduce(sumaArrayCantidades);
         $(".cantidadCesta").html(sumaTotalCantidades);
         localStorage.setItem("cantidadCesta", sumaTotalCantidades);
-        
-        
-        
-    } 
+
+
+
+    }
 }
 
 
@@ -489,15 +489,15 @@ function cestaCarrito(cantidadProductos){
 /*===================================================================
  * CHECKOUT
  ================================================================== */
-$(".btnCheckout").click(function(){
+$("#btnCheckout").click(function () {
     var idUsuario = $(this).attr("idUsuario");
     //ESSAS VARIAVEIS SÃO ARRAYS DE TODOS OS ITENS DA PAGINA...DEPOIS COM FOR CAPITURA OS VALORES DELAS
     var peso = $(".cuerpoCarrito button"); //no tobão tem o atributo peso //variavel peso é todos os botões
     var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
-    var cantidad = $("cuerpoCarrito .cantidadItem");
+    var cantidad = $(".cuerpoCarrito .cantidadItem");
     var subtotal = $(".cuerpoCarrito .subtotales span");
-    
-    for(var i = 0; i < peso.length; i++){ //podia ser qualquer um desses itens...cada produto tem um atributo peso no botão
+    var tipoArray = [];
+    for (var i = 0; i < titulo.length; i++) { //podia ser qualquer um desses itens...cada produto tem um atributo peso no botão
         var pesoArray = $(peso[i]).attr("peso");
         var tituloArray = $(titulo[i]).html();
         var cantidadArray = $(cantidad[i]).val();
@@ -505,10 +505,44 @@ $(".btnCheckout").click(function(){
         /*
          * MOSTRAR PRODUCTOS DEFINITIVOS A COMPRAR
          */
-        $(".listaProductos table.tablaProductos tbody").append('<tr>'+
-                                                                    '<td>'+tituloArray+'</td>'+
-                                                                    '<td>'+cantidadArray+'</td>'+
-                                                                    '<td><span>'+subtotalArray+'</span></td>'+
-                                                               '</tr>');
+        $(".listaProductos table.tablaProductos tbody").append('<tr>' +
+                '<td>' + tituloArray + '</td>' +
+                '<td>' + cantidadArray + '</td>' +
+                '<td><span>' + subtotalArray + '</span></td>' +
+                '</tr>');
+        /*
+         * SELECIONAR PAÍS DE ENVIO SE HAY PRODUCTOS FÍSICOS
+         */
+
+        tipoArray.push($(cantidad[i]).attr("tipo"));
+        function checkTipo(tipo) {
+            return tipo == "fisico";
+        }
+        if (tipoArray.find(checkTipo) == "fisico") {
+            $(".formEnvio").show();
+            $.ajax({
+                url: rutaOculta + "vistas/js/plugins/countries.json",
+                method: "GET",
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (respuesta) {
+                    respuesta.forEach(seleccionarPais);
+                    
+                    function seleccionarPais(item, index){
+                        var pais = item.name;
+                        var codPais = item.code;
+                        $("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
+                    }
+
+                }
+            })
+
+
+        }
+
+
     }
+
 })
