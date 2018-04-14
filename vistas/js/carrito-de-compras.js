@@ -497,11 +497,24 @@ $("#btnCheckout").click(function () {
     var cantidad = $(".cuerpoCarrito .cantidadItem");
     var subtotal = $(".cuerpoCarrito .subtotales span");
     var tipoArray = [];
+    var cantidadPeso = [];
+    
     for (var i = 0; i < titulo.length; i++) { //podia ser qualquer um desses itens...cada produto tem um atributo peso no botão
         var pesoArray = $(peso[i]).attr("peso");
         var tituloArray = $(titulo[i]).html();
         var cantidadArray = $(cantidad[i]).val();
         var subtotalArray = $(subtotal[i]).html();
+        /*
+         * EVALUAR EL PESO DE ACORDO A LA CANTIDAD DE PRODUCTOS
+         */
+        cantidadPeso[i] = pesoArray * cantidadArray;
+        
+        function sumaArrayPeso(total, numero){
+            return total+numero;
+        }
+        var sumaTotalPeso = cantidadPeso.reduce(sumaArrayPeso);
+        
+        
         /*
          * MOSTRAR PRODUCTOS DEFINITIVOS A COMPRAR
          */
@@ -538,6 +551,32 @@ $("#btnCheckout").click(function () {
 
                 }
             })
+            
+            /*
+             * EVALUAR TASAS DE ENVIO SE EL PRODUCTOS ES FISICO
+             */
+            $("#seleccionarPais").change(function(){
+                var pais = $(this).val();
+                var tasaPais = $("#tasaPais").val();
+                
+                if(pais == tasaPais){
+                    var resultadoPeso = sumaTotalPeso * $("#envioNacional").val();
+                    if(resultadoPeso < $("#tasaMinimaNal").val()){
+                        $(".valorTotalEnvio").html($("#tasaMinimaNal").val());
+                    } else {
+                        $(".valorTotalEnvio").html(resultadoPeso);
+                    }
+                } else {
+                    var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val();
+                    if(resultadoPeso < $("#tasaMinimaInt").val()){
+                        $(".valorTotalEnvio").html($("#tasaMinimaInt").val());
+                    } else {
+                        $(".valorTotalEnvio").html(resultadoPeso);
+                    }
+                }
+                
+            })
+            
 
 
         }
