@@ -505,12 +505,14 @@ $("#btnCheckout").click(function () {
      */
     var sumaSubTotal = $(".sumaSubTotal span");
     $(".valorSubtotal").html($(sumaSubTotal).html());
+    $(".valorSubtotal").attr("valor", $(sumaSubTotal).html());
 
     /*
      * TASAS IMPOSTO
      */
     var impuestoTotal = ($(".valorSubtotal").html() * $("#tasaImpuesto").val()) / 100;
     $(".valorTotalImpuesto").html(impuestoTotal.toFixed(2));
+    $(".valorTotalImpuesto").attr("valor", impuestoTotal.toFixed(2));
     sumaTotalCompra();
 
 
@@ -536,7 +538,7 @@ $("#btnCheckout").click(function () {
         $(".listaProductos table.tablaProductos tbody").append('<tr>' +
                 '<td>' + tituloArray + '</td>' +
                 '<td>' + cantidadArray + '</td>' +
-                '<td><span>' + subtotalArray + '</span></td>' +
+                '<td><span class="valorItem" valor="' + subtotalArray + '">' + subtotalArray + '</span></td>' +
                 '</tr>');
         /*
          * SELECIONAR PAÍS DE ENVIO SE HAY PRODUCTOS FÍSICOS
@@ -578,6 +580,7 @@ $("#btnCheckout").click(function () {
              */
             $("#seleccionarPais").change(function () {
                 $(".alert").remove();
+                $("#cambiarDivisa").val("USD");
                 var pais = $(this).val();
                 var tasaPais = $("#tasaPais").val();
 
@@ -585,15 +588,19 @@ $("#btnCheckout").click(function () {
                     var resultadoPeso = sumaTotalPeso * $("#envioNacional").val();
                     if (resultadoPeso < $("#tasaMinimaNal").val()) {
                         $(".valorTotalEnvio").html($("#tasaMinimaNal").val());
+                        $(".valorTotalEnvio").attr("valor", $("#tasaMinimaNal").val());
                     } else {
                         $(".valorTotalEnvio").html(resultadoPeso);
+                        $(".valorTotalEnvio").attr("valor", resultadoPeso);
                     }
                 } else {
                     var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val();
                     if (resultadoPeso < $("#tasaMinimaInt").val()) {
                         $(".valorTotalEnvio").html($("#tasaMinimaInt").val());
+                        $(".valorTotalEnvio").attr("valor", $("#tasaMinimaInt").val());
                     } else {
                         $(".valorTotalEnvio").html(resultadoPeso);
+                        $(".valorTotalEnvio").attr("valor", resultadoPeso);
                     }
                 }
 
@@ -634,6 +641,7 @@ function sumaTotalCompra() {
             Number($(".valorTotalImpuesto").html());
 
     $(".valorTotalCompra").html(sumaTotalTasas.toFixed(2));
+    $(".valorTotalCompra").attr("valor", sumaTotalTasas.toFixed(2));
 
 
 }
@@ -702,13 +710,14 @@ function divisas(metodoPago) {
 /*===================================================================
  * CAMBIO DE DIVISA
  ================================================================== */
-/*
- * 
- * 
- * 
- */
 var divisaBase = "USD"; //está por fora ...global
 $("#cambiarDivisa").change(function () {
+    $(".alert").remove();
+    
+    if ($("#seleccionarPais").val() == "") {
+        $("#cambiarDivisa").after('<div class="alert alert-warning">No ha seleccionado el país de envio</div>');
+        return;
+    }
 
     var divisa = $(this).val();
 
@@ -720,7 +729,23 @@ $("#cambiarDivisa").change(function () {
         processData: false,
         dataType: "jsonp",
         success: function (respuesta) {
-            console.log("respuesta", respuesta);
+            var divisaString = JSON.stringify(respuesta);
+            var conversion = divisaString.substr(18,4);
+            if(divisa == "USD"){
+                conversion = 1;
+            }
+            $(".cambioDivisa").html(divisa);
+            $(".valorSubtotal").html((Number(conversion) * Number($(".valorSubtotal").attr("valor"))).toFixed(2));
+            $(".valorTotalEnvio").html((Number(conversion) * Number($(".valorTotalEnvio").attr("valor"))).toFixed(2));
+            $(".valorTotalImpuesto").html((Number(conversion) * Number($(".valorTotalImpuesto").attr("valor"))).toFixed(2));
+            $(".valorTotalCompra").html((Number(conversion) * Number($(".valorTotalCompra").attr("valor"))).toFixed(2));
+            
+            var valorItem = $(".valorItem"); //array
+            for(var i = 0; i < valorItem.length; i++){
+                $(valorItem[i]).html((Number(conversion) * Number($(valorItem[i]).attr("valor"))).toFixed(2))
+            }
+            
+            //console.log("respuesta", conversion);
         }
 
     })

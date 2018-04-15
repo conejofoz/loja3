@@ -212,22 +212,22 @@ VENTANA MODAL PARA O CHECKOUT
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>USD $<span class="valorSubtotal">0</span></td>
+                                    <td><span class="cambioDivisa">USD</span> $<span class="valorSubtotal" valor="0">0</span></td>
                                 </tr>
 
                                 <tr>
                                     <td>Envio</td>
-                                    <td>USD $ <span class="valorTotalEnvio">0</span></td>
+                                    <td><span class="cambioDivisa">USD</span> $ <span class="valorTotalEnvio" valor="0">0</span></td>
                                 </tr>
 
                                 <tr>
                                     <td>Impuesto</td>
-                                    <td>USD $<span class="valorTotalImpuesto">0</span></td>
+                                    <td><span class="cambioDivisa">USD</span> $<span class="valorTotalImpuesto" valor="0">0</span></td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Total</strong></td>
-                                    <td><strong>USD $<span class="valorTotalCompra">0</span></strong></td>
+                                    <td><strong><span class="cambioDivisa">USD</span> $<span class="valorTotalCompra" valor="0">0</span></strong></td>
                                 </tr>
 
                             </tbody>
