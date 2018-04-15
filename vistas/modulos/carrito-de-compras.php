@@ -100,6 +100,9 @@ TABLA CARRITO DE COMPRAS
                 </div>
                 <div class="col-xs-6">
                     <h4 class="sumaSubTotal">
+                        <span>
+                            
+                        </span>
 
                     </h4>
                 </div>
@@ -209,7 +212,7 @@ VENTANA MODAL PARA O CHECKOUT
                             <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>$20</td>
+                                    <td>USD $<span class="valorSubtotal">0</span></td>
                                 </tr>
 
                                 <tr>
@@ -219,12 +222,12 @@ VENTANA MODAL PARA O CHECKOUT
 
                                 <tr>
                                     <td>Impuesto</td>
-                                    <td>$10</td>
+                                    <td>USD $<span class="valorTotalImpuesto">0</span></td>
                                 </tr>
 
                                 <tr>
                                     <td><strong>Total</strong></td>
-                                    <td><strong>$100</strong></td>
+                                    <td><strong>USD $<span class="valorTotalCompra">0</span></strong></td>
                                 </tr>
 
                             </tbody>
@@ -238,7 +241,7 @@ VENTANA MODAL PARA O CHECKOUT
                     </div>
                     
                     <div class="clearfix"></div>
-                    <button class="btn btn-block btn-lg btn-default backColor">PAGAR</button>
+                    <button class="btn btn-block btn-lg btn-default backColor btnPagar">PAGAR</button>
 
                 </div>
 

@@ -490,6 +490,7 @@ function cestaCarrito(cantidadProductos) {
  * CHECKOUT
  ================================================================== */
 $("#btnCheckout").click(function () {
+    $(".listaProductos table.tablaProductos tbody").html("");
     var idUsuario = $(this).attr("idUsuario");
     //ESSAS VARIAVEIS SÃO ARRAYS DE TODOS OS ITENS DA PAGINA...DEPOIS COM FOR CAPITURA OS VALORES DELAS
     var peso = $(".cuerpoCarrito button"); //no tobão tem o atributo peso //variavel peso é todos os botões
@@ -498,7 +499,21 @@ $("#btnCheckout").click(function () {
     var subtotal = $(".cuerpoCarrito .subtotales span");
     var tipoArray = [];
     var cantidadPeso = [];
-    
+
+    /*
+     * SUMA SUBTOTAL
+     */
+    var sumaSubTotal = $(".sumaSubTotal span");
+    $(".valorSubtotal").html($(sumaSubTotal).html());
+
+    /*
+     * TASAS IMPOSTO
+     */
+    var impuestoTotal = ($(".valorSubtotal").html() * $("#tasaImpuesto").val()) / 100;
+    $(".valorTotalImpuesto").html(impuestoTotal.toFixed(2));
+    sumaTotalCompra();
+
+
     for (var i = 0; i < titulo.length; i++) { //podia ser qualquer um desses itens...cada produto tem um atributo peso no botão
         var pesoArray = $(peso[i]).attr("peso");
         var tituloArray = $(titulo[i]).html();
@@ -508,13 +523,13 @@ $("#btnCheckout").click(function () {
          * EVALUAR EL PESO DE ACORDO A LA CANTIDAD DE PRODUCTOS
          */
         cantidadPeso[i] = pesoArray * cantidadArray;
-        
-        function sumaArrayPeso(total, numero){
-            return total+numero;
+
+        function sumaArrayPeso(total, numero) {
+            return total + numero;
         }
         var sumaTotalPeso = cantidadPeso.reduce(sumaArrayPeso);
-        
-        
+
+
         /*
          * MOSTRAR PRODUCTOS DEFINITIVOS A COMPRAR
          */
@@ -528,11 +543,17 @@ $("#btnCheckout").click(function () {
          */
 
         tipoArray.push($(cantidad[i]).attr("tipo"));
+
         function checkTipo(tipo) {
             return tipo == "fisico";
         }
+        
+        /*
+         * SE HAY PELO MENOS UM PRODUCTO FISICO
+         */
         if (tipoArray.find(checkTipo) == "fisico") {
             $(".formEnvio").show();
+            $(".btnPagar").attr("tipo", "fisico");
             $.ajax({
                 url: rutaOculta + "vistas/js/plugins/countries.json",
                 method: "GET",
@@ -542,46 +563,103 @@ $("#btnCheckout").click(function () {
                 dataType: "json",
                 success: function (respuesta) {
                     respuesta.forEach(seleccionarPais);
-                    
-                    function seleccionarPais(item, index){
+
+                    function seleccionarPais(item, index) {
                         var pais = item.name;
                         var codPais = item.code;
-                        $("#seleccionarPais").append('<option value="'+codPais+'">'+pais+'</option>')
+                        $("#seleccionarPais").append('<option value="' + codPais + '">' + pais + '</option>')
                     }
 
                 }
             })
-            
+
             /*
              * EVALUAR TASAS DE ENVIO SE EL PRODUCTOS ES FISICO
              */
-            $("#seleccionarPais").change(function(){
+            $("#seleccionarPais").change(function () {
+                $(".alert").remove();
                 var pais = $(this).val();
                 var tasaPais = $("#tasaPais").val();
-                
-                if(pais == tasaPais){
+
+                if (pais == tasaPais) {
                     var resultadoPeso = sumaTotalPeso * $("#envioNacional").val();
-                    if(resultadoPeso < $("#tasaMinimaNal").val()){
+                    if (resultadoPeso < $("#tasaMinimaNal").val()) {
                         $(".valorTotalEnvio").html($("#tasaMinimaNal").val());
                     } else {
                         $(".valorTotalEnvio").html(resultadoPeso);
                     }
                 } else {
                     var resultadoPeso = sumaTotalPeso * $("#envioInternacional").val();
-                    if(resultadoPeso < $("#tasaMinimaInt").val()){
+                    if (resultadoPeso < $("#tasaMinimaInt").val()) {
                         $(".valorTotalEnvio").html($("#tasaMinimaInt").val());
                     } else {
                         $(".valorTotalEnvio").html(resultadoPeso);
                     }
                 }
-                
+
+                sumaTotalCompra();
+
             })
-            
-
-
+        } else {
+            /*
+             *SE NO HAY PRODUCTOS FISICOS 
+             */
+            $(".btnPagar").attr("tipo", "virtual");
         }
 
 
-    }
+    }//final FOR
 
+})
+
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
+ * SUMA TOTAL COMPRA
+ ================================================================== */
+function sumaTotalCompra() {
+
+    var sumaTotalTasas = Number($(".valorSubtotal").html()) +
+            Number($(".valorTotalEnvio").html()) +
+            Number($(".valorTotalImpuesto").html());
+
+    $(".valorTotalCompra").html(sumaTotalTasas.toFixed(2));
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
+ * BOTON PAGAR
+ ================================================================== */
+$(".btnPagar").click(function(){
+    var tipo = $(this).attr("tipo");
+    if(tipo == "fisico" && $("#seleccionarPais").val() == ""){
+        $(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envio</div>');
+        return;
+    }
+    console.log("PAGAR");
 })
