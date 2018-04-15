@@ -160,9 +160,7 @@ VENTANA MODAL PARA O CHECKOUT
                 <div class="formEnvio row">
                     <h4 class="text-center well text-muted text-uppercase">Información de envio</h4>
                     <div class="col-xs-12 seleccionePais">
-                        <select class="form-control" id="seleccionarPais" required>
-                            <option value="">Seleccione el país</option>
-                        </select>
+                        <!--FOI TIRADO O HTML DAQUI POR QUE APESAR DE ESTAR OCULTO ELE EXISTE E ESTAVA DANDO CONFLITO QUANDO SÓ EXISTEM PRODUTOS VIRTUAIS-->
                     </div>
 
                 </div>
