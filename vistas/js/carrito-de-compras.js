@@ -547,7 +547,7 @@ $("#btnCheckout").click(function () {
         function checkTipo(tipo) {
             return tipo == "fisico";
         }
-        
+
         /*
          * SE HAY PELO MENOS UM PRODUCTO FISICO
          */
@@ -646,6 +646,53 @@ function sumaTotalCompra() {
 
 
 
+/*
+ * 
+ * 
+ * 
+ */
+/*===================================================================
+ * METODO DE PAGO PARA CAMBIO DE DIVISA
+ ================================================================== */
+var metodoPago = "paypal";
+divisas(metodoPago);
+
+$("input[name='pago']").change(function () {
+    var metodoPago = $(this).val();
+    divisas(metodoPago);
+})
+
+function divisas(metodoPago) {
+    $("#cambiarDivisa").html("");
+    if (metodoPago == "paypal") {
+        $("#cambiarDivisa").append('<option value="USD">USD</option>' +
+                '<option value="EUR">EUR</option>' +
+                '<option value="GBP">GBP</option>' +
+                '<option value="MXN">MXN</option>' +
+                '<option value="JPY">JPY</option>' +
+                '<option value="CAD">CAD</option>' +
+                '<option value="BRL">BRL</option>')
+    } else {
+        $("#cambiarDivisa").append('<option value="USD">USD</option>' +
+                '<option value="PEN">PEN</option>' +
+                '<option value="COP">COP</option>' +
+                '<option value="MXN">MXN</option>' +
+                '<option value="CLP">CLP</option>' +
+                '<option value="ARS">ARS</option>' +
+                '<option value="BRL">BRL</option>')
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 /*
  * 
@@ -653,11 +700,47 @@ function sumaTotalCompra() {
  * 
  */
 /*===================================================================
+ * CAMBIO DE DIVISA
+ ================================================================== */
+/*
+ * 
+ * 
+ * 
+ */
+var divisaBase = "USD"; //está por fora ...global
+$("#cambiarDivisa").change(function () {
+
+    var divisa = $(this).val();
+
+    $.ajax({
+        url: "http://free.currencyconverterapi.com/api/v3/convert?q="+divisaBase+"_"+divisa+"&compact=y",
+        type: "GET",
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "jsonp",
+        success: function (respuesta) {
+            console.log("respuesta", respuesta);
+        }
+
+    })
+
+})
+
+
+
+
+
+
+
+
+
+/*===================================================================
  * BOTON PAGAR
  ================================================================== */
-$(".btnPagar").click(function(){
+$(".btnPagar").click(function () {
     var tipo = $(this).attr("tipo");
-    if(tipo == "fisico" && $("#seleccionarPais").val() == ""){
+    if (tipo == "fisico" && $("#seleccionarPais").val() == "") {
         $(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envio</div>');
         return;
     }
