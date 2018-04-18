@@ -536,8 +536,8 @@ $("#btnCheckout").click(function () {
          * MOSTRAR PRODUCTOS DEFINITIVOS A COMPRAR
          */
         $(".listaProductos table.tablaProductos tbody").append('<tr>' +
-                '<td>' + tituloArray + '</td>' +
-                '<td>' + cantidadArray + '</td>' +
+                '<td class="valorTitulo">' + tituloArray + '</td>' +
+                '<td class="valorCantidad">' + cantidadArray + '</td>' +
                 '<td><span class="valorItem" valor="' + subtotalArray + '">' + subtotalArray + '</span></td>' +
                 '</tr>');
         /*
@@ -791,5 +791,49 @@ $(".btnPagar").click(function () {
         $(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envio</div>');
         return;
     }
-    console.log("PAGAR");
-})
+    
+    var divisa = $("#cambiarDivisa").val();
+    var total = $("#valorTotalCompra").val();
+    var impuesto = $("#valorTotalImpuesto").val();
+    var envio = $("#valorTotalEnvio").val();
+    var subtotal = $("#valorSubtotal").val();
+    var titulo = $("#valorTitulo").val();
+    var cantidad = $("#valorCantidad").val();
+    var valorItem = $("#valorItem").val();
+    var idProducto = $(".cuerpoCarrito");
+    
+    var tituloArray = [];
+    var cantidadArray = [];
+    var valorItemArray = [];
+    var idProductoArray = [];
+    for(var i = 0; i < titulo.length; i++){
+        tituloArray[i] = $(titulo[i]).html();
+        cantidadArray[i] = $(cantidad[i]).html();
+        valorItemArray[i] = $(valorItem[i]).html();
+        idProductoArray[i] = $(idProducto[i]).attr("idProducto");
+    }
+    
+    var datos = new FormData();
+    
+    datos.append("divisa",divisa);
+    datos.append("total",total);
+    datos.append("impuesto",impuesto);
+    datos.append("envio",envio);
+    datos.append("subtotal",subtotal);
+    datos.append("tituloArray",tituloArray);
+    datos.append("cantidadArray",cantidadArray);
+    datos.append("valorItemArray",valorItemArray);
+    datos.append("idProductoArray",idProductoArray);
+    
+    $.ajax({
+        url:rutaOculta+"ajax/carrito.ajax.php",
+        method:"POST",
+        data:datos,
+        cache:false,
+        contentType:false,
+        processData:false,
+        success:function(respuesta){
+            console.log("respuesta", respuesta);
+        }
+    })
+});
