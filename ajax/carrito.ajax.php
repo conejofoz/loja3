@@ -1,4 +1,5 @@
 <?php
+require_once "../extensiones/paypal.controlador.php";
 
 class AjaxCarrito {
 
