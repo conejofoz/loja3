@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+
+require_once "../modelos/rutas.php";
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -14,10 +15,11 @@ use PayPal\Api\Transaction;
 class Paypal {
 
     static public function mdlPagoPaypal($datos) {
+        require __DIR__ . '/bootstrap.php';
         $tituloArray = explode(",", $datos["tituloArray"]);
         $cantidadArray = explode(",", $datos["$cantidadArray"]);
         $valorItemArray = explode(",", $datos["$valorItemArray"]);
-        $idProductoArray = explode(",", $datos["$idProductoArray"]);
+        $idProductos = str_replace(",", "-", $datos["$idProductoArray"]);
 
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
@@ -55,9 +57,33 @@ class Paypal {
 
         //$baseUrl = getBaseUrl();
         //$baseUrl = "";
+        $url = ruta::ctrRuta();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("http://localhost/loja3/ExecutePayment.php?success=true")
-                ->setCancelUrl("http://localhost/loja3/ExecutePayment.php?success=false");
+        $redirectUrls->setReturnUrl("$url/index.php?ruta=finalizar-compra&paypal=true&productos=" . $idProductos)
+                ->setCancelUrl("$url/carrito-de-compras");
+
+        $payment = new Payment();
+        $payment->setIntent("sale")
+                ->setPayer($payer)
+                ->setRedirectUrls($redirectUrls)
+                ->setTransactions(array($transaction));
+        
+        try{
+            $payment->create($apiContext);
+        } catch (PayPal\Exception\PayPalConnectionException $ex) {
+            echo $ex->getCode();
+            echo $ex->getData();
+            die($ex);
+            return "$url/error";
+
+        }
+        
+        foreach ($payment->getLinks() as $link){
+            if($link->getRel() == "approval_url"){
+                $redirectUrl = $link->getHref();
+            }
+        }
+        return $redirectUrl;
     }
 
 }

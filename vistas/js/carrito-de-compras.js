@@ -793,19 +793,20 @@ $(".btnPagar").click(function () {
     }
     
     var divisa = $("#cambiarDivisa").val();
-    var total = $("#valorTotalCompra").val();
-    var impuesto = $("#valorTotalImpuesto").val();
-    var envio = $("#valorTotalEnvio").val();
-    var subtotal = $("#valorSubtotal").val();
-    var titulo = $("#valorTitulo").val();
-    var cantidad = $("#valorCantidad").val();
-    var valorItem = $("#valorItem").val();
+    var total = $(".valorTotalCompra").html();
+    var impuesto = $(".valorTotalImpuesto").html();
+    var envio = $(".valorTotalEnvio").html();
+    var subtotal = $(".valorSubtotal").html();
+    var titulo = $(".valorTitulo");
+    var cantidad = $(".valorCantidad");
+    var valorItem = $(".valorItem");
     var idProducto = $(".cuerpoCarrito");
     
     var tituloArray = [];
     var cantidadArray = [];
     var valorItemArray = [];
     var idProductoArray = [];
+    
     for(var i = 0; i < titulo.length; i++){
         tituloArray[i] = $(titulo[i]).html();
         cantidadArray[i] = $(cantidad[i]).html();
@@ -833,7 +834,8 @@ $(".btnPagar").click(function () {
         contentType:false,
         processData:false,
         success:function(respuesta){
-            console.log("respuesta", respuesta);
+            //console.log("respuesta", respuesta);
+            window.location = respuesta;
         }
     })
 });
