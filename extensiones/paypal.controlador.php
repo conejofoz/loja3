@@ -2,6 +2,7 @@
 
 
 require_once "../modelos/rutas.php";
+require_once "../modelos/carrito.modelo.php";
 
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
