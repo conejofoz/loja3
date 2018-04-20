@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/ventor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 require_once "../modelos/carrito.modelo.php";
 
 use PayPal\Rest\ApiContext;

@@ -17,9 +17,9 @@ class Paypal {
     static public function mdlPagoPaypal($datos) {
         require __DIR__ . '/bootstrap.php';
         $tituloArray = explode(",", $datos["tituloArray"]);
-        $cantidadArray = explode(",", $datos["$cantidadArray"]);
-        $valorItemArray = explode(",", $datos["$valorItemArray"]);
-        $idProductos = str_replace(",", "-", $datos["$idProductoArray"]);
+        $cantidadArray = explode(",", $datos["cantidadArray"]);
+        $valorItemArray = explode(",", $datos["valorItemArray"]);
+        $idProductos = str_replace(",", "-", $datos["idProductoArray"]);
 
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
@@ -59,8 +59,10 @@ class Paypal {
         //$baseUrl = "";
         $url = ruta::ctrRuta();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$url/index.php?ruta=finalizar-compra&paypal=true&productos=" . $idProductos)
+        $redirectUrls->setReturnUrl("$url/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos)
                 ->setCancelUrl("$url/carrito-de-compras");
+        //$redirectUrls->setReturnUrl($url."index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos)
+         //       ->setCancelUrl($url."carrito-de-compras");
 
         $payment = new Payment();
         $payment->setIntent("sale")
@@ -70,11 +72,13 @@ class Paypal {
         
         try{
             $payment->create($apiContext);
+            //var_dump($payment);
         } catch (PayPal\Exception\PayPalConnectionException $ex) {
             echo $ex->getCode();
             echo $ex->getData();
             die($ex);
             return "$url/error";
+            //return $url."error";
 
         }
         
