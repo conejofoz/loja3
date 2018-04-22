@@ -76,13 +76,13 @@ if(isset( $_GET['paypal']) && $_GET['paypal'] === 'true'){
 
    		foreach ($productosCompra as $key => $value) {
 
-   			$item1 = "ventas";
-   			$valor1 = $value["ventas"] + $cantidad[$i];
-   			$item2 = "id";
-   			$valor2 =$value["id"];
+   			$item1B = "ventas";
+   			$valor1B = $value["ventas"] + $cantidad[$i];
+   			$item2B = "id";
+   			$valor2B =$value["id"];
 
-   			$actualizarCompra = ControladorProductos::ctrActualizarProducto($item1, $valor1, $item2, $valor2);
-   			
+   			$actualizarCompra = ControladorProductos::ctrActualizarProducto($item1B, $valor1B, $item2B, $valor2B);
+   			echo 'passou aqui';
    		}
 
    		if($respuesta == "ok" && $actualizarCompra == "ok"){

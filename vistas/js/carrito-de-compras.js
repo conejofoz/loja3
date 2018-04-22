@@ -800,7 +800,7 @@ $(".btnPagar").click(function () {
     var titulo = $(".valorTitulo");
     var cantidad = $(".valorCantidad");
     var valorItem = $(".valorItem");
-    var idProducto = $(".cuerpoCarrito");
+    var idProducto = $(".cuerpoCarrito button");// por causa dessa merda de button me fudi
     
     var tituloArray = [];
     var cantidadArray = [];

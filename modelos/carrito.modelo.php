@@ -18,7 +18,7 @@ class ModeloCarrito{
     static public function mdlNuevasCompras($tabla, $datos) {
         
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla "
-                . "id_usuario, id_producto, metodo, email, direccion, pais) "
+                . "(id_usuario, id_producto, metodo, email, direccion, pais) "
                 . "VALUES(:id_usuario, :id_producto, :metodo, :email, :direccion, :pais) ");
         
         $stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
@@ -38,4 +38,8 @@ class ModeloCarrito{
         $stmt->close();
         $stmt = NULL;
     }
+    
+    
+    
+    
 }

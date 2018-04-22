@@ -156,5 +156,5 @@ var url = window.location.href;
 var indice = url.split("/");//cria um array explodindo na barra /
 
 //não estava colorindo os botões//if(indice.pop() != "#"){
-$("#item" + indice.pop()).addClass("active");
+$("#item"+indice.pop()).addClass("active");
 //}
