@@ -108,14 +108,14 @@ class ModeloProductos {
     }
     
     
-    static public function mdlActualizarVistaProducto($tabla, $datos, $item){
+    static public function mdlActualizarProducto($tabla, $item1, $valor1, $item2, $valor2){
 //        echo "<br>tabela:" .$tabla."<br>";
 //        var_dump($datos)."<br>";
 //        echo "Item:".$item."<br>";
 //        exit;
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item = :$item WHERE ruta = :ruta");
-        $stmt ->bindParam(":ruta", $datos["ruta"], PDO::PARAM_STR);
-        $stmt ->bindParam(":".$item, $datos["valor"], PDO::PARAM_STR);
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+        $stmt ->bindParam(":$item1", $valor1, PDO::PARAM_STR);
+        $stmt ->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
         if($stmt ->execute()){
             return "ok";
         } else {
