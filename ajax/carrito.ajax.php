@@ -1,4 +1,5 @@
 <?php
+
 require_once "../extensiones/paypal.controlador.php";
 
 class AjaxCarrito {
@@ -16,18 +17,44 @@ class AjaxCarrito {
     public function ajaxEnviarPaypal() {
 
         $datos = array(
-        "divisa" => $this->divisa,
-        "total" => $this->total,
-        "impuesto" => $this->impuesto,
-        "envio" => $this->envio,
-        "subtotal" => $this->subtotal,
-        "tituloArray" => $this->tituloArray,
-        "cantidadArray" => $this->cantidadArray,
-        "valorItemArray" => $this->valorItemArray,
-        "idProductoArray" => $this->idProductoArray
+            "divisa" => $this->divisa,
+            "total" => $this->total,
+            "impuesto" => $this->impuesto,
+            "envio" => $this->envio,
+            "subtotal" => $this->subtotal,
+            "tituloArray" => $this->tituloArray,
+            "cantidadArray" => $this->cantidadArray,
+            "valorItemArray" => $this->valorItemArray,
+            "idProductoArray" => $this->idProductoArray
         );
         $respuesta = Paypal::mdlPagoPaypal($datos);
         echo $respuesta;
+    }
+
+    /*
+     * METODO PAYU
+     */
+
+    public function ajaxTraerComercioPayu() {
+        $respuesta = ControladorCarrito::ctrMostrarTarifas();
+        echo json_encode($respuesta);
+    }
+
+    /*
+     * VERIFICAR QUE NO TENGA EL PRODUCTO ADQUIRIDO
+     */
+
+    public $idUsuario;
+    public $idProducto;
+
+    public function ajaxVerificarProducto() {
+        $datos = array(
+            "idUsuario" => $this->idUsuario,
+            "idProducto" => $this->idProducto
+        );
+
+        $respuesta = ControladorCarrito::ctrVerificarProducto($datos);
+        echo json_encode($respuesta);
     }
 
 }
@@ -46,3 +73,21 @@ if (isset($_POST["divisa"])) {
     $paypal->ajaxEnviarPaypal();
 }
 
+
+
+
+
+
+
+
+
+/*
+* VERIFICAR QUE NO TENGA EL PRODUCTO ADQUIRIDO
+*/
+if(isset($_POST["idProducto"])){
+    $producto = new AjaxCarrito();
+    $producto->idUsuario = $_POST["idUsuario"];
+    $producto->idProductoo = $_POST["idProducto"];
+    $producto->ajaxVerificarProducto();
+    
+}

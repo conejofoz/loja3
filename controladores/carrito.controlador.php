@@ -21,4 +21,15 @@ class ControladorCarrito{
         $respuesta = ModeloCarrito::mdlNuevasCompras($tabla, $datos);
         return $respuesta;
     }
+    
+    
+    
+    /*
+     * VERIFICAR PRODUCTO ADQUIRIDO
+     */
+    static public function ctrVerificarProducto($datos) {
+        $tabla = "compras";
+        $respuesta = ModeloCarrito::mdlVerificarProducto($tabla, $datos);
+        return $respuesta;
+    }
 }

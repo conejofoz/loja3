@@ -608,8 +608,8 @@ $("#btnCheckout").click(function () {
                         $(".valorTotalEnvio").attr("valor", resultadoPeso);
                     }
                 }
-                
-                
+
+
                 /*
                  * RETORNAR CAMBIO DE DIVISA A DOLAR USD
                  */
@@ -791,7 +791,7 @@ $(".btnPagar").click(function () {
         $(".btnPagar").after('<div class="alert alert-warning">No ha seleccionado el país de envio</div>');
         return;
     }
-    
+
     var divisa = $("#cambiarDivisa").val();
     var total = $(".valorTotalCompra").html();
     var impuesto = $(".valorTotalImpuesto").html();
@@ -801,39 +801,39 @@ $(".btnPagar").click(function () {
     var cantidad = $(".valorCantidad");
     var valorItem = $(".valorItem");
     var idProducto = $(".cuerpoCarrito button, .comprarAhora button");// por causa dessa merda de button me fudi dois dias
-    
+
     var tituloArray = [];
     var cantidadArray = [];
     var valorItemArray = [];
     var idProductoArray = [];
-    
-    for(var i = 0; i < titulo.length; i++){
+
+    for (var i = 0; i < titulo.length; i++) {
         tituloArray[i] = $(titulo[i]).html();
         cantidadArray[i] = $(cantidad[i]).html();
         valorItemArray[i] = $(valorItem[i]).html();
         idProductoArray[i] = $(idProducto[i]).attr("idProducto");
     }
-    
+
     var datos = new FormData();
-    
-    datos.append("divisa",divisa);
-    datos.append("total",total);
-    datos.append("impuesto",impuesto);
-    datos.append("envio",envio);
-    datos.append("subtotal",subtotal);
-    datos.append("tituloArray",tituloArray);
-    datos.append("cantidadArray",cantidadArray);
-    datos.append("valorItemArray",valorItemArray);
-    datos.append("idProductoArray",idProductoArray);
-    
+
+    datos.append("divisa", divisa);
+    datos.append("total", total);
+    datos.append("impuesto", impuesto);
+    datos.append("envio", envio);
+    datos.append("subtotal", subtotal);
+    datos.append("tituloArray", tituloArray);
+    datos.append("cantidadArray", cantidadArray);
+    datos.append("valorItemArray", valorItemArray);
+    datos.append("idProductoArray", idProductoArray);
+
     $.ajax({
-        url:rutaOculta+"ajax/carrito.ajax.php",
-        method:"POST",
-        data:datos,
-        cache:false,
-        contentType:false,
-        processData:false,
-        success:function(respuesta){
+        url: rutaOculta + "ajax/carrito.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (respuesta) {
             console.log("respuesta", respuesta);
             window.location = respuesta;
         }
@@ -851,9 +851,42 @@ $(".btnPagar").click(function () {
  * 
  * AGREGAR PRODUCTOS GRATIS
  */
-$(".agregarGratis").click(function(){
+$(".agregarGratis").click(function () {
     var idProducto = $(this).attr("idProducto");
     var idUsuario = $(this).attr("idUsuario");
+
+    /*
+     * VERIFICAR QUE NO TENGA EL PRODUCTO ADQUIRIDO
+     */
+    var datos = new FormData();
+    datos.append("idUsuario", idUsuario);
+    datos.append("idProducto", idProducto);
+
+    $.ajax({
+        url: rutaOculta + "ajax/carrito.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (respuesta) {
+            if (respuesta != "false") {
+                swal({
+                    title: "Usted ya adquirió este producto!",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Regresar",
+                    closeOnConfirm: false
+                });
+            } else {
+                window.location = rutaOculta + "index.php?ruta=finalizar-compra&gratis=true&producto=" + idProducto;
+            }
+
+        }
+    });
+
+
     
-    window.location = rutaOculta+"index.php?ruta=finalizar-compra&gratis=true&producto="+idProducto;
-})
+});
