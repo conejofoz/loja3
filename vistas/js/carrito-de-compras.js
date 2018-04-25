@@ -493,10 +493,10 @@ $("#btnCheckout").click(function () {
     $(".listaProductos table.tablaProductos tbody").html("");
     var idUsuario = $(this).attr("idUsuario");
     //ESSAS VARIAVEIS SÃO ARRAYS DE TODOS OS ITENS DA PAGINA...DEPOIS COM FOR CAPITURA OS VALORES DELAS
-    var peso = $(".cuerpoCarrito button"); //no tobão tem o atributo peso //variavel peso é todos os botões
-    var titulo = $(".cuerpoCarrito .tituloCarritoCompra");
-    var cantidad = $(".cuerpoCarrito .cantidadItem");
-    var subtotal = $(".cuerpoCarrito .subtotales span");
+    var peso = $(".cuerpoCarrito button, .comprarAhora button"); //no tobão tem o atributo peso //variavel peso é todos os botões
+    var titulo = $(".cuerpoCarrito .tituloCarritoCompra, .comprarAhora .tituloCarritoCompra");
+    var cantidad = $(".cuerpoCarrito .cantidadItem, .comprarAhora .cantidadItem");
+    var subtotal = $(".cuerpoCarrito .subtotales span, .comprarAhora .subtotales span");
     var tipoArray = [];
     var cantidadPeso = [];
 
@@ -800,7 +800,7 @@ $(".btnPagar").click(function () {
     var titulo = $(".valorTitulo");
     var cantidad = $(".valorCantidad");
     var valorItem = $(".valorItem");
-    var idProducto = $(".cuerpoCarrito button");// por causa dessa merda de button me fudi
+    var idProducto = $(".cuerpoCarrito button, .comprarAhora button");// por causa dessa merda de button me fudi dois dias
     
     var tituloArray = [];
     var cantidadArray = [];
@@ -839,3 +839,21 @@ $(".btnPagar").click(function () {
         }
     })
 });
+
+
+
+
+
+/*
+ * 
+ * 
+ * 
+ * 
+ * AGREGAR PRODUCTOS GRATIS
+ */
+$(".agregarGratis").click(function(){
+    var idProducto = $(this).attr("idProducto");
+    var idUsuario = $(this).attr("idUsuario");
+    
+    window.location = rutaOculta+"index.php?ruta=finalizar-compra&gratis=true&producto="+idProducto;
+})

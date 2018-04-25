@@ -146,6 +146,25 @@ INFOPRODUCTO
             ============================-->
 
             <?php
+            echo '<div class="comprarAhora" style="display:none"> '
+            . '<button class="btn btn-default backColor quitarItemCarrito" idProducto="' . $infoProducto["id"] . '" peso="' . $infoProducto["peso"] . '">'
+            . '</button> '
+            . '<p class="tituloCarritoCompra text-left">' . $infoProducto["titulo"] . '</p> ';
+            if ($infoProducto["oferta"] == 0) {
+                echo '<input class="cantidadItem" value="1" tipo="' . $infoProducto["tipo"] . '" precio="' . $infoProducto["precio"] . '" idProducto="' . $infoProducto["id"] . '"> '
+                . '<p class="subTotal' . $infoProducto["id"] . ' subtotales"> '
+                . '<strong>USD $<span>' . $infoProducto["precio"] . '</span></strong> '
+                . '</p> '
+                . '<div class="sumaSubTotal"><span>' . $infoProducto["precio"] . '</span></div>';
+            } else {
+                echo '<input class="cantidadItem" value="1" tipo="' . $infoProducto["tipo"] . '" precio="' . $infoProducto["precioOferta"] . '" idProducto="' . $infoProducto["id"] . '"> '
+                . '<p class="subTotal' . $infoProducto["id"] . ' subtotales"> '
+                . '<strong>USD $<span>' . $infoProducto["precioOferta"] . '</span></strong> '
+                . '</p> '
+                . '<div class="sumaSubTotal"><span>' . $infoProducto["precioOferta"] . '</span></div>';
+            }
+
+            echo '</div>';
             /* --==========================
               TITULO DO PRODUCTO
               ============================ */
@@ -361,17 +380,39 @@ INFOPRODUCTO
                 <?php
                 if ($infoProducto["precio"] == 0) {
                     echo '<div class="col-md-6 col-xs-12">';
-                    if ($infoProducto["tipo"] == "virtual") {
-                        echo '<button class="btn btn-default btn-block btn-lg backColor">ACCEDER AHORA</button>';
+                    if (isset($_SESSION["validarSesion"]) && $_SESSION["validarSesion"] == "ok") {
+                        if ($infoProducto["tipo"] == "virtual") {
+                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'">ACCEDER AHORA</button>';
+                        } else {
+                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'">SOLICITAR AHORA</button>';
+                            echo '<br> '
+                            . '<div class="col-xs-12 panel panel-info text-left"> '
+                                    . '<strong>Atencio!</strong> '
+                                    . 'El producto a solicitar es totalmente gratuito y se enviará a la '
+                                    . 'dirección solicitada, sólo se cobrará los cargos de envio. '
+                                    . '</div>';
+                        }
                     } else {
-                        echo '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button>';
+                        echo '<a href="#modalIngreso" data-toggle="modal"> '
+                                . '<button class="btn btn-default btn-block btn-lg backColor">SOLICITAR AHORA</button> '
+                            .'</a>';
                     }
                     echo '</div>';
                 } else {
                     if ($infoProducto["tipo"] == "virtual") {
-                        echo '<div class="col-md-6 col-xs-12">
-                     <button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button>
-                 </div>
+                        echo '<div class="col-md-6 col-xs-12">';
+
+                        if (isset($_SESSION["validarSesion"])) {
+
+                            if ($_SESSION["validarSesion"] == "ok") {
+
+                                echo '<a id="btnCheckout" href="#modalComprarAhora" data-toggle="modal" idUsuario="' . $_SESSION["id"] . '"><button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button></a>';
+                            }
+                        } else {
+                            echo '<a href="#modalIngreso" data-toggle="modal"><button class="btn btn-default btn-block btn-lg"><small>COMPRAR AHORA</small></button></a>';
+                        }
+
+                        echo '</div>
                  <div class="col-md-6 col-xs-12">
                      <button class="btn btn-default btn-block btn-lg backColor agregarCarrito"
                 idProducto = "' . $infoProducto["id"] . '"
@@ -419,125 +460,125 @@ INFOPRODUCTO
     <br>
     <div class="row">
 
-        <?php
-        $datos = array("idUsuario" => "", "idProducto" => $infoProducto["id"]);
-        $comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
+<?php
+$datos = array("idUsuario" => "", "idProducto" => $infoProducto["id"]);
+$comentarios = ControladorUsuarios::ctrMostrarComentariosPerfil($datos);
 
-        //var_dump($comentarios);
-        $cantidad = 0;
-        foreach ($comentarios as $key => $value) {
+//var_dump($comentarios);
+$cantidad = 0;
+foreach ($comentarios as $key => $value) {
 
-            if ($value["comentario"] != "") {
+    if ($value["comentario"] != "") {
 
-                $cantidad += count($value["id"]);
-            }
-        }
-        ?>
+        $cantidad += count($value["id"]);
+    }
+}
+?>
 
         <ul class="nav nav-tabs">
 
-            <?php
-            if ($cantidad == 0) {
-                echo '<li class="active"><a>ESTE PRODUCTO NO TIENE COMENTARIOS</a></li>
+<?php
+if ($cantidad == 0) {
+    echo '<li class="active"><a>ESTE PRODUCTO NO TIENE COMENTARIOS</a></li>
                       <li></li>';
-            } else {
+} else {
 
-                echo '<li class="active"><a>COMENTARIOS ' . $cantidad . '</a></li>'
-                . '<li><a id="verMas">Ver más</a></li>';
+    echo '<li class="active"><a>COMENTARIOS ' . $cantidad . '</a></li>'
+    . '<li><a id="verMas">Ver más</a></li>';
 
-                $sumaCalificacion = 0;
-                for ($i = 0; $i < $cantidad; $i++) {
+    $sumaCalificacion = 0;
+    for ($i = 0; $i < $cantidad; $i++) {
 
-                    $sumaCalificacion += $comentarios[$i]["calificacion"];
-                }
+        $sumaCalificacion += $comentarios[$i]["calificacion"];
+    }
 
-                $promedio = round($sumaCalificacion / $cantidad, 1);
+    $promedio = round($sumaCalificacion / $cantidad, 1);
 
-                echo '<li class="pull-right"><a class="text-muted">PROMEDIO DE CALIFICACION: ' . $promedio . ' | ';
-                //**
-                if ($promedio >= 0 && $promedio <= 0.5) {
-                    echo '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
+    echo '<li class="pull-right"><a class="text-muted">PROMEDIO DE CALIFICACION: ' . $promedio . ' | ';
+    //**
+    if ($promedio >= 0 && $promedio <= 0.5) {
+        echo '<i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 0.5 && $promedio <= 1) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 0.5 && $promedio <= 1) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 1 && $promedio <= 1.5) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 1 && $promedio <= 1.5) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 1.5 && $promedio <= 2) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 1.5 && $promedio <= 2) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 2 && $promedio <= 2.5) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 2 && $promedio <= 2.5) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 2.5 && $promedio <= 3) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 2.5 && $promedio <= 3) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 3 && $promedio <= 3.5) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 3 && $promedio <= 3.5) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 3.5 && $promedio <= 4) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 3.5 && $promedio <= 4) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 4 && $promedio <= 4.5) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 4 && $promedio <= 4.5) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star-half-o text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                if ($promedio >= 4.5 && $promedio <= 5) {
-                    echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
+    if ($promedio >= 4.5 && $promedio <= 5) {
+        echo '<i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>
                           <i class="fa fa-star text-success" aria-hidden="true"></i>';
-                }
+    }
 
-                //****
-            }
-            ?>
+    //****
+}
+?>
 
 
             </a></li>
@@ -548,129 +589,126 @@ INFOPRODUCTO
 
     <div class="row comentarios">
 
-        <?php
-        foreach ($comentarios as $key => $value) {
+<?php
+foreach ($comentarios as $key => $value) {
 
-            if ($value["comentario"] != "") {
+    if ($value["comentario"] != "") {
 
-                $item = "id";
-                $valor = $value["id_usuario"];
+        $item = "id";
+        $valor = $value["id_usuario"];
 
-                $usuario = ControladorUsuarios::ctrMostrarUsuario($item, $valor);
+        $usuario = ControladorUsuarios::ctrMostrarUsuario($item, $valor);
 
-                echo '<div class="panel-group col-md-3 col-sm-6 col-xs-12 alturaComentarios">
+        echo '<div class="panel-group col-md-3 col-sm-6 col-xs-12 alturaComentarios">
                             <div class="panel panel-default">
                               <div class="panel-heading text-uppercase">
                                   ' . $usuario["nombre"] . '
                                   <span class="text-right">';
-                                      if($usuario["modo"] == "directo"){
-                                          
-                                          if($usuario["foto"] == ""){
-                                              echo '<img class="img-circle pull-right" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="20%">';
-                                          } else {
-                                              echo '<img class="img-circle pull-right" src="' . $url . $usuario["foto"] . '" width="20%">';
-                                          }
-                                          
-                                      } else {
-                                          echo '<img class="img-circle pull-right" src="' . $usuario["foto"] . '" width="20%">';
-                                      }
-                                      
-                                  echo '</span>
+        if ($usuario["modo"] == "directo") {
+
+            if ($usuario["foto"] == "") {
+                echo '<img class="img-circle pull-right" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="20%">';
+            } else {
+                echo '<img class="img-circle pull-right" src="' . $url . $usuario["foto"] . '" width="20%">';
+            }
+        } else {
+            echo '<img class="img-circle pull-right" src="' . $usuario["foto"] . '" width="20%">';
+        }
+
+        echo '</span>
                               </div>
                               <div class="panel-body"><small>' . $value["comentario"] . '</small></div>
                               <div class="panel-footer">';
 
-                                    switch ($value["calificacion"]){
+        switch ($value["calificacion"]) {
 
-                                    case 0.5:
-                                    echo '<i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>
+            case 0.5:
+                echo '<i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 1.0:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 1.0:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 1.5:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 1.5:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 2.0:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 2.0:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 2.5:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 2.5:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 3.0:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 3.0:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 3.5:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 3.5:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 4.0:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 4.0:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 4.5:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 4.5:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star-half-o text-success" aria-hidden = "true"></i>';
-                                    break;
+                break;
 
-                                    case 5.0:
-                                    echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
+            case 5.0:
+                echo '<i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i>
                                     <i class = "fa fa-star text-success" aria-hidden = "true"></i > ';
-                                    break;
-
-
-                }
-                echo '</div>
+                break;
+        }
+        echo '</div>
                 </div>
 
                 </div>';
-            }
-        }
-        ?>
+    }
+}
+?>
 
 
 
@@ -691,17 +729,17 @@ INFOPRODUCTO
                     <h1><small>PRODUCTOS RELACIONADOS</small></h1>
                 </div>
                 <div class="col-sm-6 col-xs-12">
-                    <?php
-                    $item = "id";
-                    $valor = $infoProducto["id_subcategoria"];
-                    $rutasArticulosDestacados = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
+<?php
+$item = "id";
+$valor = $infoProducto["id_subcategoria"];
+$rutasArticulosDestacados = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 //var_dump($rutasArticulosDestacados);
-                    echo '<a href = "' . $url . $rutasArticulosDestacados[0]["ruta"] . '">
+echo '<a href = "' . $url . $rutasArticulosDestacados[0]["ruta"] . '">
                 <button class = "btn btn-default backColor pull-right">
                 VER MÁS <span class = "fa fa-chevron-right"></span>
                 </button>
                 </a>';
-                    ?>
+?>
 
                 </div>
             </div>
@@ -709,26 +747,26 @@ INFOPRODUCTO
             <div class="clearfix"></div>
             <hr>
         </div>
-        <?php
-        $ordenar = "";
-        $item = "id_subcategoria";
-        $valor = $infoProducto["id_subcategoria"];
-        $base = 0;
-        $tope = 4;
-        $modo = "Rand()";
-        $relacionados = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+<?php
+$ordenar = "";
+$item = "id_subcategoria";
+$valor = $infoProducto["id_subcategoria"];
+$base = 0;
+$tope = 4;
+$modo = "Rand()";
+$relacionados = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 //var_dump($relacionados);
-        if (!$relacionados) {
-            echo '<div class = "col-xs-12 error404">
+if (!$relacionados) {
+    echo '<div class = "col-xs-12 error404">
                 <h1><small>Oops!</small></h1>
                 <h2><small>No hay productos relacionados!</small></h2>
 
                 </div>';
-        } else {
-            echo '<ul class = "grid0">';
+} else {
+    echo '<ul class = "grid0">';
 
-            foreach ($relacionados as $key => $value) {
-                echo '<li class = "col-md-3 col-sm-6 col-xs-12">
+    foreach ($relacionados as $key => $value) {
+        echo '<li class = "col-md-3 col-sm-6 col-xs-12">
                 <!-- === === === === == -->
                 <figure>
                 <a href = "' . $url . $value["ruta"] . '" class = "pixelSubCategorias">
@@ -743,15 +781,15 @@ INFOPRODUCTO
                 <a href = "' . $url . $value["ruta"] . '" class = "pixelProducto">
                 ' . $value["titulo"] . '<br><span style = "color:rgba(0,0,0,0)">-</span>';
 
-                if ($value["nuevo"] != 0) {
-                    echo '<span class = "label label-warning fontSize">Nuevo</span> ';
-                }
+        if ($value["nuevo"] != 0) {
+            echo '<span class = "label label-warning fontSize">Nuevo</span> ';
+        }
 
-                if ($value["oferta"] != 0) {
-                    echo '<span class = "label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
-                }
+        if ($value["oferta"] != 0) {
+            echo '<span class = "label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+        }
 
-                echo '</a>
+        echo '</a>
                 </small>
                 </h4>
 
@@ -759,22 +797,22 @@ INFOPRODUCTO
                 <!-- === === === === == -->
                 <div class = "col-xs-6 precio">';
 
-                if ($value["precio"] == 0) {
-                    echo '<h2><small>GRATIS</small></h2>';
-                } else {
-                    if ($value["oferta"] != 0) {
-                        echo '<h2><small>
+        if ($value["precio"] == 0) {
+            echo '<h2><small>GRATIS</small></h2>';
+        } else {
+            if ($value["oferta"] != 0) {
+                echo '<h2><small>
                 <strong class = "oferta">USD $' . $value["precio"] . '</strong>
                 </small>
                 <small>
                 $' . $value["precioOferta"] . '
                 </small></h2>';
-                    } else {
-                        echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
-                    }
-                }
+            } else {
+                echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+            }
+        }
 
-                echo '</div>
+        echo '</div>
 
 
                 <!-- === === === === == -->
@@ -786,9 +824,9 @@ INFOPRODUCTO
 
                 </button>';
 
-                if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
-                    if ($value["oferta"] != 0) {
-                        echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
+        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+            if ($value["oferta"] != 0) {
+                echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
                 idProducto = "' . $value["id"] . '"
                 imagen = "' . $servidor . $value["portada"] . '"
                 titulo = "' . $value["titulo"] . '"
@@ -799,10 +837,10 @@ INFOPRODUCTO
                 title = "Agregar al carrito de compras">
                 <i class = "fa fa-shopping-cart" aria-hidden = "true"></i>
                 </button>';
-                    } else {
+            } else {
 
 
-                        echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
+                echo '<button type = "button" class = "btn btn-default btn-xs agregarCarrito"
                 idProducto = "' . $value["id"] . '"
                 imagen = "' . $servidor . $value["portada"] . '"
                 titulo = "' . $value["titulo"] . '"
@@ -813,10 +851,10 @@ INFOPRODUCTO
                 title = "Agregar al carrito de compras">
                 <i class = "fa fa-shopping-cart" aria-hidden = "true"></i>
                 </button>';
-                    }
-                }
+            }
+        }
 
-                echo '<a href = "' . $url . $value["ruta"] . '" class = "pixelProducto">
+        echo '<a href = "' . $url . $value["ruta"] . '" class = "pixelProducto">
                 <button type = "button" class = "btn btn-default btn-xs"
                 data-toggle = "tooltip" title = "Ver producto">
                 <i class = "fa fa-eye" aria-hidden = "true"></i>
@@ -827,11 +865,138 @@ INFOPRODUCTO
                 </div>
                 </div>
                 </li>';
-            }
+    }
 
 
-            echo '</ul>';
-        }
-        ?>
+    echo '</ul>';
+}
+?>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--======================================================
+VENTANA MODAL PARA O CHECKOUT
+========================================================-->
+<div id="modalComprarAhora" class="modal fade modalFormulario" role="dialog">
+    <div class="modal-content modal-dialog">
+        <div class="modal-body modalTitulo">
+            <h3 class="backColor">REALIZAR PAGO</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="contenidoCheckout">
+<?php
+$respuesta = ControladorCarrito::ctrMostrarTarifas();
+echo '<input type="hidden" id="tasaImpuesto" value="' . $respuesta["impuesto"] . '">
+                            <input type="hidden" id="envioNacional" value="' . $respuesta["envioNacional"] . '">
+                            <input type="hidden" id="envioInternacional" value="' . $respuesta["envioInternacional"] . '">
+                            <input type="hidden" id="tasaMinimaNal" value="' . $respuesta["tasaMinimaNal"] . '">
+                            <input type="hidden" id="tasaMinimaInt" value="' . $respuesta["tasaMinimaInt"] . '">
+                            <input type="hidden" id="tasaPais" value="' . $respuesta["pais"] . '">';
+?>
+                <div class="formEnvio row">
+                    <h4 class="text-center well text-muted text-uppercase">Información de envio</h4>
+                    <div class="col-xs-12 seleccionePais">
+                        <!--FOI TIRADO O HTML DAQUI POR QUE APESAR DE ESTAR OCULTO ELE EXISTE E ESTAVA DANDO CONFLITO QUANDO SÓ EXISTEM PRODUTOS VIRTUAIS-->
+                    </div>
+
+                </div>
+                <br>
+
+
+                <div class="formPago row">
+                    <h4 class="text-center well text-muted text-uppercase">Elige la forma de pago</h4>
+                    <figure class="col-xs-6">
+                        <center>
+                            <input id="checkPaypal" type="radio" name="pago" value="paypal" checked>
+
+                        </center>
+                        <img src="<?php echo $url; ?>vistas/img/plantilla/paypal.jpg" class="img-thumbnail">
+                    </figure>
+
+                    <figure class="col-xs-6">
+                        <center>
+                            <input id="checkPayu" type="radio" name="pago" value="paypal">
+
+                        </center>
+                        <img src="<?php echo $url; ?>vistas/img/plantilla/payu.jpg" class="img-thumbnail">
+                    </figure>
+
+                </div>
+                <br>
+
+
+                <div class="listaProductos row">
+                    <h4 class="text-center well text-muted text-uppercase">Productos a comprar</h4>
+                    <table class="table table-striped tablaProductos">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                    <div class="col-sm-6 col-xs-12 pull-right">
+                        <table class="table table-striped tablaTasas">
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td><span class="cambioDivisa">USD</span> $<span class="valorSubtotal" valor="0">0</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Envio</td>
+                                    <td><span class="cambioDivisa">USD</span> $ <span class="valorTotalEnvio" valor="0">0</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Impuesto</td>
+                                    <td><span class="cambioDivisa">USD</span> $<span class="valorTotalImpuesto" valor="0">0</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td><strong><span class="cambioDivisa">USD</span> $<span class="valorTotalCompra" valor="0">0</span></strong></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="divisa">
+                            <select class="form-control" id="cambiarDivisa" name="divisa">
+                                <option value="USD">USD</option>
+                            </select>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <button class="btn btn-block btn-lg btn-default backColor btnPagar">PAGAR</button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
     </div>
 </div>
