@@ -844,6 +844,13 @@ $(".btnPagar").click(function () {
 
 
 
+
+
+
+
+
+
+
 /*
  * 
  * 
@@ -854,6 +861,9 @@ $(".btnPagar").click(function () {
 $(".agregarGratis").click(function () {
     var idProducto = $(this).attr("idProducto");
     var idUsuario = $(this).attr("idUsuario");
+    var tipo = $(this).attr("tipo");
+    var titulo = $(this).attr("titulo");
+    var agregarGratis = false;
 
     /*
      * VERIFICAR QUE NO TENGA EL PRODUCTO ADQUIRIDO
@@ -881,12 +891,44 @@ $(".agregarGratis").click(function () {
                     closeOnConfirm: false
                 });
             } else {
-                window.location = rutaOculta + "index.php?ruta=finalizar-compra&gratis=true&producto=" + idProducto;
+                if (tipo == "virtual") {
+
+                    agregarGratis = true;
+
+                } else {
+
+                    var selecionarDetalle = $(".selecionarDetalle");
+
+                    for (var i = 0; i < selecionarDetalle.length; i++) {
+
+                        if ($(selecionarDetalle[i]).val() == "") {
+
+                            swal({
+                                title: "Debe selecionar Talla Y Color",
+                                text: "",
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Selecionar",
+                                closeOnConfirm: false
+                            })
+
+                        } else {
+
+                            titulo = titulo + "-" + $(selecionarDetalle[i]).val()
+
+                            agregarGratis = true;
+                        }
+                    }
+
+                }
+                
+                if(agregarGratis){
+                    window.location = rutaOculta + "index.php?ruta=finalizar-compra&gratis=true&producto="+idProducto+"&titulo="+titulo;
+                }
+                
             }
 
         }
     });
-
-
-    
 });

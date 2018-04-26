@@ -202,8 +202,9 @@ if(isset( $_GET['paypal']) && $_GET['paypal'] === 'true'){
 /*=============================================
 ADQUISICIONES GRATUITAS
 =============================================*/
-else if(isset($_GET["gratis"]) === true ){
+else if(isset($_GET["gratis"]) && $_GET["gratis"] === 'true' ){
     $producto = $_GET['producto'];
+    $titulo = $_GET['titulo'];
     
     $datos = array("idUsuario"=>$_SESSION["id"],
                         "idProducto"=>$producto,
@@ -215,6 +216,11 @@ else if(isset($_GET["gratis"]) === true ){
     $respuesta = ControladorCarrito::ctrNuevasCompras($datos);
     
     if($respuesta == "ok"){
+        /*
+         * ENVIAR CORREO ELECTRONICO
+         */
+        
+        
         echo '<script>
             window.location = "'.$url.'ofertas";
             </script>';

@@ -382,9 +382,9 @@ INFOPRODUCTO
                     echo '<div class="col-md-6 col-xs-12">';
                     if (isset($_SESSION["validarSesion"]) && $_SESSION["validarSesion"] == "ok") {
                         if ($infoProducto["tipo"] == "virtual") {
-                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'">ACCEDER AHORA</button>';
+                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'" tipo="'.$infoProducto["tipo"].'" titulo="'.$infoProducto["titulo"].'">ACCEDER AHORA</button>';
                         } else {
-                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'">SOLICITAR AHORA</button>';
+                            echo '<button class="btn btn-default btn-block btn-lg backColor agregarGratis" idProducto="'.$infoProducto["id"].'" idUsuario="'.$_SESSION["id"].'" tipo="'.$infoProducto["tipo"].'" titulo="'.$infoProducto["titulo"].'">SOLICITAR AHORA</button>';
                             echo '<br> '
                             . '<div class="col-xs-12 panel panel-info text-left"> '
                                     . '<strong>Atencio!</strong> '
