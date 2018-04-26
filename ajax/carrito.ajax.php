@@ -1,6 +1,8 @@
 <?php
 
 require_once "../extensiones/paypal.controlador.php";
+require_once "../controladores/carrito.controlador.php";
+require_once "../modelos/carrito.modelo.php";
 
 class AjaxCarrito {
 
@@ -87,7 +89,7 @@ if (isset($_POST["divisa"])) {
 if(isset($_POST["idProducto"])){
     $producto = new AjaxCarrito();
     $producto->idUsuario = $_POST["idUsuario"];
-    $producto->idProductoo = $_POST["idProducto"];
+    $producto->idProducto = $_POST["idProducto"];
     $producto->ajaxVerificarProducto();
     
 }

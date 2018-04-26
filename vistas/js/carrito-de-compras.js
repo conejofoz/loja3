@@ -880,6 +880,7 @@ $(".agregarGratis").click(function () {
         contentType: false,
         processData: false,
         success: function (respuesta) {
+            console.log("resposta->", respuesta);
             if (respuesta != "false") {
                 swal({
                     title: "Usted ya adquirió este producto!",
