@@ -173,3 +173,33 @@ $("#item"+indice.pop()).addClass("active");
 $(".cerrarOfertas").click(function(){
     $(this).parent().remove();
 })
+
+
+/*=============================================
+CONTADOR DE TIEMPO
+=============================================*/
+
+var finOferta = $(".countdown");
+var fechaFinOferta = [];
+
+for(var i = 0; i < finOferta.length; i++){
+
+	fechaFinOferta[i] = $(finOferta[i]).attr("finOferta");
+
+	$(finOferta[i]).dsCountDown({
+
+	endDate: new Date(fechaFinOferta[i]),
+
+	theme: 'flat', 
+
+	titleDays: 'Días', 
+
+	titleHours: 'Horas', 
+
+	titleMinutes: 'Minutos', 
+
+	titleSeconds: 'Segundos' 
+
+
+	});
+        }

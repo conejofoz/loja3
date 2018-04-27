@@ -48,7 +48,7 @@ jumbotron aviso oferta
                                         </button>
                                     </a>
                                     <br><br>
-                                    <a href="">
+                                    <a href="#moduloOfertas">
                                         <button class="btn btn-default btn-lg">
                                             VER OFERTAS
                                         </button>
@@ -65,7 +65,7 @@ jumbotron aviso oferta
 
 <div class="container-fluid">
     <div class="container">
-        <div class="row moduloOfertas">
+        <div class="row" id="moduloOfertas">
             <?php
                 /*
                  * TRAEMOS LAS OFERTAS DE CATEGORIAS
@@ -84,10 +84,10 @@ jumbotron aviso oferta
                             $datetime2 = new DateTime($fechaActual);
                             $interval = date_diff($datetime1, $datetime2);
                             $finOferta = $interval->format('%a');
-                            var_dump($finOferta);
+                            //var_dump($finOferta);
                             //var_dump($datetime1);
                             //var_dump($datetime2);
-                            echo '<div class="col-md4 col-sm-6 col-xs-12">
+                            echo '<div class="col-md-4 col-sm-6 col-xs-12">
                                        <div class="ofertas">
                                            <h3 class="text-center text-uppercase">
                                                OFERTA ESPECIAL EN <br> '.$value["categoria"].'!
@@ -102,8 +102,136 @@ jumbotron aviso oferta
                                                    }
 
 
-                                                   echo '</figure>
-                                       </div>
+                                                   echo '</figure>';
+                                                   if($finOferta == 0){
+                                                       echo '<h4 class="text-center">La oferta termina hoy<h4>';
+                                                   } else if($finOferta == 1){
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' día<h4>';
+                                                   } else {
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' días<h4>';
+                                                   }
+                                       echo '
+                                           <center>
+                                                <div class="countdown" finOferta="'.$value["finOferta"].'"></div>
+                                                <a href="'.$url.$value["ruta"].'" class="pixelOferta">
+                                                    <button class="btn backColor btn-lg text-uppercase">Ir a la Oferta</button>
+                                                </a>
+                                                
+                                           </center>
+                                           
+                                        </div>
+                                   </div>';
+                        }
+                     }
+                 }
+            
+                /*
+                 * TRAEMOS LAS OFERTAS DE SUBCATEGORIAS
+                 */
+//                 $item = null;
+//                 $valor = null;
+//                 date_default_timezone_set('America/Sao_Paulo');
+//                 $fecha = date('Y-m-d');
+//                 $hora = date('H:i:s');
+//                 $fechaActual = $fecha.' '.$hora;
+                 $respuestaSubcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
+                 foreach ($respuestaSubcategorias as $key => $value) {
+                     if($value["oferta"] == 1 && $value["ofertadoPorCategoria"] == 0){
+                        if($value["finOferta"] > $fecha){
+                            $datetime1 = new DateTime($value["finOferta"]);
+                            $datetime2 = new DateTime($fechaActual);
+                            $interval = date_diff($datetime1, $datetime2);
+                            $finOferta = $interval->format('%a');
+                            //var_dump($finOferta);
+                            //var_dump($datetime1);
+                            //var_dump($datetime2);
+                            echo '<div class="col-md-4 col-sm-6 col-xs-12">
+                                       <div class="ofertas">
+                                           <h3 class="text-center text-uppercase">
+                                               OFERTA ESPECIAL EN <br> '.$value["subcategoria"].'!
+                                           </h3>
+                                           <figure>
+                                               <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">
+                                               <div class="sombraSuperior"></div>';
+                                                   if($value["descuentoOferta"] != 0){
+                                                       echo '<h1 class="text-center text-uppercase">%'.$value["descuentoOferta"].' OFF</h1>';
+                                                   } else {
+                                                       echo '<h1 class="text-center text-uppercase">$'.$value["precioOferta"].'</h1>';
+                                                   }
+
+
+                                                   echo '</figure>';
+                                                   if($finOferta == 0){
+                                                       echo '<h4 class="text-center">La oferta termina hoy<h4>';
+                                                   } else if($finOferta == 1){
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' día<h4>';
+                                                   } else {
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' días<h4>';
+                                                   }
+                                       echo '
+                                           <center>
+                                                <div class="countdown" finOferta="'.$value["finOferta"].'"></div>
+                                                <a href="'.$url.$value["ruta"].'" class="pixelOferta">
+                                                    <button class="btn backColor btn-lg text-uppercase">Ir a la Oferta</button>
+                                                </a>
+                                                
+                                           </center>
+                                           
+                                        </div>
+                                   </div>';
+                        }
+                     }
+                 }
+            
+            
+                 /*
+                  * OFERTAS DE PRODUCTOS
+                  */
+                 $ordenar = "id";
+                 $respuestaProductos = ControladorProductos::ctrListarProductos($ordenar, $item, $valor);
+                 foreach ($respuestaProductos as $key => $value) {
+                     if($value["oferta"] == 1 && $value["ofertadoPorCategoria"] == 0 && $value["ofertadoPorSubCategoria"] == 0){
+                        if($value["finOferta"] > $fecha){
+                            $datetime1 = new DateTime($value["finOferta"]);
+                            $datetime2 = new DateTime($fechaActual);
+                            $interval = date_diff($datetime1, $datetime2);
+                            $finOferta = $interval->format('%a');
+                            //var_dump($finOferta);
+                            //var_dump($datetime1);
+                            //var_dump($datetime2);
+                            echo '<div class="col-md-4 col-sm-6 col-xs-12">
+                                       <div class="ofertas">
+                                           <h3 class="text-center text-uppercase">
+                                               OFERTA ESPECIAL EN <br> '.$value["titulo"].'!
+                                           </h3>
+                                           <figure>
+                                               <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">
+                                               <div class="sombraSuperior"></div>';
+                                                   if($value["descuentoOferta"] != 0){
+                                                       echo '<h1 class="text-center text-uppercase">%'.$value["descuentoOferta"].' OFF</h1>';
+                                                   } else {
+                                                       echo '<h1 class="text-center text-uppercase">$'.$value["precioOferta"].'</h1>';
+                                                   }
+
+
+                                                   echo '</figure>';
+                                                   if($finOferta == 0){
+                                                       echo '<h4 class="text-center">La oferta termina hoy<h4>';
+                                                   } else if($finOferta == 1){
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' día<h4>';
+                                                   } else {
+                                                       echo '<h4 class="text-center">La oferta termina en '.$finOferta.' días<h4>';
+                                                   }
+                                       echo '
+                                           <center>
+                                                <div class="countdown" finOferta="'.$value["finOferta"].'"></div>
+                                                <a href="'.$url.$value["ruta"].'" class="pixelOferta">
+                                                    <button class="btn backColor btn-lg text-uppercase">Ir a la Oferta</button>
+                                                </a>
+                                                
+                                           </center>
+                                           
+                                        </div>
                                    </div>';
                         }
                      }
