@@ -48,6 +48,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/infoproducto.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/perfil.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/carrito-de-compras.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/ofertas.css">
         
         <!--=========================================================
         PLUGINS DE JAVASCRIPT

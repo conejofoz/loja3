@@ -1,3 +1,8 @@
+<?php
+$servidor = ruta::ctrRutaServidor();
+$url = ruta::ctrRuta();
+?>
+
 <!--========================================================
 BREADCRUMB OFERTAS
 =========================================================-->
@@ -37,7 +42,7 @@ jumbotron aviso oferta
                                 <p class="text-center">
                                     Tu artículo ha sido asignado a tus compras, pero antes queremos presentarte las siguintes ofertas, si no deseas ver las ofertas y continuar en el artículo que acabas de adquirir haz click en el siguiente botón:
                                     <br><br>
-                                    <a href="">
+                                    <a href="'.$url.'perfil">
                                         <button class="btn btn-default backColor btn-lg">
                                             VER ARTICULOS COMPRADOS
                                         </button>
@@ -57,4 +62,56 @@ jumbotron aviso oferta
     }
 
 ?>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row moduloOfertas">
+            <?php
+                /*
+                 * TRAEMOS LAS OFERTAS DE CATEGORIAS
+                 */
+                 $item = null;
+                 $valor = null;
+                 date_default_timezone_set('America/Sao_Paulo');
+                 $fecha = date('Y-m-d');
+                 $hora = date('H:i:s');
+                 $fechaActual = $fecha.' '.$hora;
+                 $respuesta = ControladorProductos::ctrMostrarCategorias($item, $valor);
+                 foreach ($respuesta as $key => $value) {
+                     if($value["oferta"] == 1){
+                        if($value["finOferta"] > $fecha){
+                            $datetime1 = new DateTime($value["finOferta"]);
+                            $datetime2 = new DateTime($fechaActual);
+                            $interval = date_diff($datetime1, $datetime2);
+                            $finOferta = $interval->format('%a');
+                            var_dump($finOferta);
+                            //var_dump($datetime1);
+                            //var_dump($datetime2);
+                            echo '<div class="col-md4 col-sm-6 col-xs-12">
+                                       <div class="ofertas">
+                                           <h3 class="text-center text-uppercase">
+                                               OFERTA ESPECIAL EN <br> '.$value["categoria"].'!
+                                           </h3>
+                                           <figure>
+                                               <img class="img-responsive" src="'.$servidor.$value["imgOferta"].'" width="100%">
+                                               <div class="sombraSuperior"></div>';
+                                                   if($value["descuentoOferta"] != 0){
+                                                       echo '<h1 class="text-center text-uppercase">%'.$value["descuentoOferta"].' OFF</h1>';
+                                                   } else {
+                                                       echo '<h1 class="text-center text-uppercase">$'.$value["precioOferta"].'</h1>';
+                                                   }
+
+
+                                                   echo '</figure>
+                                       </div>
+                                   </div>';
+                        }
+                     }
+                 }
+            
+            
+            ?>
+        </div>
+    </div>
+</div>
 
