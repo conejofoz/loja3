@@ -115,6 +115,8 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.flexslider.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/sweetalert.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/dscountdown.min.js"></script>
+        <!--RELACIONADO COM COMPARTIR EM GOOGLE-->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     </head>
     <body>
@@ -224,6 +226,41 @@
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+   
+   
+   
+   
+   
+   /*
+    * COMPARTIR EN FACEBOOK
+    * https://developers.facebook.com/docs/
+    */
+   $(".btnFacebook").click(function(){
+       FB.ui({
+           method: 'share',
+           display: 'popup',
+           href:'<?php echo $url.$cabeceras["ruta"]; ?>'
+       }, function(response){});
+   })
+   
+	/*=============================================
+	COMPARTIR EN GOOGLE
+	https://developers.google.com/+/web/share/     
+	=============================================*/
+
+	$(".btnGoogle").click(function(){
+
+		window.open(
+
+			'https://plus.google.com/share?url=<?php  echo $url.$cabeceras["ruta"];  ?>',
+			'',
+			'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=400'
+		);
+
+		return false;
+
+	})   
+   
 </script>
     </body>
 </html>
