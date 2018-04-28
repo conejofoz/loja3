@@ -1000,3 +1000,50 @@ echo '<input type="hidden" id="tasaImpuesto" value="' . $respuesta["impuesto"] .
         </div>
     </div>
 </div>
+
+<?php
+
+if($infoproducto["tipo"] == "fisico"){
+
+	echo '<script type="application/ld+json">
+
+			{
+			  "@context": "http://schema.org/",
+			  "@type": "Product",
+			  "name": "'.$infoproducto["titulo"].'",
+			  "image": [';
+
+			  for($i = 0; $i < count($multimedia); $i ++){
+
+			  	echo $servidor.$multimedia[$i]["foto"].',';
+
+			  }
+			
+			  echo '],
+			  "description": "'.$infoproducto["descripcion"].'"
+	  
+			}
+
+		</script>';
+
+}else{
+
+	echo '<script type="application/ld+json">
+
+			{
+			  "@context": "http://schema.org",
+			  "@type": "Course",
+			  "name": "'.$infoproducto["titulo"].'",
+			  "description": "'.$infoproducto["descripcion"].'",
+			  "provider": {
+			    "@type": "Organization",
+			    "name": "Tu Logo",
+			    "sameAs": "'.$url.$infoproducto["ruta"].'"
+			  }
+			}
+
+		</script>';
+
+}
+
+?>
