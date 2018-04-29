@@ -113,7 +113,7 @@ jumbotron aviso oferta
                                        echo '
                                            <center>
                                                 <div class="countdown" finOferta="'.$value["finOferta"].'"></div>
-                                                <a href="'.$url.$value["ruta"].'" class="pixelOferta">
+                                                <a href="'.$url.$value["ruta"].'" class="pixelOferta"  titulo="' . $value["categoria"] . '">
                                                     <button class="btn backColor btn-lg text-uppercase">Ir a la Oferta</button>
                                                 </a>
                                                 

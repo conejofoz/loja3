@@ -115,6 +115,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/jquery.flexslider.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/sweetalert.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/dscountdown.min.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/knob.jquery.js"></script>
         <!--RELACIONADO COM COMPARTIR EM GOOGLE-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -190,6 +191,7 @@
         }else{
             include "modulos/slide.php";
             include "modulos/destacados.php";
+            include "modulos/visitas.php";
         }
         ?>
         <input type="hidden" value="<?php echo $url; ?>" id="rutaOculta">
@@ -204,6 +206,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/usuarios.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/registroFacebook.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/carrito-de-compras.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/visitas.js"></script>
         
         
 <script>
