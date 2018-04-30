@@ -1,6 +1,6 @@
 <?php
     //$ip = $_SERVER['REMOTE_ADDR'];
-    $ip = "249.170.168.184";
+    $ip = "138.121.58.36";
     //http://www.geoplugin.net/
     $informacionPais = file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip);
     //var_dump($informacionPais);
@@ -8,8 +8,8 @@
     $pais = $datosPais->geoplugin_countryName;
     
     $enviarIp = ControladorVisitas::ctrEnviarIp($ip, $pais);
-    var_dump($enviarIp);
     
+    $totalVisitas = ControladorVisitas::ctrMostrarTotalVisitas();
 
 ?>
 <!--========================================================
@@ -20,7 +20,7 @@ BREADCRUMB INFOPRODUCTO
     <div class="container">
         <div class="row">
             <ul class="breadcrumb lead">
-                <h2 class="pull-right"><small>Tu eres nuestro visitante # 100</small></h2>
+                <h2 class="pull-right"><small>Tu eres nuestro visitante # <?php echo $totalVisitas["total"] ?></small></h2>
             </ul>
         </div>
     </div>
@@ -31,11 +31,22 @@ BREADCRUMB INFOPRODUCTO
 <div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-md2 col-sm-4 col-xs-12 text-center">
-                <h2 class="text-muted">Colombia</h2>
-                <input type="text" class="knob" value="45" data-width="90" data-height="90" data-fgcolor="#0f0" data-readonly="true">
-                <p class="text-muted text-center" style="font-size: 12px">50% de las visitas</p>
-            </div>
+            <?php
+                $paises = ControladorVisitas::ctrMostrarPaises();
+                $coloresPaises = array("#09F","#900","#059","#260","#F09","#02A");
+                foreach ($paises as $key => $value) {
+                    
+                    $promedio = $value["cantidad"] *100 / $totalVisitas["total"];
+                    
+                    echo '<div class="col-md2 col-sm-4 col-xs-12 text-center">
+                            <h2 class="text-muted">'.$value["pais"].'</h2>
+                            <input type="text" class="knob" value="'. round($promedio).'" data-width="90" data-height="90" data-fgcolor="'.$coloresPaises[$key].'" data-readonly="true">
+                            <p class="text-muted text-center" style="font-size: 12px">'. round($promedio).'% de las visitas</p>
+                        </div>';
+                }
+            
+            ?>
+            
         </div>
     </div>
 </div>
