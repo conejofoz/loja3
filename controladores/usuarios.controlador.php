@@ -627,91 +627,185 @@ class ControladorUsuarios {
             }
         }
     }
-    
-    
-    
+
     /*
      * AGREGAR A LISTA DE DESEOS
      */
+
     static public function ctrAgregarDeseo($datos) {
         $tabla = "deseos";
-        
+
         $respuesta = ModelUsuarios::mdlAgregarDeseo($tabla, $datos);
-        
+
         return $respuesta;
     }
-    
+
     /*
      * MOSTRAR LISTA DE DESEOS
      */
+
     static public function ctrMostrarDeseos($item) {
         $tabla = "deseos";
-        
+
         $respuesta = ModelUsuarios::mdlMostrarDeseos($tabla, $item);
-        
+
         return $respuesta;
     }
-    
+
     /*
      * QUITAR PRODUCTO DA LISTA DE DESEOS
      */
+
     static public function ctrQuitarDeseo($datos) {
         $tabla = "deseos";
-        
+
         $respuesta = ModelUsuarios::mdlQuitarDeseo($tabla, $datos);
-        
+
         return $respuesta;
     }
-    
-    
-    
+
     /*
      * ELIMINAR USUARIO
      */
-    public function ctrEliminarUsuario(){
-        if(isset($_GET["id"])){
+
+    public function ctrEliminarUsuario() {
+        if (isset($_GET["id"])) {
             $tabla1 = "usuarios";
             $tabla2 = "comentarios";
             $tabla3 = "compras";
             $tabla4 = "deseos";
-            
+
             $id = $_GET["id"];
-            
-            if($_GET["foto"] != ""){
-                
+
+            if ($_GET["foto"] != "") {
+
                 unlink($_GET["foto"]);
-                rmdir('vistas/img/usuarios/'.$_GET["id"]);
-                
+                rmdir('vistas/img/usuarios/' . $_GET["id"]);
             }
-            
+
             $respuesta = ModelUsuarios::mdlEliminarUsuario($tabla1, $id);
             ModelUsuarios::mdlEliminarComentarios($tabla2, $id);
             ModelUsuarios::mdlEliminarCompras($tabla3, $id);
             ModelUsuarios::mdlEliminarListaDeseos($tabla4, $id);
-            
-            if($respuesta == "ok"){
+
+            if ($respuesta == "ok") {
                 echo '<script>'
-                        . 'swal({'
-                        . 'title:"SU CUENTA HA SIDO BORRADA!",'
-                        . 'text: "Debe registrarse nuevamente si desea ingresar!",'
-                        . 'type:"success",'
-                        . 'confirmButtonText:"Cerrar",'
-                        . 'closeOnConfirm:false},'
-                        . 'function(isConfirm){'
-                        . 'if(isConfirm){'
-                        . 'window.location = "'.$url.'salir";'
-                        . '}'
-                        . '});'
-                        . '</script>';
+                . 'swal({'
+                . 'title:"SU CUENTA HA SIDO BORRADA!",'
+                . 'text: "Debe registrarse nuevamente si desea ingresar!",'
+                . 'type:"success",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'window.location = "' . $url . 'salir";'
+                . '}'
+                . '});'
+                . '</script>';
             }
-            
-            
-            
         }
     }
-    
-    
-    
-    
+
+    /*
+     * FORMULARIO CONTACTENOS
+     */
+
+    public function ctrFormularioContactenos() {
+        if (isset($_POST["mensajeContactenos"])) {
+            if (preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombreContactenos"]) &&
+                    preg_match('/^[,\\.\\a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["mensajeContactenos"]) &&
+                    preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["emailContactenos"])) {
+
+                /*
+                 * ENVIO DE CORREO ELECTRONICO
+                 */
+                date_default_timezone_set("America/Sao_Paulo");
+                $url = ruta::ctrRuta();
+
+                $mail = new PHPMailer;
+                $mail->CharSet = 'UTF-8';
+                $mail->isMail();
+                $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
+                $mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales');
+                $mail->Subject = "Ha recibido una consulta";
+                $mail->addAddress("contacto@tiendaenlinea.com");
+                $mail->msgHTML('
+
+						<div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+
+						<center><img style="padding:20px; width:10%" src="http://www.tutorialesatualcance.com/tienda/logo.png"></center>
+
+						<div style="position:relative; margin:auto; width:600px; background:white; padding-bottom:20px">
+
+							<center>
+
+							<img style="padding-top:20px; width:15%" src="http://www.tutorialesatualcance.com/tienda/icon-email.png">
+
+
+							<h3 style="font-weight:100; color:#999;">HA RECIBIDO UNA CONSULTA</h3>
+
+							<hr style="width:80%; border:1px solid #ccc">
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px; text-transform:uppercase">'.$_POST["nombreContactenos"].'</h4>
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px;">De: '.$_POST["emailContactenos"].'</h4>
+
+							<h4 style="font-weight:100; color:#999; padding:0px 20px">'.$_POST["mensajeContactenos"].'</h4>
+
+							<hr style="width:80%; border:1px solid #ccc">
+
+							</center>
+
+						</div>
+
+					</div>');
+                $envio = $mail->Send();
+
+                if (!envio) {
+                    echo '<script>'
+                    . 'swal({'
+                    . 'title:"ERROR!",'
+                    . 'text: "Ha ocurrido un problema enviando el mensaje!",'
+                    . 'type:"error",'
+                    . 'confirmButtonText:"Cerrar",'
+                    . 'closeOnConfirm:false},'
+                    . 'function(isConfirm){'
+                    . 'if(isConfirm){'
+                    . 'history.back();'
+                    . '}'
+                    . '});'
+                    . '</script>';
+                } else {
+                    echo '<script> '
+                    . 'swal({'
+                    . 'title:"OK!", '
+                    . 'text: "Su mensaje ha sido enviado, muy pronto le responderemos!", '
+                    . 'type:"success", '
+                    . 'confirmButtonText:"Cerrar", '
+                    . 'closeOnConfirm:false}, '
+                    . 'function(isConfirm){ '
+                    . 'if(isConfirm){ '
+                    . 'history.back(); '
+                    . '} '
+                    . '}); '
+                    . '</script> ';
+                }
+            } else {
+                echo '<script>'
+                . 'swal({'
+                . 'title:"ERROR!",'
+                . 'text: "Problemas al enviar el mensaje, revise que no tenga caracteres especiales",'
+                . 'type:"error",'
+                . 'confirmButtonText:"Cerrar",'
+                . 'closeOnConfirm:false},'
+                . 'function(isConfirm){'
+                . 'if(isConfirm){'
+                . 'history.back();'
+                . '}'
+                . '});'
+                . '</script>';
+            }
+        } 
+    }
 
 }

@@ -55,7 +55,7 @@
             <!--FORMULARIO CONTÁCTENOS-->
             <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 formContacto">
                 <h4>RESUELVA SU INQUIETUDE</h4>
-                <form role="form" method="POST">
+                <form role="form" method="POST" onsubmit="return validarContactenos()">
                     <input type="text" id="nombreContactenos" name="nombreContactenos" class="form-control" placeholder="Escriba su nombre" required>
                     <br>
                     <input type="email" id="emailContactenos" name="emailContactenos" class="form-control" placeholder="Escriba su correo electrónico" required>
@@ -64,6 +64,13 @@
                     <br>
                     <input type="submit" value="Enviar" class="btn btn-default backColor pull-right" id="enviar">
                 </form>
+                
+                <?php
+                    $contactenos = new ControladorUsuarios();
+                    $contactenos->ctrFormularioContactenos();
+                
+                
+                ?>
 
             </div>
 
