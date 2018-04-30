@@ -104,6 +104,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/perfil.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/carrito-de-compras.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/ofertas.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/footer.css">
         
         <!--=========================================================
         PLUGINS DE JAVASCRIPT
@@ -191,8 +192,11 @@
         }else{
             include "modulos/slide.php";
             include "modulos/destacados.php";
-            include "modulos/visitas.php";
         }
+//        SI O SI DEVEN APARECER
+        include "modulos/visitas.php";
+        include "modulos/footer.php";
+        
         ?>
         <input type="hidden" value="<?php echo $url; ?>" id="rutaOculta">
         <!--=========================================================

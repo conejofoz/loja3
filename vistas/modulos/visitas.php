@@ -38,7 +38,7 @@ BREADCRUMB INFOPRODUCTO
                     
                     $promedio = $value["cantidad"] *100 / $totalVisitas["total"];
                     
-                    echo '<div class="col-md2 col-sm-4 col-xs-12 text-center">
+                    echo '<div class="col-md-2 col-sm-4 col-xs-12 text-center">
                             <h2 class="text-muted">'.$value["pais"].'</h2>
                             <input type="text" class="knob" value="'. round($promedio).'" data-width="90" data-height="90" data-fgcolor="'.$coloresPaises[$key].'" data-readonly="true">
                             <p class="text-muted text-center" style="font-size: 12px">'. round($promedio).'% de las visitas</p>
