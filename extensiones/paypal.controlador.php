@@ -69,9 +69,10 @@ class Paypal{
     	#Agregamos las URL'S después de realizar el pago, o cuando el pago es cancelado
 		#Importante agregar la URL principal en la API developers de Paypal
     	$url = Ruta::ctrRuta();
+        $pago = $datos["subtotal"];
 
 		$redirectUrls = new RedirectUrls();
-		$redirectUrls->setReturnUrl("$url/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos."&cantidad=".$cantidadProductos)
+		$redirectUrls->setReturnUrl("$url/index.php?ruta=finalizar-compra&paypal=true&productos=".$idProductos."&cantidad=".$cantidadProductos."&pago=".$pago)
    				     ->setCancelUrl("$url/carrito-de-compras");
 
    		#Agregamos todas las características del pago

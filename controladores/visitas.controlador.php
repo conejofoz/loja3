@@ -5,7 +5,7 @@ class ControladorVisitas {
      * GUARDAR IP
      */
 
-    static public function ctrEnviarIp($ip, $pais) {
+    static public function ctrEnviarIp($ip, $pais, $codigo) {
         $tabla = "visitaspersonas";
         $visita = 1;
         $respuestaInsertarIp = null;
@@ -50,7 +50,7 @@ class ControladorVisitas {
             if (!$seleccionarPais) {
                 /* SE NO EXISTE EL PAIS AGREGAR NUEVO PAIS */
                 $cantidad = 1;
-                $insertarPais = ModeloVisitas::mdlInsertarPais($tablaPais, $pais, $cantidad);
+                $insertarPais = ModeloVisitas::mdlInsertarPais($tablaPais, $pais, $codigo, $cantidad);
             } else {
                 /* SI EXISTE EL PAIS ACTUALIZAR UNA NUEVA VISITA */
                 $actualizarCantidad = $seleccionarPais["cantidad"] + 1;

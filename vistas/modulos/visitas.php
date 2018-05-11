@@ -6,8 +6,10 @@
     //var_dump($informacionPais);
     $datosPais = json_decode($informacionPais);
     $pais = $datosPais->geoplugin_countryName;
+    $codigo = $datosPais->geoplugin_countryCode;
     
-    $enviarIp = ControladorVisitas::ctrEnviarIp($ip, $pais);
+    
+    $enviarIp = ControladorVisitas::ctrEnviarIp($ip, $pais, $codigo);
     
     $totalVisitas = ControladorVisitas::ctrMostrarTotalVisitas();
 

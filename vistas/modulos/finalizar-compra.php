@@ -30,6 +30,7 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
     #recibo los productos comprados
     $productos = explode("-", $_GET['productos']);
     $cantidad = explode("-", $_GET['cantidad']);
+    $pago = $_GET['pago'];
 
     #capturamos el Id del pago que arroja Paypal
     $paymentId = $_GET['paymentId'];
@@ -64,7 +65,8 @@ if (isset($_GET['paypal']) && $_GET['paypal'] === 'true') {
             "metodo" => "paypal",
             "email" => $emailComprador,
             "direccion" => $direccion,
-            "pais" => $pais);
+            "pais" => $pais,
+            "pago" => $pago);
 
         $respuesta = ControladorCarrito::ctrNuevasCompras($datos);
 
