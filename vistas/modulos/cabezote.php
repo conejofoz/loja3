@@ -5,14 +5,13 @@ $url = ruta::ctrRuta();
 /* ===============================================
  * INICIO DE SESION USUARIO
   ================================================ */
-if(isset($_SESSION["validarSesion"])){
-    
-    if($_SESSION["validarSesion"] == "ok"){
-        
+if (isset($_SESSION["validarSesion"])) {
+
+    if ($_SESSION["validarSesion"] == "ok") {
+
         echo '<script>'
-                . 'localStorage.setItem("usuario", "'.$_SESSION["id"].'");'
-            . '</script>';
-        
+        . 'localStorage.setItem("usuario", "' . $_SESSION["id"] . '");'
+        . '</script>';
     }
 }
 
@@ -39,11 +38,11 @@ $rutaGoogle = $cliente->createAuthUrl();
 /* ===============================================
  * RECIBIMOS LA VARIABLE GET DE GOOGLE LLAMADA CODE
   ================================================ */
-if(isset($_GET["code"])){
+if (isset($_GET["code"])) {
     $token = $cliente->authenticate($_GET["code"]);
-    
+
     $_SESSION['id_token_google'] = $token;
-    
+
     $cliente->setAccessToken($token);
 }
 
@@ -51,34 +50,29 @@ if(isset($_GET["code"])){
 /* ===============================================
  * RECIBIMOS LOS DATOS CIFRADOS DE GOOGLE EN UN ARRAY
   ================================================ */
-if($cliente->getAccessToken()){
+if ($cliente->getAccessToken()) {
     $item = $cliente->verifyIdToken();
-    
-    
+
+
     $datos = array(
-        "nombre"=>$item["name"],
-        "email"=>$item["email"],
-        "foto"=>$item["picture"],
-        "password"=>"null",
-        "modo"=>"google",
-        "verificacion"=>0,
-        "emailEncriptado"=>"null"
+        "nombre" => $item["name"],
+        "email" => $item["email"],
+        "foto" => $item["picture"],
+        "password" => "null",
+        "modo" => "google",
+        "verificacion" => 0,
+        "emailEncriptado" => "null"
     );
-    
+
     $respuesta = ControladorUsuarios::ctrRegistroRedesSociales($datos);
-    
-    
-        echo '<script>'
-                . 'setTimeout(function(){ '
-                . 'window.location = localStorage.getItem("rutaActual"); '
-                . '},1000); '
-           . '</script>';
-        
-    
-    
+
+
+    echo '<script>'
+    . 'setTimeout(function(){ '
+    . 'window.location = localStorage.getItem("rutaActual"); '
+    . '},1000); '
+    . '</script>';
 }
-
-
 ?>
 
 
@@ -106,11 +100,13 @@ $social = ControladorPlantilla::ctrEstiloPlantilla();
 
 $jsonRedesSociales = json_decode($social["redesSociales"], true);
 foreach ($jsonRedesSociales as $key => $value) {
-    echo '<li>
-				<a href="' . $value["url"] . '" target="_blank">
-                                    <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
-				</a>
-                            </li>';
+    if ($value["activo"] !=0) {
+        echo '<li>
+                <a href="' . $value["url"] . '" target="_blank">
+                    <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
+                </a>
+          </li>';
+    }
 }
 ?>
 
@@ -126,9 +122,9 @@ foreach ($jsonRedesSociales as $key => $value) {
 <?php
 if (isset($_SESSION["validarSesion"])) {
     if ($_SESSION["validarSesion"] == "ok") {
-        
-        
-        
+
+
+
         if ($_SESSION["modo"] == "directo") {
             if ($_SESSION["foto"] != "") {
                 echo '<li>'
@@ -143,26 +139,25 @@ if (isset($_SESSION["validarSesion"])) {
                   <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
                   <li> | </li>
                   <li><a href="' . $url . 'salir">Salir</a></li>';
-
         }
-        
-        
+
+
         if ($_SESSION["modo"] == "facebook") {
             echo '<li>'
             . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
             . '</li> '
-                    . '<li> | </li>
+            . '<li> | </li>
               <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
               <li> | </li>
               <li><a href="' . $url . 'salir" class="salir">Salir</a></li>';
         }
-        
-        
+
+
         if ($_SESSION["modo"] == "google") {
             echo '<li>'
             . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
             . '</li> '
-                    . '<li> | </li>
+            . '<li> | </li>
               <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
               <li> | </li>
               <li><a href="' . $url . 'salir">Salir</a></li>';
@@ -171,10 +166,6 @@ if (isset($_SESSION["validarSesion"])) {
             . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
             . '</li>';
         }
-        
-        
-        
-        
     }
 } else {
     echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
@@ -248,7 +239,7 @@ if (isset($_SESSION["validarSesion"])) {
             =            CARRITO            =
             ==============================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
-                <a href="<?php echo $url;?>carrito-de-compras">
+                <a href="<?php echo $url; ?>carrito-de-compras">
                     <button class="btn btn-default pull-left backColor">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
