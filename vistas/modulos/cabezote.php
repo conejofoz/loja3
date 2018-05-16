@@ -221,7 +221,7 @@ if (isset($_SESSION["validarSesion"])) {
                 =            BUSCADOR            =
                 ===============================-->
                 <div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
-                    <input type="search" name="buscar" class="form-control" placeholder="Buscar...">
+                    <input type="search" name="buscar" class="form-control input-lg" placeholder="Buscar...">
                     <span class="input-group-btn">
                         <a href="<?php echo $url; ?>buscador/1/recientes">
                             <button class="btn btn-default backColor" type="submit">
@@ -344,7 +344,7 @@ foreach ($categorias as $key => $value) {
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
-                        <input type="text" class="form-control text-uppercase" id="regUsuario" name="regUsuario" placeholder="Nome Completo" required>
+                        <input type="text" class="form-control input-lg text-uppercase" id="regUsuario" name="regUsuario" placeholder="Nome Completo" required>
                     </div>
                 </div>
 
@@ -353,7 +353,7 @@ foreach ($categorias as $key => $value) {
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-envelope"></i>
                         </span>
-                        <input type="email" class="form-control" id="regEmail" name="regEmail" placeholder="Correio eletronico" required>
+                        <input type="email" class="form-control input-lg" id="regEmail" name="regEmail" placeholder="Correio eletronico" required>
                     </div>
                 </div>
 
@@ -362,7 +362,7 @@ foreach ($categorias as $key => $value) {
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="regPassword" name="regPassword" placeholder="Senha" required>
+                        <input type="password" class="form-control input-lg" id="regPassword" name="regPassword" placeholder="Senha" required>
                     </div>
                 </div>
 
@@ -450,7 +450,7 @@ $registro->ctrRegistroUsuario();
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-envelope"></i>
                         </span>
-                        <input type="email" class="form-control" id="ingEmail" name="ingEmail" placeholder="Correio eletronico" required>
+                        <input type="email" class="form-control input-lg" id="ingEmail" name="ingEmail" placeholder="Correio eletronico" required>
                     </div>
                 </div>
 
@@ -459,7 +459,7 @@ $registro->ctrRegistroUsuario();
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="ingPassword" name="ingPassword" placeholder="Senha" required>
+                        <input type="password" class="form-control input-lg" id="ingPassword" name="ingPassword" placeholder="Senha" required>
                     </div>
                 </div>
 
@@ -536,7 +536,7 @@ VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
                             <i class="glyphicon glyphicon-envelope"></i>
                         </span>
 
-                        <input type="email" class="form-control" id="passEmail" name="passEmail" placeholder="Correio eletronico" required>
+                        <input type="email" class="form-control input-lg" id="passEmail" name="passEmail" placeholder="Correio eletronico" required>
                     </div>
                 </div>
 

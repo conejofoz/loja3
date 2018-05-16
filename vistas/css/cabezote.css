@@ -37,7 +37,7 @@ header #btnCategorias{
 }
 
 header #btnCategorias p{
-	line-height:40px;
+	line-height:46px;
 	margin-bottom:0px;
 }
 
@@ -50,12 +50,12 @@ header #buscador{
 }
 
 header #buscador input{
-	padding:19px;
+	/*padding:19px;*/
 	border-radius:0;
 }
 
 header #buscador button{
-	padding:9px;
+	padding:12px;
 	border:1px solid silver;
 	border-radius:0;
 }
@@ -149,9 +149,7 @@ VENTANAS MODALES
 .modalFormulario hr{
     border: 1px solid #eee;
 }
-.modalFormulario form input[type="text"],.modalFormulario form input[type="email"], .modalFormulario form input[type="password"]{
-    padding: 25px;
-}
+
 .modalFormulario form input[type="submit"]{
     padding: 15px;
 }
