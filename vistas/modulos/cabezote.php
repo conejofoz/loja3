@@ -95,20 +95,20 @@ if ($cliente->getAccessToken()) {
             ======================================-->
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
                 <ul>
-<?php
-$social = ControladorPlantilla::ctrEstiloPlantilla();
+                    <?php
+                    $social = ControladorPlantilla::ctrEstiloPlantilla();
 
-$jsonRedesSociales = json_decode($social["redesSociales"], true);
-foreach ($jsonRedesSociales as $key => $value) {
-    if ($value["activo"] !=0) {
-        echo '<li>
+                    $jsonRedesSociales = json_decode($social["redesSociales"], true);
+                    foreach ($jsonRedesSociales as $key => $value) {
+                        if ($value["activo"] != 0) {
+                            echo '<li>
                 <a href="' . $value["url"] . '" target="_blank">
                     <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
                 </a>
           </li>';
-    }
-}
-?>
+                        }
+                    }
+                    ?>
 
 
                 </ul>
@@ -119,60 +119,60 @@ foreach ($jsonRedesSociales as $key => $value) {
             ======================================-->
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 registro">
                 <ul>
-<?php
-if (isset($_SESSION["validarSesion"])) {
-    if ($_SESSION["validarSesion"] == "ok") {
+                    <?php
+                    if (isset($_SESSION["validarSesion"])) {
+                        if ($_SESSION["validarSesion"] == "ok") {
 
 
 
-        if ($_SESSION["modo"] == "directo") {
-            if ($_SESSION["foto"] != "") {
-                echo '<li>'
-                . '<img class="img-circle" src="' . $url . $_SESSION["foto"] . '" width="10%">'
-                . '</li>';
-            } else {
-                echo '<li>'
-                . '<img class="img-circle" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="10%">'
-                . '</li>';
-            }
-            echo '<li> | </li>
+                            if ($_SESSION["modo"] == "directo") {
+                                if ($_SESSION["foto"] != "") {
+                                    echo '<li>'
+                                    . '<img class="img-circle" src="' . $url . $_SESSION["foto"] . '" width="10%">'
+                                    . '</li>';
+                                } else {
+                                    echo '<li>'
+                                    . '<img class="img-circle" src="' . $servidor . 'vistas/img/usuarios/default/anonymous.png" width="10%">'
+                                    . '</li>';
+                                }
+                                echo '<li> | </li>
                   <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
                   <li> | </li>
                   <li><a href="' . $url . 'salir">Salir</a></li>';
-        }
+                            }
 
 
-        if ($_SESSION["modo"] == "facebook") {
-            echo '<li>'
-            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
-            . '</li> '
-            . '<li> | </li>
+                            if ($_SESSION["modo"] == "facebook") {
+                                echo '<li>'
+                                . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+                                . '</li> '
+                                . '<li> | </li>
               <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
               <li> | </li>
               <li><a href="' . $url . 'salir" class="salir">Salir</a></li>';
-        }
+                            }
 
 
-        if ($_SESSION["modo"] == "google") {
-            echo '<li>'
-            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
-            . '</li> '
-            . '<li> | </li>
+                            if ($_SESSION["modo"] == "google") {
+                                echo '<li>'
+                                . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+                                . '</li> '
+                                . '<li> | </li>
               <li><a href="' . $url . 'perfil">Ver Perfil</a></li>
               <li> | </li>
               <li><a href="' . $url . 'salir">Salir</a></li>';
-        } else {
-            echo '<li>'
-            . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
-            . '</li>';
-        }
-    }
-} else {
-    echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+                            } else {
+                                echo '<li>'
+                                . '<img class="img-circle" src="' . $_SESSION["foto"] . '" width="10%">'
+                                . '</li>';
+                            }
+                        }
+                    } else {
+                        echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
                                  <li><a href="#" data-toggle="modal">|</a></li>
                                  <li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>';
-}
-?>
+                    }
+                    ?>
 
                 </ul>
             </div>
@@ -255,37 +255,40 @@ if (isset($_SESSION["validarSesion"])) {
         ======================================-->
         <div class="col-xs-12 backColor" id="categorias">
 
-<?php
-$item = null;
-$valor = null;
-$categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
+            <?php
+            $item = null;
+            $valor = null;
+            $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
 
-foreach ($categorias as $key => $value) {
+            foreach ($categorias as $key => $value) {
 
-    echo '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                if ($value["estado"] != 0) {
+
+                    echo '<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                 <h4>
                     <a href="' . $url . $value["ruta"] . '" class="pixelCategorias" titulo="' . $value["categoria"] . '">' . $value["categoria"] . '</a>
                 </h4>
                 <hr>
                 <ul>';
 
-    $item = "id_categoria";
-    $valor = $value["id"];
-    $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
+                    $item = "id_categoria";
+                    $valor = $value["id"];
+                    $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 
-    foreach ($subcategorias as $key => $value) {
-        echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
-    }
-    echo '
+                    foreach ($subcategorias as $key => $value) {
+                        echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
+                    }
+                    echo '
                 </ul>
 
             </div>';
-}
+                }
+            }
 
 
 
-;
-?>
+            ;
+            ?>
 
 
 
@@ -376,10 +379,10 @@ foreach ($categorias as $key => $value) {
                     </label>
                 </div>
 
-<?php
-$registro = new ControladorUsuarios();
-$registro->ctrRegistroUsuario();
-?>
+                <?php
+                $registro = new ControladorUsuarios();
+                $registro->ctrRegistroUsuario();
+                ?>
 
 
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 
@@ -466,10 +469,10 @@ $registro->ctrRegistroUsuario();
 
 
 
-<?php
-$ingreso = new ControladorUsuarios();
-$ingreso->ctrIngresoUsuario();
-?>
+                <?php
+                $ingreso = new ControladorUsuarios();
+                $ingreso->ctrIngresoUsuario();
+                ?>
 
 
                 <input type="submit" class="btn btn-default backColor btn-block btnIngreso" value="ENVIAR"> 
@@ -544,10 +547,10 @@ VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
 
 
 
-<?php
-$password = new ControladorUsuarios();
-$password->ctrOlvidoPassword();
-?>
+                <?php
+                $password = new ControladorUsuarios();
+                $password->ctrOlvidoPassword();
+                ?>
 
 
                 <input type="submit" class="btn btn-default backColor btn-block" value="ENVIAR"> 

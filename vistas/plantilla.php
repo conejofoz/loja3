@@ -16,6 +16,7 @@
          * mantener la ruta fixa del projeto
          */
         $url = Ruta::ctrRuta();
+       
 
         
         
@@ -55,7 +56,7 @@
 	<meta property="og:title"   content="<?php echo $cabeceras['titulo'];?>">
 	<meta property="og:url" content="<?php echo $url.$cabeceras['ruta'];?>">
 	<meta property="og:description" content="<?php echo $cabeceras['descripcion'];?>">
-	<meta property="og:image"  content="<?php echo $cabeceras['portada'];?>">
+	<meta property="og:image"  content="<?php echo $servidor.$cabeceras['portada'];?>">
 	<meta property="og:type"  content="website">	
 	<meta property="og:site_name" content="Tu logo">
 	<meta property="og:locale" content="es_CO">
@@ -67,7 +68,7 @@
 	<meta itemprop="name" content="<?php echo $cabeceras['titulo'];?>">
 	<meta itemprop="url" content="<?php echo $url.$cabeceras['ruta'];?>">
 	<meta itemprop="description" content="<?php echo $cabeceras['descripcion'];?>">
-	<meta itemprop="image" content="<?php echo $cabeceras['portada'];?>">
+	<meta itemprop="image" content="<?php echo $servidor.$cabeceras['portada'];?>">
 
 	<!--=====================================
 	Marcado de TWITTER
@@ -76,7 +77,7 @@
 	<meta name="twitter:title" content="<?php echo $cabeceras['titulo'];?>">
 	<meta name="twitter:url" content="<?php echo $url.$cabeceras['ruta'];?>">
 	<meta name="twitter:description" content="<?php echo $cabeceras['descripcion'];?>">
-	<meta name="twitter:image" content="<?php echo $cabeceras['portada'];?>">
+	<meta name="twitter:image" content="<?php echo $servidor.$cabeceras['portada'];?>">
 	<meta name="twitter:site" content="@tu-usuario">
         
                 
@@ -147,7 +148,7 @@
              */
             $rutaCategorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
 
-            if ($valor == $rutaCategorias["ruta"]) {
+            if ($valor == $rutaCategorias["ruta"] && $rutaCategorias["estado"] == 1) {
                 $ruta = $valor;
             }
             
@@ -156,7 +157,7 @@
              */
             $rutaSubCategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
             foreach ($rutaSubCategorias as $key => $value){
-                if($rutas[0] == $value["ruta"]){
+                if($rutas[0] == $value["ruta"] && $value["estado"] == 1){
                     $ruta = $rutas[0];
                 }
             }
@@ -166,7 +167,7 @@
              * urls amigaveis de produtos
              */
             $rutaProductos = ControladorProductos::ctrMostrarInfoProducto($item, $valor);
-            if($rutas[0] == $rutaProductos["ruta"]){
+            if($rutas[0] == $rutaProductos["ruta"] && $rutaProductos["estado"] == 1){
                 $infoProducto = $rutas[0];
             }
             

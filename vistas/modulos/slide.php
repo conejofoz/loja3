@@ -26,10 +26,10 @@ SLIDE SHOW
                 
                 if ($value["imgProducto"] != "") {
 
-                    echo '<img class="imgProducto" src="' . $servidor . $value["imgProducto"] . '" style="top:' . $estiloImgProducto["top"] . '; right:' . $estiloImgProducto["right"] . '; width:' . $estiloImgProducto["width"] . '; left:' . $estiloImgProducto["left"] . '">';
+                    echo '<img class="imgProducto" src="' . $servidor . $value["imgProducto"] . '" style="top:' . $estiloImgProducto["top"] . '%; right:' . $estiloImgProducto["right"] . '%; width:' . $estiloImgProducto["width"] . '%; left:' . $estiloImgProducto["left"] . '%">';
                 }
 
-                echo '<div class="textosSlide" style="top:' . $estiloTextoSlide["top"] . '; left:' . $estiloTextoSlide["left"] . '; width:' . $estiloTextoSlide["width"] . '; right:' . $estiloTextoSlide["right"] . '">
+                echo '<div class="textosSlide" style="top:' . $estiloTextoSlide["top"] . '%; left:' . $estiloTextoSlide["left"] . '%; width:' . $estiloTextoSlide["width"] . '%; right:' . $estiloTextoSlide["right"] . '%">
                         
                         <h1 style="color:' . $titulo1["color"] . '">' . $titulo1["texto"] . '</h1>
                         <h2 style="color:' . $titulo2["color"] . '">' . $titulo2["texto"] . '</h2>
