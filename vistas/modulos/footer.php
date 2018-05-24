@@ -11,19 +11,23 @@
                 $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
 
                 foreach ($categorias as $key => $value) {
-                    echo '<div class="col-lg-4 col-md-3 col-sm-4 col-xs-12 footerCategorias">
+                    if ($value["estado"] != 0) {
+                        echo '<div class="col-lg-4 col-md-3 col-sm-4 col-xs-12 footerCategorias">
                             <h4><a href="' . $url . $value["ruta"] . '" class="pixelCategorias" titulo="' . $value["categoria"] . '">' . $value["categoria"] . '</a></h4>
                             <hr>
                             <ul>';
-                    $item = "id_categoria";
-                    $valor = $value["id"];
-                    $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
+                        $item = "id_categoria";
+                        $valor = $value["id"];
+                        $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 
-                    foreach ($subcategorias as $key => $value) {
-                        echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
-                    }
-                    echo '</ul>
+                        foreach ($subcategorias as $key => $value) {
+                            if ($value["estado"] != 0) {
+                                echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
+                            }
+                        }
+                        echo '</ul>
                           </div>';
+                    }
                 }
                 ?>
 
@@ -64,12 +68,10 @@
                     <br>
                     <input type="submit" value="Enviar" class="btn btn-default backColor pull-right" id="enviar">
                 </form>
-                
+
                 <?php
-                    $contactenos = new ControladorUsuarios();
-                    $contactenos->ctrFormularioContactenos();
-                
-                
+                $contactenos = new ControladorUsuarios();
+                $contactenos->ctrFormularioContactenos();
                 ?>
 
             </div>
@@ -91,18 +93,18 @@
 
             <div class="col-sm-6 col-xs-12 text-right social">
                 <ul>
-                    <?php
-                    $social = ControladorPlantilla::ctrEstiloPlantilla();
+<?php
+$social = ControladorPlantilla::ctrEstiloPlantilla();
 
-                    $jsonRedesSociales = json_decode($social["redesSociales"], true);
-                    foreach ($jsonRedesSociales as $key => $value) {
-                        echo '<li>
+$jsonRedesSociales = json_decode($social["redesSociales"], true);
+foreach ($jsonRedesSociales as $key => $value) {
+    echo '<li>
 				<a href="' . $value["url"] . '" target="_blank">
                                     <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
 				</a>
                             </li>';
-                    }
-                    ?>
+}
+?>
                 </ul>
             </div>
         </div>

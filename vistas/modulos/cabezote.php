@@ -276,7 +276,9 @@ if ($cliente->getAccessToken()) {
                     $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
 
                     foreach ($subcategorias as $key => $value) {
-                        echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
+                        if ($value["estado"] != 0) {
+                            echo '<li><a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias" titulo="' . $value["subcategoria"] . '">' . $value["subcategoria"] . '</a></li>';
+                        }
                     }
                     echo '
                 </ul>
