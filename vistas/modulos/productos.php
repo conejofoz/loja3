@@ -172,6 +172,7 @@ LISTAR PRODUTOS
             } else {
                 echo '<ul class="grid0">';
                 foreach ($productos as $key => $value) {
+                    if($value["estado"] !=0 ){
                     echo '<li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
                 <figure>
@@ -192,7 +193,7 @@ LISTAR PRODUTOS
                         echo '<span class="label label-warning fontSize">Nuevo</span> ';
                     }
 
-                    if ($value["oferta"] != 0) {
+                    if ($value["oferta"] != 0 && $value["precio"] != 0) {
                         echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
                     }
 
@@ -273,6 +274,7 @@ LISTAR PRODUTOS
                 </div>
             </li>';
                 }
+                }
 
 
                 echo '</ul>
@@ -281,7 +283,7 @@ LISTAR PRODUTOS
 
 <ul class="list0" style="display: none">';
                 foreach ($productos as $key => $value) {
-
+if($value["estado"] !=0 ){
 
                     echo '<!--PRODUTO 1-->
             <li class="col-xs-12">
@@ -307,7 +309,7 @@ LISTAR PRODUTOS
                         echo '<span class="label label-warning fontSize">Nuevo</span> ';
                     }
 
-                    if ($value["oferta"] != 0) {
+                    if ($value["oferta"] != 0 && $value["precio"] != 0) {
                         echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
                     }
 
@@ -386,6 +388,7 @@ LISTAR PRODUTOS
                 <!--==============================================-->
                 <div class="col-xs-12"><hr></div>
             </li>';
+                }
                 }
                 echo '</ul>';
             }
