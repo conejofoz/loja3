@@ -98,7 +98,7 @@ LISTAR PRODUTOS
                         $_SESSION["ordenar"] = $modo;
                     }
                 } else {
-                    if(isset($_SESSION["ordenar"])){
+                    if (isset($_SESSION["ordenar"])) {
                         $modo = $_SESSION["ordenar"];
                     } else {
                         $modo = "DESC";
@@ -172,11 +172,11 @@ LISTAR PRODUTOS
             } else {
                 echo '<ul class="grid0">';
                 foreach ($productos as $key => $value) {
-                    if($value["estado"] !=0 ){
-                    echo '<li class="col-md-3 col-sm-6 col-xs-12">
+                    if ($value["estado"] != 0) {
+                        echo '<li class="col-md-3 col-sm-6 col-xs-12">
                 <!--==============-->
                 <figure>
-                    <a href="' .$url . $value["ruta"] . '" class="pixelSubCategorias">
+                    <a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias">
                         <img src="' . $servidor . $value["portada"] . '" class="img-responsive">
                     </a>
                 </figure>
@@ -186,18 +186,22 @@ LISTAR PRODUTOS
                 ' . $value["id"] . '
                 <h4>
                     <small>
-                        <a href="' .$url . $value["ruta"] . '" class="pixelProducto">
+                        <a href="' . $url . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br><span style="color:rgba(0,0,0,0)">-</span>';
 
-                    if ($value["nuevo"] != 0) {
-                        echo '<span class="label label-warning fontSize">Nuevo</span> ';
-                    }
+                        $fecha = date('Y-m-d');
+                        $fechaActual = strtotime('-30 day', strtotime($fecha));
+                        $fechaNueva = date('Y-m-d', $fechaActual);
 
-                    if ($value["oferta"] != 0 && $value["precio"] != 0) {
-                        echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
-                    }
+                        if ($fechaNueva < $value["fecha"]) {
+                            echo '<span class="label label-warning fontSize">Nuevo</span> ';
+                        }
 
-                    echo '</a>
+                        if ($value["oferta"] != 0 && $value["precio"] != 0) {
+                            echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+                        }
+
+                        echo '</a>
                     </small>
                 </h4>
 
@@ -205,22 +209,22 @@ LISTAR PRODUTOS
                 <!--==============-->
                 <div class="col-xs-6 precio">';
 
-                    if ($value["precio"] == 0) {
-                        echo '<h2><small>GRATIS</small></h2>';
-                    } else {
-                        if ($value["oferta"] != 0) {
-                            echo '<h2><small>
+                        if ($value["precio"] == 0) {
+                            echo '<h2><small>GRATIS</small></h2>';
+                        } else {
+                            if ($value["oferta"] != 0) {
+                                echo '<h2><small>
                             <strong class="oferta">USD $' . $value["precio"] . '</strong>
                         </small>
                         <small>
                             $' . $value["precioOferta"] . '
                         </small></h2>';
-                        } else {
-                            echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                            } else {
+                                echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                            }
                         }
-                    }
 
-                    echo '</div>
+                        echo '</div>
 
 
                 <!--==============-->
@@ -232,9 +236,9 @@ LISTAR PRODUTOS
 
                         </button>';
 
-                    if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
-                        if ($value["oferta"] != 0) {
-                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+                            if ($value["oferta"] != 0) {
+                                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -245,10 +249,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-                        } else {
+                            } else {
 
 
-                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -259,10 +263,10 @@ LISTAR PRODUTOS
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
+                            }
                         }
-                    }
 
-                    echo '<a href="' .$url . $value["ruta"] . '" class="pixelProducto">
+                        echo '<a href="' . $url . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
@@ -273,7 +277,7 @@ LISTAR PRODUTOS
                     </div>
                 </div>
             </li>';
-                }
+                    }
                 }
 
 
@@ -283,14 +287,14 @@ LISTAR PRODUTOS
 
 <ul class="list0" style="display: none">';
                 foreach ($productos as $key => $value) {
-if($value["estado"] !=0 ){
+                    if ($value["estado"] != 0) {
 
-                    echo '<!--PRODUTO 1-->
+                        echo '<!--PRODUTO 1-->
             <li class="col-xs-12">
                 <!--==============================================-->
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                     <figure>
-                        <a href="' .$url . $value["ruta"] . '" class="pixelSubCategorias">
+                        <a href="' . $url . $value["ruta"] . '" class="pixelSubCategorias">
                         <img src="' . $servidor . $value["portada"] . '" class="img-responsive">
                     </a>
                     </figure>
@@ -303,48 +307,53 @@ if($value["estado"] !=0 ){
                     <h1>
                         <small>
                             <a href="' . $value["titulo"] . '" class="pixelProducto">
-                                <a href="' .$url . $value["ruta"] . '" class="pixelProducto">
+                                <a href="' . $url . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br>';
-                    if ($value["nuevo"] != 0) {
-                        echo '<span class="label label-warning fontSize">Nuevo</span> ';
-                    }
 
-                    if ($value["oferta"] != 0 && $value["precio"] != 0) {
-                        echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
-                    }
+                        $fecha = date('Y-m-d');
+                        $fechaActual = strtotime('-30 day', strtotime($fecha));
+                        $fechaNueva = date('Y-m-d', $fechaActual);
+
+                        if ($fechaNueva < $value["fecha"]) {
+                            echo '<span class="label label-warning fontSize">Nuevo</span> ';
+                        }
+
+                        if ($value["oferta"] != 0 && $value["precio"] != 0) {
+                            echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+                        }
 
 
 
-                    echo '</a>
+                        echo '</a>
                         </small>
                     </h1>
                     <p class="text-muted">' . $value["titular"] . '</p>';
-                    if ($value["precio"] == 0) {
-                        echo '<h2><small>GRATIS</small></h2>';
-                    } else {
-                        if ($value["oferta"] != 0) {
-                            echo '<h2><small>
+                        if ($value["precio"] == 0) {
+                            echo '<h2><small>GRATIS</small></h2>';
+                        } else {
+                            if ($value["oferta"] != 0) {
+                                echo '<h2><small>
                                         <strong class="oferta">USD $' . $value["precio"] . '</strong>
                                     </small>
                                     <small>
                                         $' . $value["precioOferta"] . '
                                     </small></h2>';
-                        } else {
-                            echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                            } else {
+                                echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                            }
                         }
-                    }
 
 
-                    echo '<div class="btn-group pull-left enlaces">
+                        echo '<div class="btn-group pull-left enlaces">
                         <button type="button" class="btn btn-default btn-xs deseos" 
                                 idProducto="' . $value["id"] . '" data-toggle="tooltip" title="Agregar a mi lista de deseos">
                             <i class="fa fa-heart" aria-hidden="true"></i>
 
                         </button>';
 
-                    if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
-                        if ($value["oferta"] != 0) {
-                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                        if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
+                            if ($value["oferta"] != 0) {
+                                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -355,10 +364,10 @@ if($value["estado"] !=0 ){
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
-                        } else {
+                            } else {
 
 
-                            echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
+                                echo '<button type="button" class="btn btn-default btn-xs agregarCarrito" 
                                     idProducto="' . $value["id"] . '" 
                                     imagen="' . $servidor . $value["portada"] . '"
                                     titulo="' . $value["titulo"] . '"
@@ -369,10 +378,10 @@ if($value["estado"] !=0 ){
                                     title="Agregar al carrito de compras">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>';
+                            }
                         }
-                    }
 
-                    echo '<a href="' .$url . $value["ruta"] . '" class="pixelProducto">
+                        echo '<a href="' . $url . $value["ruta"] . '" class="pixelProducto">
                             <button type="button" class="btn btn-default btn-xs" 
                                     data-toggle="tooltip" title="Ver producto">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
@@ -388,7 +397,7 @@ if($value["estado"] !=0 ){
                 <!--==============================================-->
                 <div class="col-xs-12"><hr></div>
             </li>';
-                }
+                    }
                 }
                 echo '</ul>';
             }
@@ -403,107 +412,107 @@ if($value["estado"] !=0 ){
                 INICIO DA PAGINACAO
                 PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP-->
 
-<?php
-if (count($listaProductos) != 0) {
+                <?php
+                if (count($listaProductos) != 0) {
 
-    $pagProductos = ceil(count($listaProductos) / 12);
-    /* =============================================
-     * QUANDO O NUMERO DE PAGINAS E MAIOR DO QUE 4
-      ============================================ */
-    if ($pagProductos > 4) {
-        /* =============================================
-         * BOTOES DAS PRIMEIRAS 4 PAGINAS E ULTIMA PAGINA
-          ============================================ */
-        if ($rutas[1] == 1) {
-            echo '<ul class="pagination">';
-            for ($i = 1; $i <= 4; $i ++) {
-                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
-            }
+                    $pagProductos = ceil(count($listaProductos) / 12);
+                    /* =============================================
+                     * QUANDO O NUMERO DE PAGINAS E MAIOR DO QUE 4
+                      ============================================ */
+                    if ($pagProductos > 4) {
+                        /* =============================================
+                         * BOTOES DAS PRIMEIRAS 4 PAGINAS E ULTIMA PAGINA
+                          ============================================ */
+                        if ($rutas[1] == 1) {
+                            echo '<ul class="pagination">';
+                            for ($i = 1; $i <= 4; $i ++) {
+                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                            }
 
-            echo '<li class="disabled"><a>...</a></li>
+                            echo '<li class="disabled"><a>...</a></li>
                               <li id="item' . $pagProductos . '"><a href="' . $url . $rutas[0] . '/' . $pagProductos . '">' . $pagProductos . '</a></li>
                               <li><a href="' . $url . $rutas[0] . '/2"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>    
                             </ul>';
-        }
+                        }
 
-        /* =============================================
-         * BOTÕES DA METADE DE PÁGINAS PARA BAIXO
-          ============================================ */ else if ($rutas[1] != $pagProductos &&
-                $rutas[1] != 1 &&
-                $rutas[1] < ($pagProductos / 2) &&
-                $rutas[1] < ($pagProductos - 3)
-        ) {
-            $numPagAtual = $rutas[1];
-            echo '<ul class="pagination">'
-            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
-            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
-                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
-            }
+                        /* =============================================
+                         * BOTÕES DA METADE DE PÁGINAS PARA BAIXO
+                          ============================================ */ else if ($rutas[1] != $pagProductos &&
+                                $rutas[1] != 1 &&
+                                $rutas[1] < ($pagProductos / 2) &&
+                                $rutas[1] < ($pagProductos - 3)
+                        ) {
+                            $numPagAtual = $rutas[1];
+                            echo '<ul class="pagination">'
+                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+                            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
+                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                            }
 
-            echo '<li class="disabled"><a>...</a></li>
+                            echo '<li class="disabled"><a>...</a></li>
                               <li id="item' . $pagProductos . '"><a href="' . $url . $rutas[0] . '/' . $pagProductos . '">' . $pagProductos . '</a></li>
                               <li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>    
                             </ul>';
-        }
+                        }
 
 
-        /* =============================================
-         * BOTÕES DA METADE DE PÁGINAS PARA CIMA
-          ============================================ */ else if ($rutas[1] != $pagProductos &&
-                $rutas[1] != 1 &&
-                $rutas[1] >= ($pagProductos / 2) &&
-                $rutas[1] < ($pagProductos - 3)
-        ) {
+                        /* =============================================
+                         * BOTÕES DA METADE DE PÁGINAS PARA CIMA
+                          ============================================ */ else if ($rutas[1] != $pagProductos &&
+                                $rutas[1] != 1 &&
+                                $rutas[1] >= ($pagProductos / 2) &&
+                                $rutas[1] < ($pagProductos - 3)
+                        ) {
 
-            $numPagAtual = $rutas[1];
+                            $numPagAtual = $rutas[1];
 
-            echo '<ul class="pagination">'
-            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
-            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1">1</a></li>'
-            . '<li class="disabled"><a>...</a></li>';
+                            echo '<ul class="pagination">'
+                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
+                            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1">1</a></li>'
+                            . '<li class="disabled"><a>...</a></li>';
 
-            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
-                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
-            }
+                            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
+                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                            }
 
-            echo '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>'
-            . '</ul>';
-        }
+                            echo '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>'
+                            . '</ul>';
+                        }
 
-        /* =============================================
-         * BOTÕES DAS ÚLTIMAS 4 PÁGINAS E A PRIMEIRA PÁGINA
-          ============================================ */ else {
+                        /* =============================================
+                         * BOTÕES DAS ÚLTIMAS 4 PÁGINAS E A PRIMEIRA PÁGINA
+                          ============================================ */ else {
 
-            $numPagAtual = $rutas[1];
+                            $numPagAtual = $rutas[1];
 
-            echo '<ul class="pagination">'
-            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
-            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1">1</a></li>'
-            . '<li class="disabled"><a>...</a></li>';
-            for ($i = ($pagProductos - 3); $i <= $pagProductos; $i ++) {
-                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
-            }
+                            echo '<ul class="pagination">'
+                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
+                            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1">1</a></li>'
+                            . '<li class="disabled"><a>...</a></li>';
+                            for ($i = ($pagProductos - 3); $i <= $pagProductos; $i ++) {
+                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                            }
 
-            echo '</ul>';
-        }
-
-
+                            echo '</ul>';
+                        }
 
 
 
-        /* =============================================
-         * QUANDO O NUMERO DE PAGINAS E MENOR OU IGUAL A 4
-          ============================================ */
-    } else {
-        echo '<ul class="pagination">';
-        for ($i = 1; $i <= $pagProductos; $i ++) {
-            echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
-        }
 
-        echo '';
-    }
-}
-?>
+
+                        /* =============================================
+                         * QUANDO O NUMERO DE PAGINAS E MENOR OU IGUAL A 4
+                          ============================================ */
+                    } else {
+                        echo '<ul class="pagination">';
+                        for ($i = 1; $i <= $pagProductos; $i ++) {
+                            echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '">' . $i . '</a></li>';
+                        }
+
+                        echo '';
+                    }
+                }
+                ?>
 
             </center>
         </div>

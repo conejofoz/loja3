@@ -99,9 +99,9 @@ LISTAR PRODUTOS
 
 
             if (!$productos) {
-                
+
                 $estado = 0;
-                
+
                 echo '<div class="col-xs-12 error404 text-center">
                         <h1><small>Oops!</small></h1>
                         <h2>No hay productos</h2>
@@ -127,7 +127,11 @@ LISTAR PRODUTOS
                         <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br><span style="color:rgba(0,0,0,0)">-</span>';
 
-                        if ($value["nuevo"] != 0) {
+                        $fecha = date('Y-m-d');
+                        $fechaActual = strtotime('-30 day', strtotime($fecha));
+                        $fechaNueva = date('Y-m-d', $fechaActual);
+
+                        if ($fechaNueva < $value["fecha"]) {
                             echo '<span class="label label-warning fontSize">Nuevo</span> ';
                         }
 
@@ -259,7 +263,12 @@ LISTAR PRODUTOS
                             <a href="' . $value["titulo"] . '" class="pixelProducto">
                                 <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br>';
-                        if ($value["nuevo"] != 0) {
+
+                        $fecha = date('Y-m-d');
+                        $fechaActual = strtotime('-30 day', strtotime($fecha));
+                        $fechaNueva = date('Y-m-d', $fechaActual);
+
+                        if ($fechaNueva < $value["fecha"]) {
                             echo '<span class="label label-warning fontSize">Nuevo</span> ';
                         }
 
@@ -371,108 +380,107 @@ LISTAR PRODUTOS
                 PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP-->
 
                 <?php
-                
-                if($estado !=0){
-                
-                if (count($listaProductos) != 0) {
+                if ($estado != 0) {
 
-                    $pagProductos = ceil(count($listaProductos) / 12);
-                    /* =============================================
-                     * QUANDO O NUMERO DE PAGINAS E MAIOR DO QUE 4
-                      ============================================ */
-                    if ($pagProductos > 4) {
+                    if (count($listaProductos) != 0) {
+
+                        $pagProductos = ceil(count($listaProductos) / 12);
                         /* =============================================
-                         * BOTOES DAS PRIMEIRAS 4 PAGINAS E ULTIMA PAGINA
+                         * QUANDO O NUMERO DE PAGINAS E MAIOR DO QUE 4
                           ============================================ */
-                        if ($rutas[1] == 1) {
-                            echo '<ul class="pagination">';
-                            for ($i = 1; $i <= 4; $i ++) {
-                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
-                            }
+                        if ($pagProductos > 4) {
+                            /* =============================================
+                             * BOTOES DAS PRIMEIRAS 4 PAGINAS E ULTIMA PAGINA
+                              ============================================ */
+                            if ($rutas[1] == 1) {
+                                echo '<ul class="pagination">';
+                                for ($i = 1; $i <= 4; $i ++) {
+                                    echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
+                                }
 
-                            echo '<li class="disabled"><a>...</a></li>
+                                echo '<li class="disabled"><a>...</a></li>
                               <li id="item' . $pagProductos . '"><a href="' . $url . $rutas[0] . '/' . $pagProductos . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $pagProductos . '</a></li>
                               <li><a href="' . $url . $rutas[0] . '/2/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>    
                             </ul>';
-                        }
-
-                        /* =============================================
-                         * BOTÕES DA METADE DE PÁGINAS PARA BAIXO
-                          ============================================ */ else if ($rutas[1] != $pagProductos &&
-                                $rutas[1] != 1 &&
-                                $rutas[1] < ($pagProductos / 2) &&
-                                $rutas[1] < ($pagProductos - 3)
-                        ) {
-                            $numPagAtual = $rutas[1];
-                            echo '<ul class="pagination">'
-                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
-                            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
-                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
                             }
 
-                            echo '<li class="disabled"><a>...</a></li>
+                            /* =============================================
+                             * BOTÕES DA METADE DE PÁGINAS PARA BAIXO
+                              ============================================ */ else if ($rutas[1] != $pagProductos &&
+                                    $rutas[1] != 1 &&
+                                    $rutas[1] < ($pagProductos / 2) &&
+                                    $rutas[1] < ($pagProductos - 3)
+                            ) {
+                                $numPagAtual = $rutas[1];
+                                echo '<ul class="pagination">'
+                                . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+                                for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
+                                    echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
+                                }
+
+                                echo '<li class="disabled"><a>...</a></li>
                               <li id="item' . $pagProductos . '"><a href="' . $url . $rutas[0] . '/' . $pagProductos . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $pagProductos . '</a></li>
                               <li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>    
                             </ul>';
-                        }
+                            }
 
 
-                        /* =============================================
-                         * BOTÕES DA METADE DE PÁGINAS PARA CIMA
-                          ============================================ */ else if ($rutas[1] != $pagProductos &&
-                                $rutas[1] != 1 &&
-                                $rutas[1] >= ($pagProductos / 2) &&
-                                $rutas[1] < ($pagProductos - 3)
-                        ) {
+                            /* =============================================
+                             * BOTÕES DA METADE DE PÁGINAS PARA CIMA
+                              ============================================ */ else if ($rutas[1] != $pagProductos &&
+                                    $rutas[1] != 1 &&
+                                    $rutas[1] >= ($pagProductos / 2) &&
+                                    $rutas[1] < ($pagProductos - 3)
+                            ) {
 
-                            $numPagAtual = $rutas[1];
+                                $numPagAtual = $rutas[1];
 
-                            echo '<ul class="pagination">'
-                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
-                            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1/' . $rutas[2] . '/' . $rutas[3] . '">1</a></li>'
-                            . '<li class="disabled"><a>...</a></li>';
+                                echo '<ul class="pagination">'
+                                . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
+                                . '<li id="item1"><a href="' . $url . $rutas[0] . '/1/' . $rutas[2] . '/' . $rutas[3] . '">1</a></li>'
+                                . '<li class="disabled"><a>...</a></li>';
 
-                            for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
+                                for ($i = $numPagAtual; $i <= ($numPagAtual + 3); $i ++) {
+                                    echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
+                                }
+
+                                echo '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>'
+                                . '</ul>';
+                            }
+
+                            /* =============================================
+                             * BOTÕES DAS ÚLTIMAS 4 PÁGINAS E A PRIMEIRA PÁGINA
+                              ============================================ */ else {
+
+                                $numPagAtual = $rutas[1];
+
+                                echo '<ul class="pagination">'
+                                . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
+                                . '<li id="item1"><a href="' . $url . $rutas[0] . '/1/' . $rutas[2] . '/' . $rutas[3] . '">1</a></li>'
+                                . '<li class="disabled"><a>...</a></li>';
+                                for ($i = ($pagProductos - 3); $i <= $pagProductos; $i ++) {
+                                    echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
+                                }
+
+                                echo '</ul>';
+                            }
+
+
+
+
+
+                            /* =============================================
+                             * QUANDO O NUMERO DE PAGINAS E MENOR OU IGUAL A 4
+                              ============================================ */
+                        } else {
+                            echo '<ul class="pagination">';
+                            for ($i = 1; $i <= $pagProductos; $i ++) {
                                 echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
                             }
 
-                            echo '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual + 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>'
-                            . '</ul>';
+                            echo '';
                         }
-
-                        /* =============================================
-                         * BOTÕES DAS ÚLTIMAS 4 PÁGINAS E A PRIMEIRA PÁGINA
-                          ============================================ */ else {
-
-                            $numPagAtual = $rutas[1];
-
-                            echo '<ul class="pagination">'
-                            . '<li><a href="' . $url . $rutas[0] . '/' . ($numPagAtual - 1) . '/' . $rutas[2] . '/' . $rutas[3] . '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>'
-                            . '<li id="item1"><a href="' . $url . $rutas[0] . '/1/' . $rutas[2] . '/' . $rutas[3] . '">1</a></li>'
-                            . '<li class="disabled"><a>...</a></li>';
-                            for ($i = ($pagProductos - 3); $i <= $pagProductos; $i ++) {
-                                echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
-                            }
-
-                            echo '</ul>';
-                        }
-
-
-
-
-
-                        /* =============================================
-                         * QUANDO O NUMERO DE PAGINAS E MENOR OU IGUAL A 4
-                          ============================================ */
-                    } else {
-                        echo '<ul class="pagination">';
-                        for ($i = 1; $i <= $pagProductos; $i ++) {
-                            echo '<li id="item' . $i . '"><a href="' . $url . $rutas[0] . '/' . $i . '/' . $rutas[2] . '/' . $rutas[3] . '">' . $i . '</a></li>';
-                        }
-
-                        echo '';
                     }
-                }
                 }
                 ?>
 

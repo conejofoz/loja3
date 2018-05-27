@@ -114,8 +114,13 @@ for ($i = 0; $i < count($titulosModulos); $i++) {
                     <small>
                         <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br><span style="color:rgba(0,0,0,0)">-</span>';
+        
+        $fecha = date('Y-m-d');
+        $fechaActual = strtotime('-30 day', strtotime($fecha));
+        $fechaNueva = date('Y-m-d', $fechaActual);
 
-        if ($value["nuevo"] != 0) {
+        if ($fechaNueva < $value["fecha"]) {
+            
             echo '<span class="label label-warning fontSize">Nuevo</span> ';
         }
 
@@ -231,7 +236,12 @@ if($value["estado"] !=0){
                             <a href="' . $value["titulo"] . '" class="pixelProducto">
                                 <a href="' . $value["ruta"] . '" class="pixelProducto">
                             ' . $value["titulo"] . '<br>';
-        if ($value["nuevo"] != 0) {
+        
+        $fecha = date('Y-m-d');
+        $fechaActual = strtotime('-30 day', strtotime($fecha));
+        $fechaNueva = date('Y-m-d', $fechaActual);
+
+        if ($fechaNueva < $value["fecha"]) {
             echo '<span class="label label-warning fontSize">Nuevo</span> ';
         }
 
