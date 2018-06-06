@@ -28,9 +28,20 @@ class ControladorUsuarios {
 
                 $tabla = "usuarios";
 
-                $respuesta = ModelUsuarios::mdlRegistraUsuario($tabla, $datos);
+                $respuesta = ModeloUsuarios::mdlRegistraUsuario($tabla, $datos);
 
                 if ($respuesta == "ok") {
+                    /* =============================================
+                      ACTUALIZAR NOTIFICACIONES NUEVOS USUARIOS
+                      ============================================= */
+
+                    $traerNotificaciones = ControladorNotificaciones::ctrMostrarNotificaciones();
+
+                    $nuevoUsuario = $traerNotificaciones["nuevosUsuarios"] + 1;
+
+                    ModeloNotificaciones::mdlActualizarNotificaciones("notificaciones", "nuevosUsuarios", $nuevoUsuario);
+
+
                     /*
                      * VERIFICAR CORREIO ELETRONICO
                      */
@@ -122,7 +133,7 @@ class ControladorUsuarios {
 
     static public function ctrMostrarUsuario($item, $valor) {
         $tabla = "usuarios";
-        $respuesta = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+        $respuesta = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
         return $respuesta;
     }
 
@@ -132,7 +143,7 @@ class ControladorUsuarios {
 
     static public function ctrActualizarUsuario($id, $item, $valor) {
         $tabla = "usuarios";
-        $respuesta = ModelUsuarios::mdlActualizarUsuario($tabla, $id, $item, $valor);
+        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $id, $item, $valor);
         return $respuesta;
     }
 
@@ -153,7 +164,7 @@ class ControladorUsuarios {
                 $item = "email";
                 $valor = $_POST["ingEmail"];
 
-                $respuesta = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+                $respuesta = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
 
 
@@ -254,12 +265,12 @@ class ControladorUsuarios {
                 $tabla = "usuarios";
                 $item1 = "email";
                 $valor1 = $_POST["passEmail"];
-                $respuesta1 = ModelUsuarios::mdlMostrarUsuario($tabla, $item1, $valor1);
+                $respuesta1 = ModeloUsuarios::mdlMostrarUsuario($tabla, $item1, $valor1);
                 if ($respuesta1) {
                     $id = $respuesta1["id"];
                     $item2 = "password";
                     $valor2 = $encriptar;
-                    $respuesta2 = ModelUsuarios::mdlActualizarUsuario($tabla, $id, $item2, $valor2);
+                    $respuesta2 = ModeolUsuarios::mdlActualizarUsuario($tabla, $id, $item2, $valor2);
 
 
                     //================ 
@@ -372,7 +383,7 @@ class ControladorUsuarios {
         $valor = $datos["email"];
         $emailRepetido = false;
 
-        $respuesta0 = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+        $respuesta0 = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
         if ($respuesta0) {
             if ($respuesta0["modo"] != $datos["modo"]) {
@@ -393,7 +404,16 @@ class ControladorUsuarios {
             }
             $emailRepetido = true;
         } else {
-            $respuesta1 = ModelUsuarios::mdlRegistraUsuario($tabla, $datos);
+            $respuesta1 = ModeloUsuarios::mdlRegistraUsuario($tabla, $datos);
+            /* =============================================
+              ACTUALIZAR NOTIFICACIONES NUEVOS USUARIOS
+              ============================================= */
+
+            $traerNotificaciones = ControladorNotificaciones::ctrMostrarNotificaciones();
+
+            $nuevoUsuario = $traerNotificaciones["nuevosUsuarios"] + 1;
+
+            ModeloNotificaciones::mdlActualizarNotificaciones("notificaciones", "nuevosUsuarios", $nuevoUsuario);
         }
 
 
@@ -401,7 +421,7 @@ class ControladorUsuarios {
         if ($emailRepetido || $respuesta1 == "ok") {
 
 
-            $respuesta2 = ModelUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
+            $respuesta2 = ModeloUsuarios::mdlMostrarUsuario($tabla, $item, $valor);
 
             if ($respuesta2["modo"] == "facebook") {
 
@@ -492,7 +512,7 @@ class ControladorUsuarios {
 
             $tabla = "usuarios";
 
-            $respuesta = ModelUsuarios::mdlActualizarPerfil($tabla, $datos);
+            $respuesta = ModeloUsuarios::mdlActualizarPerfil($tabla, $datos);
 
             if ($respuesta == "ok") {
 
@@ -543,7 +563,7 @@ class ControladorUsuarios {
 
     static public function ctrMostrarCompras($item, $valor) {
         $tabla = "compras";
-        $respuesta = ModelUsuarios::mdlMostrarCompras($tabla, $item, $valor);
+        $respuesta = ModeloUsuarios::mdlMostrarCompras($tabla, $item, $valor);
         return $respuesta;
     }
 
@@ -553,7 +573,7 @@ class ControladorUsuarios {
 
     static public function ctrMostrarComentariosPerfil($datos) {
         $tabla = "comentarios";
-        $respuesta = ModelUsuarios::mdlMostrarComentariosPerfil($tabla, $datos);
+        $respuesta = ModeloUsuarios::mdlMostrarComentariosPerfil($tabla, $datos);
         return $respuesta;
     }
 
@@ -578,7 +598,7 @@ class ControladorUsuarios {
                     );
 
 
-                    $respuesta = ModelUsuarios::mdlActualizarComentario($tabla, $datos);
+                    $respuesta = ModeloUsuarios::mdlActualizarComentario($tabla, $datos);
 
                     if ($respuesta == "ok") {
                         echo '<script>'
@@ -635,7 +655,7 @@ class ControladorUsuarios {
     static public function ctrAgregarDeseo($datos) {
         $tabla = "deseos";
 
-        $respuesta = ModelUsuarios::mdlAgregarDeseo($tabla, $datos);
+        $respuesta = ModeloUsuarios::mdlAgregarDeseo($tabla, $datos);
 
         return $respuesta;
     }
@@ -647,7 +667,7 @@ class ControladorUsuarios {
     static public function ctrMostrarDeseos($item) {
         $tabla = "deseos";
 
-        $respuesta = ModelUsuarios::mdlMostrarDeseos($tabla, $item);
+        $respuesta = ModeloUsuarios::mdlMostrarDeseos($tabla, $item);
 
         return $respuesta;
     }
@@ -659,7 +679,7 @@ class ControladorUsuarios {
     static public function ctrQuitarDeseo($datos) {
         $tabla = "deseos";
 
-        $respuesta = ModelUsuarios::mdlQuitarDeseo($tabla, $datos);
+        $respuesta = ModeloUsuarios::mdlQuitarDeseo($tabla, $datos);
 
         return $respuesta;
     }
@@ -683,10 +703,10 @@ class ControladorUsuarios {
                 rmdir('vistas/img/usuarios/' . $_GET["id"]);
             }
 
-            $respuesta = ModelUsuarios::mdlEliminarUsuario($tabla1, $id);
-            ModelUsuarios::mdlEliminarComentarios($tabla2, $id);
-            ModelUsuarios::mdlEliminarCompras($tabla3, $id);
-            ModelUsuarios::mdlEliminarListaDeseos($tabla4, $id);
+            $respuesta = ModeloUsuarios::mdlEliminarUsuario($tabla1, $id);
+            ModeloUsuarios::mdlEliminarComentarios($tabla2, $id);
+            ModeloUsuarios::mdlEliminarCompras($tabla3, $id);
+            ModeloUsuarios::mdlEliminarListaDeseos($tabla4, $id);
 
             if ($respuesta == "ok") {
                 echo '<script>'
@@ -746,11 +766,11 @@ class ControladorUsuarios {
 
 							<hr style="width:80%; border:1px solid #ccc">
 
-							<h4 style="font-weight:100; color:#999; padding:0px 20px; text-transform:uppercase">'.$_POST["nombreContactenos"].'</h4>
+							<h4 style="font-weight:100; color:#999; padding:0px 20px; text-transform:uppercase">' . $_POST["nombreContactenos"] . '</h4>
 
-							<h4 style="font-weight:100; color:#999; padding:0px 20px;">De: '.$_POST["emailContactenos"].'</h4>
+							<h4 style="font-weight:100; color:#999; padding:0px 20px;">De: ' . $_POST["emailContactenos"] . '</h4>
 
-							<h4 style="font-weight:100; color:#999; padding:0px 20px">'.$_POST["mensajeContactenos"].'</h4>
+							<h4 style="font-weight:100; color:#999; padding:0px 20px">' . $_POST["mensajeContactenos"] . '</h4>
 
 							<hr style="width:80%; border:1px solid #ccc">
 
@@ -805,7 +825,7 @@ class ControladorUsuarios {
                 . '});'
                 . '</script>';
             }
-        } 
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
-    //$ip = $_SERVER['REMOTE_ADDR'];
-    $ip = "138.121.58.36";
+    $ip = $_SERVER['REMOTE_ADDR'];
+    //$ip = "163.172.160.190";
     //http://www.geoplugin.net/
     $informacionPais = file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip);
     //var_dump($informacionPais);

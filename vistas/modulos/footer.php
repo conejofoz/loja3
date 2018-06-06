@@ -43,7 +43,7 @@
                 <h5>
                     <i class="fa fa-phone-square" aria-hidden="true"></i>(591)-061-xxxx
                     <br><br>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>soporte@tiendavirtual.com
+                    <i class="fa fa-envelope" aria-hidden="true"></i>ecommerce@infinity-group.net
                     <br><br>
                     <i class="fa fa-map-marker" aria-hidden="true"></i>Av. Sán Blás, 136
                     <br><br>

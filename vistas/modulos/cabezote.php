@@ -188,15 +188,15 @@ if ($cliente->getAccessToken()) {
 <!--=====================================
 =            HEADER                     =
 ======================================-->
-<header class="container-fluid">
+<header class="container">
     <div class="container">
         <div class="row" id="cabezote">
             <!--=====================================
             =            LOGOTIPO                   =
             ======================================-->
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="logotipo">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="logotipo">
                 <a href="<?php echo $url; ?>">
-                    <img src="<?php echo $servidor . $social["logo"]; ?>" class="img-responsive">
+                    <img src="<?php echo $servidor . $social["logo"]; ?>" class="">
                 </a>
 
             </div>
@@ -205,7 +205,7 @@ if ($cliente->getAccessToken()) {
             <!--=====================================
             =BLOQUE CATEGORIAS Y BUSCADOR           =
             ======================================-->
-            <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                 <!--======================================
                 =            BOTON CATEGORIAS            =
                 =======================================-->
@@ -220,7 +220,7 @@ if ($cliente->getAccessToken()) {
                 <!--==============================
                 =            BUSCADOR            =
                 ===============================-->
-                <div class="input-group col-lg-8 col-md-8 col-sm-8 col-xs-12" id="buscador">
+                <div class="input-group col-lg-8 col-md-8 col-sm-7 col-xs-12" id="buscador">
                     <input type="search" name="buscar" class="form-control input-lg" placeholder="Buscar...">
                     <span class="input-group-btn">
                         <a href="<?php echo $url; ?>buscador/1/recientes">
