@@ -49,7 +49,7 @@
                     <br><br>
                     Ciudad del Este | Paraguay
                 </h5>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.888409007901!2d-54.6109664567692!3d-25.508767917315215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f685599ba0e249%3A0xf6988af036f41039!2sInfinity+Group+S.A.!5e0!3m2!1spt-BR!2sbr!4v1525058948947" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+
 
 
             </div>
@@ -81,7 +81,15 @@
 </footer>
 
 
-
+<div class="container-fluid final">
+    <!--<div class="container">-->
+        <div class="row">
+            <div class="col-xs-12 text-left text-muted">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.888409007901!2d-54.6109664567692!3d-25.508767917315215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f685599ba0e249%3A0xf6988af036f41039!2sInfinity+Group+S.A.!5e0!3m2!1spt-BR!2sbr!4v1525058948947" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    <!--</div>-->
+</div>
 
 <!--FINAL-->
 <div class="container-fluid final">
@@ -93,18 +101,18 @@
 
             <div class="col-sm-6 col-xs-12 text-right social">
                 <ul>
-<?php
-$social = ControladorPlantilla::ctrEstiloPlantilla();
+                    <?php
+                    $social = ControladorPlantilla::ctrEstiloPlantilla();
 
-$jsonRedesSociales = json_decode($social["redesSociales"], true);
-foreach ($jsonRedesSociales as $key => $value) {
-    echo '<li>
+                    $jsonRedesSociales = json_decode($social["redesSociales"], true);
+                    foreach ($jsonRedesSociales as $key => $value) {
+                        echo '<li>
 				<a href="' . $value["url"] . '" target="_blank">
                                     <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
 				</a>
                             </li>';
-}
-?>
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

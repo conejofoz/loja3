@@ -3,75 +3,69 @@ BANNER
 ======================================-->
 
 <?php
-
 $servidor = Ruta::ctrRutaServidor();
 
 $ruta = "sin-categoria";
 
 $banner = ControladorProductos::ctrMostrarBanner($ruta);
 
-if($banner != null){
+if ($banner != null) {
 
-	if($banner["estado"] != 0){
+    if ($banner["estado"] != 0) {
 
-		echo '<figure class="banner">
+        echo '<figure class="banner">
 
-				<img src="'.$servidor.$banner["img"].'" class="img-responsive" width="100%">	
+				<img src="' . $servidor . $banner["img"] . '" class="img-responsive" width="100%">	
 
 			  </figure>';
-
-	}
-
+    }
 }
 
-/*=============================================
-PRODUCTOS DESTACADOS
-=============================================*/
+/* =============================================
+  PRODUCTOS DESTACADOS
+  ============================================= */
 
 $titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VISTO");
-$rutaModulos = array("articulos-gratis","lo-mas-vendido","lo-mas-visto");
+$rutaModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
 
 $base = 0;
 $tope = 4;
 
-if($titulosModulos[0] == "ARTÍCULOS GRATUITOS"){
+if ($titulosModulos[0] == "ARTÍCULOS GRATUITOS") {
 
-$ordenar = "id";
-$item = "precio";
-$valor = 0;
-$modo = "DESC";
+    $ordenar = "id";
+    $item = "precio";
+    $valor = 0;
+    $modo = "DESC";
 
-$gratis = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
-
+    $gratis = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
-if($titulosModulos[1] == "LO MÁS VENDIDO"){
+if ($titulosModulos[1] == "LO MÁS VENDIDO") {
 
-$ordenar = "ventas";
-$item = "estado";
-$valor = 1;
-$modo = "DESC";
+    $ordenar = "ventas";
+    $item = "estado";
+    $valor = 1;
+    $modo = "DESC";
 
-$ventas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
-
+    $ventas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
-if($titulosModulos[2] == "LO MÁS VISTO"){
+if ($titulosModulos[2] == "LO MÁS VISTO") {
 
-$ordenar = "vistas";
-$item = "estado";
-$valor = 1;
-$modo = "DESC";
+    $ordenar = "vistas";
+    $item = "estado";
+    $valor = 1;
+    $modo = "DESC";
 
-$vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
-
+    $vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
 $modulos = array($gratis, $ventas, $vistas);
 
-for($i = 0; $i < count($titulosModulos); $i ++){
+for ($i = 0; $i < count($titulosModulos); $i ++) {
 
-	echo '<div class="container-fluid well well-sm barraProductos">
+    echo '<div class="container-fluid well well-sm barraProductos">
 
 			<div class="container">
 				
@@ -81,7 +75,7 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 						<div class="btn-group pull-right">
 
-							 <button type="button" class="btn btn-default btnGrid" id="btnGrid'.$i.'">
+							 <button type="button" class="btn btn-default btnGrid" id="btnGrid' . $i . '">
 							 	
 								<i class="fa fa-th" aria-hidden="true"></i>  
 
@@ -89,7 +83,7 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 							 </button>
 
-							 <button type="button" class="btn btn-default btnList" id="btnList'.$i.'">
+							 <button type="button" class="btn btn-default btnList" id="btnList' . $i . '">
 							 	
 								<i class="fa fa-list" aria-hidden="true"></i> 
 
@@ -118,13 +112,13 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 						<div class="col-sm-6 col-xs-12">
 					
-							<h1><small>'.$titulosModulos[$i].' </small></h1>
+							<h1><small>' . $titulosModulos[$i] . ' </small></h1>
 
 						</div>
 
 						<div class="col-sm-6 col-xs-12">
 					
-							<a href="'.$rutaModulos[$i].' ">
+							<a href="' . $rutaModulos[$i] . ' ">
 								
 								<button class="btn btn-default backColor pull-right">
 									
@@ -144,123 +138,110 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 				</div>
 
-				<ul class="grid'.$i.'">';
+				<ul class="grid' . $i . '">';
 
-				foreach ($modulos[$i] as $key => $value) {
+    foreach ($modulos[$i] as $key => $value) {
 
-					if($value["estado"] != 0){
-					
-					echo '<li class="col-md-3 col-sm-6 col-xs-12">
+        if ($value["estado"] != 0) {
 
-							<figure>
+            echo '<li class="col-md-3 col-sm-6 col-xs-12">
+
+		<figure>
 								
-								<a href="'.$value["ruta"].'" class="pixelProducto" >
+		<a href="' . $value["ruta"] . '" class="pixelProducto" >
 									
-									<center>
-									<img src="'.$servidor.$value["portada"].'" class="img-responsive" width="100%">
-									</center>
+		<center>
+		<img src="' . $servidor . $value["portada"] . '" class="img-responsive" width="100%">
+		</center>
+		</a>
 
-								</a>
+		</figure>
 
-							</figure>
-
-							<h4>
+		<h4>
 					
-								<small>
+		<small>
 									
-									<a href="'.$value["ruta"].'" class="pixelProducto">
-										
-										'.$value["titulo"].'<br>
+		<a href="' . $value["ruta"] . '" class="pixelProducto">' . $value["titulo"] . '<br>
 
-										<span style="color:rgba(0,0,0,0)">-</span>';
+		<span style="color:rgba(0,0,0,0)">-</span>';
 
-										$fecha = date('Y-m-d');
-										$fechaActual = strtotime('-30 day', strtotime($fecha));
-										$fechaNueva = date('Y-m-d', $fechaActual);
+            $fecha = date('Y-m-d');
+            $fechaActual = strtotime('-30 day', strtotime($fecha));
+            $fechaNueva = date('Y-m-d', $fechaActual);
 
-										if($fechaNueva < $value["fecha"]){
+            if ($fechaNueva < $value["fecha"]) {
 
-											echo '<span class="label label-warning fontSize">Nuevo</span> ';
+                echo '<span class="label label-warning fontSize">Nuevo</span> ';
+            }
 
-										}
+            if ($value["oferta"] != 0 && $value["precio"] != 0) {
 
-										if($value["oferta"] != 0 && $value["precio"] != 0){
+                echo '<span class="label label-warning fontSize">' . $value["descuentoOferta"] . '% off</span>';
+            }
 
-											echo '<span class="label label-warning fontSize">'.$value["descuentoOferta"].'% off</span>';
+            echo '</a>	
 
-										}
+	</small>			
 
-									echo '</a>	
+	</h4>
 
-								</small>			
+	<div class="col-xs-6 precio">';
 
-							</h4>
+            if ($value["precio"] == 0) {
 
-							<div class="col-xs-6 precio">';
+               echo '<h2><small>GRATIS</small></h2>';
+            } else {
 
-							if($value["precio"] == 0){
+             if ($value["oferta"] != 0) {
 
-								echo '<h2><small>GRATIS</small></h2>';
-
-							}else{
-
-								if($value["oferta"] != 0){
-
-									echo '<h2>
-
-											<small>
+             echo '<h2>
+									<small>
 						
-												<strong class="oferta">USD $'.$value["precio"].'</strong>
+												<strong class="oferta">USD $' . $value["precio"] . '</strong>
 
 											</small>
 
-											<small>$'.$value["precioOferta"].'</small>
+											<small>$' . $value["precioOferta"] . '</small>
 										
 										</h2>';
+                } else {
 
-								}else{
+                    echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                }
+            }
 
-									echo '<h2><small>USD $'.$value["precio"].'</small></h2>';
-
-								}
-								
-							}
-											
-							echo '</div>
+            echo '</div>
 
 							<div class="col-xs-6 enlaces">
 								
 								<div class="btn-group pull-right">
 									
-									<button type="button" class="btn btn-default btn-xs deseos" idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+									<button type="button" class="btn btn-default btn-xs deseos" idProducto="' . $value["id"] . '" data-toggle="tooltip" title="Agregar a mi lista de deseos">
 										
 										<i class="fa fa-heart" aria-hidden="true"></i>
 
 									</button>';
 
-									if($value["tipo"] == "virtual" && $value["precio"] != 0){
+            if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
 
-										if($value["oferta"] != 0){
+                if ($value["oferta"] != 0) {
 
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
-
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-											</button>';
-
-										}else{
-
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+                    echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="' . $value["id"] . '" imagen="' . $servidor . $value["portada"] . '" titulo="' . $value["titulo"] . '" precio="' . $value["precioOferta"] . '" tipo="' . $value["tipo"] . '" peso="' . $value["peso"] . '" data-toggle="tooltip" title="Agregar al carrito de compras">
 
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
 											</button>';
+                } else {
 
-										}
+                    echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="' . $value["id"] . '" imagen="' . $servidor . $value["portada"] . '" titulo="' . $value["titulo"] . '" precio="' . $value["precio"] . '" tipo="' . $value["tipo"] . '" peso="' . $value["peso"] . '" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-									}
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-									echo '<a href="'.$value["ruta"].'" class="pixelProducto">
+											</button>';
+                }
+            }
+
+            echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
 									
 										<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
 											
@@ -275,27 +256,26 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 							</div>
 
 						</li>';
+        }
+    }
 
-					}
-				}
+    echo '</ul>
 
-				echo '</ul>
+				<ul class="list' . $i . '" style="display:none">';
 
-				<ul class="list'.$i.'" style="display:none">';
+    foreach ($modulos[$i] as $key => $value) {
 
-				foreach ($modulos[$i] as $key => $value) {
+        if ($value["estado"] != 0) {
 
-					if($value["estado"] != 0){
-
-					echo '<li class="col-xs-12">
+            echo '<li class="col-xs-12">
 					  
 				  		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 							   
 							<figure>
 						
-								<a href="'.$value["ruta"].'" class="pixelProducto">
+								<a href="' . $value["ruta"] . '" class="pixelProducto">
 									
-									<img src="'.$servidor.$value["portada"].'" class="img-responsive">
+									<img src="' . $servidor . $value["portada"] . '" class="img-responsive">
 
 								</a>
 
@@ -309,93 +289,84 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 
 								<small>
 								
-									<a href="'.$value["ruta"].'" class="pixelProducto">
+									<a href="' . $value["ruta"] . '" class="pixelProducto">
 										
-										'.$value["titulo"].'<br>';
+										' . $value["titulo"] . '<br>';
 
-										$fecha = date('Y-m-d');
-										$fechaActual = strtotime('-30 day', strtotime($fecha));
-										$fechaNueva = date('Y-m-d', $fechaActual);
+            $fecha = date('Y-m-d');
+            $fechaActual = strtotime('-30 day', strtotime($fecha));
+            $fechaNueva = date('Y-m-d', $fechaActual);
 
-										if($fechaNueva < $value["fecha"]){
+            if ($fechaNueva < $value["fecha"]) {
 
-											echo '<span class="label label-warning">Nuevo</span> ';
+                echo '<span class="label label-warning">Nuevo</span> ';
+            }
 
-										}
+            if ($value["oferta"] != 0 && $value["precio"] != 0) {
 
-										if($value["oferta"] != 0 && $value["precio"] != 0){
+                echo '<span class="label label-warning">' . $value["descuentoOferta"] . '% off</span>';
+            }
 
-											echo '<span class="label label-warning">'.$value["descuentoOferta"].'% off</span>';
-
-										}		
-
-									echo '</a>
+            echo '</a>
 
 								</small>
 
 							</h1>
 
-							<p class="text-muted">'.$value["titular"].'</p>';
+							<p class="text-muted">' . $value["titular"] . '</p>';
 
-							if($value["precio"] == 0){
+            if ($value["precio"] == 0) {
 
-								echo '<h2><small>GRATIS</small></h2>';
+                echo '<h2><small>GRATIS</small></h2>';
+            } else {
 
-							}else{
+                if ($value["oferta"] != 0) {
 
-								if($value["oferta"] != 0){
-
-									echo '<h2>
+                    echo '<h2>
 
 											<small>
 						
-												<strong class="oferta">USD $'.$value["precio"].'</strong>
+												<strong class="oferta">USD $' . $value["precio"] . '</strong>
 
 											</small>
 
-											<small>$'.$value["precioOferta"].'</small>
+											<small>$' . $value["precioOferta"] . '</small>
 										
 										</h2>';
+                } else {
 
-								}else{
+                    echo '<h2><small>USD $' . $value["precio"] . '</small></h2>';
+                }
+            }
 
-									echo '<h2><small>USD $'.$value["precio"].'</small></h2>';
-
-								}
-								
-							}
-
-							echo '<div class="btn-group pull-left enlaces">
+            echo '<div class="btn-group pull-left enlaces">
 						  	
-						  		<button type="button" class="btn btn-default btn-xs deseos"  idProducto="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+						  		<button type="button" class="btn btn-default btn-xs deseos"  idProducto="' . $value["id"] . '" data-toggle="tooltip" title="Agregar a mi lista de deseos">
 
 						  			<i class="fa fa-heart" aria-hidden="true"></i>
 
 						  		</button>';
 
-						  		if($value["tipo"] == "virtual" && $value["precio"] != 0){
+            if ($value["tipo"] == "virtual" && $value["precio"] != 0) {
 
-										if($value["oferta"] != 0){
+                if ($value["oferta"] != 0) {
 
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precioOferta"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
-
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-
-											</button>';
-
-										}else{
-
-											echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="'.$value["id"].'" imagen="'.$servidor.$value["portada"].'" titulo="'.$value["titulo"].'" precio="'.$value["precio"].'" tipo="'.$value["tipo"].'" peso="'.$value["peso"].'" data-toggle="tooltip" title="Agregar al carrito de compras">
+                    echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="' . $value["id"] . '" imagen="' . $servidor . $value["portada"] . '" titulo="' . $value["titulo"] . '" precio="' . $value["precioOferta"] . '" tipo="' . $value["tipo"] . '" peso="' . $value["peso"] . '" data-toggle="tooltip" title="Agregar al carrito de compras">
 
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
 											</button>';
+                } else {
 
-										}
+                    echo '<button type="button" class="btn btn-default btn-xs agregarCarrito"  idProducto="' . $value["id"] . '" imagen="' . $servidor . $value["portada"] . '" titulo="' . $value["titulo"] . '" precio="' . $value["precio"] . '" tipo="' . $value["tipo"] . '" peso="' . $value["peso"] . '" data-toggle="tooltip" title="Agregar al carrito de compras">
 
-									}
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 
-						  		echo '<a href="'.$value["ruta"].'" class="pixelProducto">
+											</button>';
+                }
+            }
+
+            echo '<a href="' . $value["ruta"] . '" class="pixelProducto">
 
 							  		<button type="button" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ver producto">
 
@@ -412,18 +383,14 @@ for($i = 0; $i < count($titulosModulos); $i ++){
 						<div class="col-xs-12"><hr></div>
 
 					</li>';
+        }
+    }
 
-					}
-
-				}
-
-				echo '</ul>
+    echo '</ul>
 
 			</div>
 
 		</div>';
-
 }
-
 ?>
 
