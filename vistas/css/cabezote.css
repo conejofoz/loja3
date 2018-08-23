@@ -27,6 +27,10 @@ TOP
 HEADER
 =============================================*/
 
+header .container{
+    position: relative;
+}
+
 header #logotipo img{
 	padding: 20px 60px;
 	padding-left: 0px;
@@ -34,6 +38,7 @@ header #logotipo img{
 
 header #btnCategorias{
 	margin:20px 0;
+        border-radius: 5px 0 0 5px;
 }
 
 header #btnCategorias p{
@@ -57,7 +62,7 @@ header #buscador input{
 header #buscador button{
 	padding:12px;
 	border:1px solid silver;
-	border-radius:0;
+	border-radius:0 5px 5px 0;
 }
 
 header #carrito{
@@ -67,7 +72,7 @@ header #carrito{
 header #carrito button{
 	padding:9px 15px;
 	border:1px solid silver;
-	border-radius:0;
+	border-radius:5px 0 0 5px;
 }
 
 header #carrito p{
@@ -75,13 +80,19 @@ header #carrito p{
 	padding-left:60px;
 	border:1px solid #aaa;
 	font-size:12px;
+        border-radius: 5px 5px 5px 5px;
 }
 
 header #categorias{
 	display:none;
 	margin-top:-10px;
-	position: relative;
+	/*position: relative;*/
+        position: absolute;
 	padding-bottom:20px;
+        z-index: 2;
+        border-radius: 5px;
+        box-shadow: 5px 5px 8px #888888;
+        opacity: 0.5;
 }
 
 header #categorias h4{

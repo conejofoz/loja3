@@ -253,6 +253,23 @@
 
 	})   
    
+	/*=============================================
+	COMPARTIR EN WHATSAPP
+	https://api.whatsapp.com/send?text     
+	=============================================*/
+
+	$(".btnwhats").click(function(){
+            
+            //alert("clicou");
+
+		window.open(
+
+			'https://api.whatsapp.com/send?text=<?php  echo $url.$cabeceras["ruta"];  ?>');
+
+		return false;
+
+	})   
+   
 </script>
 
 

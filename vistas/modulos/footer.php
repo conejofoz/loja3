@@ -118,3 +118,4 @@
         </div>
     </div>
 </div>
+<a href="https://api.whatsapp.com/send?l=pt_br&phone=595986824566" target="blank"><img src="https://i.imgur.com/XMsxHpu.png" style="height:40px; position:fixed; bottom: 25px; left: 25px; z-index:100;" data-selector="img"></a>

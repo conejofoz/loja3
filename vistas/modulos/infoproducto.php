@@ -165,6 +165,13 @@ INFOPRODUCTOS
 									Google
 								</p>
 							</li>
+                                                        
+                                                        <li>
+                                                            <p class="btnwhats">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                                WhatsApp
+                                                            </p>
+                                                        </li>
 							
 						</ul>
 
