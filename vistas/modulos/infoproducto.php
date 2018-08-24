@@ -146,7 +146,8 @@ INFOPRODUCTOS
 						
 						<a class="dropdown-toggle pull-right text-muted" data-toggle="dropdown" href="">
 							
-							<i class="fa fa-plus"></i> Compartir
+							<i class="fa fa-share-alt"></i> Compartir
+							
 
 						</a>
 

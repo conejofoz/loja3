@@ -51,8 +51,8 @@ class ControladorUsuarios {
                     $mail = new PHPMailer;
                     $mail->CharSet = 'UTF-8';
                     $mail->isMail();
-                    $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
-                    $mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales');
+                    $mail->setFrom('ecommerce@infinity-group.net', 'Infinity Site');
+                    $mail->addReplyTo('ecommerce@infinity-group.net', 'Infinity Site');
                     $mail->Subject = "Por favor verifique su dirección de correio eletrónico";
                     $mail->addAddress($_POST["regEmail"]);
                     $mail->msgHTML('<div style="width: 100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px">
@@ -284,8 +284,8 @@ class ControladorUsuarios {
                         $mail = new PHPMailer;
                         $mail->CharSet = 'UTF-8';
                         $mail->isMail();
-                        $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
-                        $mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales');
+                        $mail->setFrom('ecommerce@infinity-group.net', 'Infinity Site');
+                        $mail->addReplyTo('ecommerce@infinity-group.net', 'Infinity Site');
                         $mail->Subject = "Solicitud de nueva contraseña";
                         $mail->addAddress($_POST["passEmail"]);
                         $mail->msgHTML('<div style="width: 100%; background: #eee; position: relative; font-family: sans-serif; padding-bottom: 40px">
@@ -745,10 +745,10 @@ class ControladorUsuarios {
                 $mail = new PHPMailer;
                 $mail->CharSet = 'UTF-8';
                 $mail->isMail();
-                $mail->setFrom('cursos@tutorialesatualcance.com', 'Tutoriales');
-                $mail->addReplyTo('cursos@tutorialesatualcance.com', 'Tutoriales');
-                $mail->Subject = "Ha recibido una consulta";
-                $mail->addAddress("contacto@tiendaenlinea.com");
+                $mail->setFrom('ecommerce@infinity-group.net', $_POST["emailContactenos"]);
+                $mail->addReplyTo('ecommerce@infinity-group.net', 'Site contato');
+                $mail->Subject = "Ha recibido una consulta de: " . $_POST["nombreContactenos"];
+                $mail->addAddress("ecommerce@infinity-group.net");
                 $mail->msgHTML('
 
 						<div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
