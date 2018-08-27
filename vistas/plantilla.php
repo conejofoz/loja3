@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
     <head>
         
 
@@ -43,10 +43,19 @@
         <!--Marcado de HTML5-->
         <meta name="title" content="<?php echo $cabeceras['titulo']; ?>">
         <meta name="description" content="<?php echo $cabeceras['descripcion']; ?>">
-        <meta name="keyword" content="<?php echo $cabeceras['palavrasClaves']; ?>">
+        <meta name="keyword" content="<?php echo $cabeceras['palabrasClaves']; ?>">
         <title><?php echo $cabeceras['titulo']; ?></title>
         <meta charset="UTF-8">
+        <meta name="author" content="Silvio Coelho">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        
+        
+        <!--Geo localização-->
+        <meta name="geo.region" content="PY" />
+        <meta name="geo.placename" content="Ciudad del Este" />
+        <meta name="geo.position" content="-25.508772;-54.609126" />
+        <meta name="ICBM" content="-25.508772, -54.609126" />
+
         
 
         <!--=====================================
@@ -59,7 +68,7 @@
 	<meta property="og:image"  content="<?php echo $servidor.$cabeceras['portada'];?>">
 	<meta property="og:type"  content="website">	
 	<meta property="og:site_name" content="Tu logo">
-	<meta property="og:locale" content="es_CO">
+	<meta property="og:locale" content="es_PY">
 
 	<!--=====================================
 	Marcado para DATOS ESTRUCTURADOS GOOGLE

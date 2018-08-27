@@ -41,7 +41,14 @@
                 <h5>Dudas e inquietudes, contáctenos en:</h5>
                 <br>
                 <h5>
-                    <i class="fa fa-phone-square" aria-hidden="true"></i>(591)-061-xxxx
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>(595)-061-512216 - Infinity Matriz
+                    <br><br>
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>(595)-061-500628 - Filial Sax
+                    <br><br>
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>(595)-046-242456 - Filial Salto
+                    <br><br>
+                    <a href="https://api.whatsapp.com/send?l=pt_br&phone=595986824566" target="blank">
+                        <i class="fa fa-whatsapp" aria-hidden="true"></i>+595-986-824566</a>
                     <br><br>
                     <i class="fa fa-envelope" aria-hidden="true"></i>ecommerce@infinity-group.net
                     <br><br>
@@ -58,7 +65,7 @@
 
             <!--FORMULARIO CONTÁCTENOS-->
             <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 formContacto">
-                <h4>RESUELVA SU INQUIETUDE</h4>
+                <h4>Formulario de contacto</h4>
                 <form role="form" method="POST" onsubmit="return validarContactenos()">
                     <input type="text" id="nombreContactenos" name="nombreContactenos" class="form-control" placeholder="Escriba su nombre" required>
                     <br>

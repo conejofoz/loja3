@@ -63,7 +63,7 @@ if ($titulosModulos[2] == "LO MÁS VISTO") {
 
 $modulos = array($gratis, $ventas, $vistas);
 
-for ($i = 0; $i < count($titulosModulos); $i ++) {
+for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não mostrar os gratuitos
 
     echo '<div class="container-fluid well well-sm barraProductos">
 
