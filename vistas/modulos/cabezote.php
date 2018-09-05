@@ -188,7 +188,7 @@ if ($cliente->getAccessToken()) {
 <!--=====================================
 =            HEADER                     =
 ======================================-->
-<header class="container">
+<header class="container-fluid">
     <div class="container">
         <div class="row" id="cabezote">
             <!--=====================================
