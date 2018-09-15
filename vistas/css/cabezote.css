@@ -40,18 +40,26 @@ header #logotipo img{
     padding-left: 0px;
 }
 
+
+
 header #btnCategorias{
-    margin:20px 0;
+    margin:15px 0;
     border-radius: 5px 0 0 5px;
+    padding-bottom: 5px;
+    /*border:1px solid red;*/
+    color: #8dcd98;
 }
 
 header #btnCategorias p{
     line-height:46px;
     margin-bottom:0px;
+    padding-bottom: 5px;
+    
 }
 
 header #btnCategorias p span{
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 header #buscador{
@@ -60,31 +68,53 @@ header #buscador{
 
 header #buscador input{
     /*padding:19px;*/
-    border-radius:0;
+    border-radius:15px 0 0 15px;
+    border:1px solid #8dcd98;
 }
 
 header #buscador button{
-    padding:12px;
-    border:1px solid silver;
-    border-radius:0 5px 5px 0;
+    /*padding:12px;*/
+    border:1px solid #8dcd98;
+    border-radius:0 15px 15px 0;
 }
 
 header #carrito{
     margin:20px 0;
+    
 }
 
 header #carrito button{
-    padding:9px 15px;
-    border:1px solid silver;
-    border-radius:5px 0 0 5px;
+    /*padding:9px 15px;*/
+    /*border:1px solid red;*/
+    /*border-radius:15px 0 0 15px;*/
+    /*border: none;*/
+    /*margin-top: 2px;*/
+    
+}
+
+header a #btnCar{
+    border: none;
+}
+
+header #carrito span{
+    padding-left: 10px;
+    /*padding: 7px;*/
 }
 
 header #carrito p{
-    padding:2px;
-    padding-left:60px;
-    border:1px solid #aaa;
+    /*padding:2px;*/
+    /*padding-left:60px;*/
+    /*border:1px solid #8dcd98;*/
     font-size:12px;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 8px;
+
+}
+
+header #btnValorCarrinho{
+    border-radius: 50px;
+    /*border: solid 1px red;*/
+    background-color: #f8f8f8;
 }
 
 header #categorias{
@@ -95,9 +125,11 @@ header #categorias{
     position: absolute;
     padding-bottom:20px;
     z-index: 2;
-    border-radius: 5px;
-    box-shadow: 5px 5px 8px #888888;
+    /*border-radius: 5px;*/
+    /*box-shadow: 5px 5px 8px #888888;*/
     /*clear: both;*/
+    background-color: white;
+    border: solid 5px #8dcd98;
 
 }
 
@@ -188,10 +220,11 @@ ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
     header #logotipo img{
         padding:0px 0px;
         padding-left:0px;
-        margin-top: 00px;
+        margin-top: 5px;
         margin-bottom: 10px;
-        width: 215px;
-        height: 100px;
+        margin-left: 50px;
+        width: 182px;
+        height: 80px;
 
     }
 
@@ -314,7 +347,7 @@ MOVIL (XS revisamos en 320px)
     
     header #categorias ul li{
         color: white;
-        background-color:red;
+        /*background-color:red;*/
     }
 
     header #categorias{

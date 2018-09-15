@@ -209,7 +209,7 @@ if ($cliente->getAccessToken()) {
                 <!--======================================
                 =            BOTON CATEGORIAS            =
                 =======================================-->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 backColor" id="btnCategorias">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="btnCategorias">
                     <p>CATEGORIAS
                         <span class="pull-right">
                             <i class="fa fa-bars" aria-hidden="true"></i>
@@ -221,15 +221,14 @@ if ($cliente->getAccessToken()) {
                 =            BUSCADOR            =
                 ===============================-->
                 <div class="input-group col-lg-8 col-md-8 col-sm-7 col-xs-12" id="buscador">
-                    <input type="search" name="buscar" class="form-control input-lg" placeholder="Buscar...">
+                    <input type="search" name="buscar" class="form-control" placeholder="Buscar...">
                     <span class="input-group-btn">
                         <a href="<?php echo $url; ?>buscador/1/recientes">
-                            <button class="btn btn-default backColor" type="submit">
+                            <button class="btn btn-default" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
                         </a>
                     </span>
-
                 </div>
 
 
@@ -240,11 +239,15 @@ if ($cliente->getAccessToken()) {
             ==============================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
                 <a href="<?php echo $url; ?>carrito-de-compras">
-                    <button class="btn btn-default pull-left backColor">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    
+                    <button class="btn btn-default pull-left " id="btnCar">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="cantidadCesta"></span>
                     </button>
+                    
                 </a>
-                <p>TU CESTA <span class="cantidadCesta"></span><br>U$D $<span class="sumaCesta"></span></p>
+                <button class="btn btn-default" id="btnValorCarrinho">
+                    <i class="fa fa-dollar"> <span class="sumaCesta"></span></i>
+                </button>
 
             </div>
 
@@ -253,7 +256,7 @@ if ($cliente->getAccessToken()) {
         <!--=====================================
         =              CATEGORIAS            =
         ======================================-->
-        <div class="col-xs-12 backColor" id="categorias">
+        <div class="col-xs-12" id="categorias">
 
             <?php
             $item = null;
