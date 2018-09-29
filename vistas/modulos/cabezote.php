@@ -95,6 +95,7 @@ if ($cliente->getAccessToken()) {
             ======================================-->
             <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 social">
                 <ul>
+                    
                     <?php
                     $social = ControladorPlantilla::ctrEstiloPlantilla();
 
@@ -102,16 +103,18 @@ if ($cliente->getAccessToken()) {
                     foreach ($jsonRedesSociales as $key => $value) {
                         if ($value["activo"] != 0) {
                             echo '<li>
-                <a href="' . $value["url"] . '" target="_blank">
-                    <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
-                </a>
-          </li>';
+                                    <a href="' . $value["url"] . '" target="_blank">
+                                        <i class="fa ' . $value["red"] . ' redSocial ' . $value["estilo"] . '" arial-hidden="true"></i>
+                                    </a>
+                                 </li>';
                         }
                     }
                     ?>
-
-
+                    <a href="https://api.whatsapp.com/send?l=pt_br&phone=595986824566" target="blank">
+                        <i class="fa fa-whatsapp whatsappSuperior"> <span>+595-986-824566</span></i>
+                    </a>
                 </ul>
+                
             </div>
 
             <!--=====================================
@@ -168,9 +171,9 @@ if ($cliente->getAccessToken()) {
                             }
                         }
                     } else {
-                        echo '<li><a href="#modalIngreso" data-toggle="modal">Ingresar</a></li>
+                        echo '<li><a href="#modalIngreso" data-toggle="modal"><i class="fa fa-user iconeUser"></i></a></li>
                                  <li><a href="#" data-toggle="modal">|</a></li>
-                                 <li><a href="#modalRegistro" data-toggle="modal">Crear una cuenta</a></li>';
+                                 <li><a href="#modalRegistro" data-toggle="modal"><i class="fa fa-user-plus iconeUser"></i></a></li>';
                     }
                     ?>
 
@@ -188,13 +191,13 @@ if ($cliente->getAccessToken()) {
 <!--=====================================
 =            HEADER                     =
 ======================================-->
-<header class="container-fluid">
+<header class="container-fluid backColor colorTitulo">
     <div class="container">
         <div class="row" id="cabezote">
             <!--=====================================
             =            LOGOTIPO                   =
             ======================================-->
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="logotipo">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 anime anime-start" id="logotipo">
                 <a href="<?php echo $url; ?>">
                     <img src="<?php echo $servidor . $social["logo"]; ?>" class="">
                 </a>
@@ -221,10 +224,10 @@ if ($cliente->getAccessToken()) {
                 =            BUSCADOR            =
                 ===============================-->
                 <div class="input-group col-lg-8 col-md-8 col-sm-7 col-xs-12" id="buscador">
-                    <input type="search" name="buscar" class="form-control" placeholder="Buscar...">
+                    <input type="search" name="buscar" class="form-control input-lg" placeholder="Buscar...">
                     <span class="input-group-btn">
                         <a href="<?php echo $url; ?>buscador/1/recientes">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default btn-lg" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
                         </a>
@@ -238,16 +241,24 @@ if ($cliente->getAccessToken()) {
             =            CARRITO            =
             ==============================-->
             <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12" id="carrito">
+                <div col-xs-12>
                 <a href="<?php echo $url; ?>carrito-de-compras">
                     
-                    <button class="btn btn-default pull-left " id="btnCar">
+                    <button class="btn btn-default btn-circle pull-left btn-lg backColor" id="btnCar">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="cantidadCesta"></span>
                     </button>
                     
                 </a>
-                <button class="btn btn-default" id="btnValorCarrinho">
+<!--                <button class="btn btn-default btn-lg backColor" id="btnValorCarrinho">
                     <i class="fa fa-dollar"> <span class="sumaCesta"></span></i>
+                </button>-->
+                <button class="btn btn-default btn-lg backColor" id="btnValorCarrinho">
+                    <a href="https://api.whatsapp.com/send?l=pt_br&phone=595986824566" target="blank">
+
+<!--                    <i class="fa fa-whatsapp"> <span>+595-986-824566</span></i>-->
+                    </a>
                 </button>
+                </div>
 
             </div>
 
@@ -307,6 +318,18 @@ if ($cliente->getAccessToken()) {
     </div>
 
 </header>
+
+
+<div id="menuLinha" class="container-fluid menuLinha">
+    <ul>
+        <li><a href="#empresa">EMPRESA</a></li>
+        <li><a href="#equipe">EQUIPE</a></li>
+        <li><a href="#mapaLocalizacao">LOCALIZAÇÃO</a></li>
+        <li><a href="#formContacto">CONTATO</a></li>
+        
+    </ul>
+    
+</div>
 
 
 <!--VENTANA MODAL PARA EL REGISTRO-->

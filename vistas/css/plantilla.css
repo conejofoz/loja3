@@ -7,7 +7,9 @@ GLOBAL
 	padding:0px;
 	list-style: none;
 	text-decoration: none;
-	font-family: 'Rubik', sans-serif;
+	/*font-family: 'Rubik', sans-serif;*/
+	font-family: 'Ubuntu', sans-serif;
+        
 }
 
 body{
@@ -24,7 +26,7 @@ a:visited, a:link, a:focus, a:hover, a:active{
 }
 
 .barraSuperior{
-	background:black;
+	/*background:black;*/
 }
 
 .barraSuperior a{
@@ -263,4 +265,15 @@ MOVIL (XS revisamos en 320px)
 
 .bota{
     background-color: black;
+}
+
+
+.anime{
+    opacity: 0;
+    transform: translate3d(-100px,0,0);
+    transition: 3s;
+}
+.anime-start{
+    opacity: 1;
+    transform: translate3d(0,0,0);
 }

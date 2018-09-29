@@ -2,6 +2,64 @@
  PLANTILLA
  =============================================*/
 
+
+/*
+ * ANIMAÇÃO
+ */
+//evitar chamar a função scroll muintas vezes
+debounce = function(func, wait, immediate){
+    var timeout;
+    return function(){
+        var context = this, args = arguments;
+        var later = function(){
+            timeout = null;
+            if(!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if(callNow) func.apply(context, args);
+        };
+    };
+
+
+
+
+//(function(){
+var $target = $('.anime'),
+        animationClass = 'anime-start',
+        offset = $(window).height() * 3/4;
+
+function animeScroll(){
+    var documentTop = $(document).scrollTop();
+    $target.each(function(){
+        var itemTop = $(this).offset().top;
+        if(documentTop > itemTop - offset){
+            $(this).addClass('animationClass');
+        } else {
+           $(this).removeClass('animationClass'); 
+        }
+    });
+}
+//animeScroll();
+
+$(document).scroll(debounce(function(){
+    //animeScroll();
+    console.log('teste');
+},200));
+
+//}());
+
+ 
+//-----------------------------------------------------------
+
+
+
+
+
+
+
+
 var rutaOculta = $("#rutaOculta").val();
 
 //TOOLTIP
@@ -22,6 +80,9 @@ $.ajax({
 
         $(".backColor, .backColor a").css({"background": colorFondo,
             "color": colorTexto})
+        
+        $(".colorTitulo #categorias, .colorTitulo #categorias a").css({"background": colorTexto,
+            "color": colorFondo})
 
         $(".barraSuperior, .barraSuperior a").css({"background": barraSuperior,
             "color": textoSuperior})
@@ -261,3 +322,16 @@ $(".pixelOferta").click(function(){
         title: titulo
     })
 })
+
+
+
+
+$('.menuLinha a').click(function(e){
+    e.preventDefault();
+    var idMenu = $(this).attr('href'),
+    targetOffset = $(idMenu).offset().top,
+    menuHeight = 0; //$('se o menu fosse fixo').innerHeight();
+    $('html, body').animate({scrollTop: targetOffset - menuHeight}, 500);
+    //console.log(idMenu);
+    
+});

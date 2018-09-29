@@ -1,6 +1,6 @@
 <!--FOOTER-->
 <footer class="container-fluid">
-    <div class="container">
+    <div class="container anime anime-start">
         <div class="row">
             <!--CATEGORIAS E SUBCATEGORIAS-->
             <div class="col-lg-5 col-md-6 col-xs-12 footerCategorias">
@@ -64,7 +64,7 @@
 
 
             <!--FORMULARIO CONTÁCTENOS-->
-            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 formContacto">
+            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 formContacto " id="formContacto">
                 <h4>Formulario de contacto</h4>
                 <form role="form" method="POST" onsubmit="return validarContactenos()">
                     <input type="text" id="nombreContactenos" name="nombreContactenos" class="form-control" placeholder="Escriba su nombre" required>
@@ -88,7 +88,7 @@
 </footer>
 
 
-<div class="container-fluid final">
+<div class="container-fluid final anime anime-start" id="mapaLocalizacao">
     <!--<div class="container">-->
         <div class="row">
             <div class="col-xs-12 text-left text-muted">
