@@ -18,11 +18,11 @@
 BREADCRUMB INFOPRODUCTO
 =========================================================-->
 
-<div class="container-fluid well well-sm">
+<div class="container-fluid well well-sm visitas">
     <div class="container">
         <div class="row">
             <ul class="breadcrumb lead">
-                <h2 class="pull-right"><small>Tu eres nuestro visitante # <?php echo $totalVisitas["total"] ?></small></h2>
+                <h2 class="pull-right"><small><?php echo $totalVisitas["total"] ?> <i class="fa fa-users"></i></small> </h2>
             </ul>
         </div>
     </div>

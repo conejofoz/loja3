@@ -2,6 +2,28 @@
  PLANTILLA
  =============================================*/
 
+/*
+ * animate css
+ */
+$(function(){
+    var animacao = "animated fadeInLeft";
+    var fimAnimacao = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+    
+    $("#menuMapaLocalizacao").click(function(e){
+        $("#mapaLocalizacao").addClass(animacao).one(fimAnimacao,function(){
+           $(this).removeClass(animacao); 
+        });
+    });
+    
+    
+    
+    
+    new WOW().init();
+}); //fim jq
+
+
+
+
 
 /*
  * ANIMAÇÃO
@@ -41,10 +63,10 @@ function animeScroll(){
         }
     });
 }
-//animeScroll();
+animeScroll();
 
 $(document).scroll(debounce(function(){
-    //animeScroll();
+    animeScroll();
     console.log('teste');
 },200));
 
@@ -52,6 +74,16 @@ $(document).scroll(debounce(function(){
 
  
 //-----------------------------------------------------------
+
+
+
+
+//fim animate
+
+
+
+
+
 
 
 
@@ -331,7 +363,7 @@ $('.menuLinha a').click(function(e){
     var idMenu = $(this).attr('href'),
     targetOffset = $(idMenu).offset().top,
     menuHeight = 0; //$('se o menu fosse fixo').innerHeight();
-    $('html, body').animate({scrollTop: targetOffset - menuHeight}, 500);
+    $('html, body').animate({scrollTop: targetOffset - menuHeight}, 1000);
     //console.log(idMenu);
     
 });

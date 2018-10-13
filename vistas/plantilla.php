@@ -99,9 +99,14 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/flexslider.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/dscountdown.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/animate.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/style.css">
         
         <!--=========================================================
         FOLHAS DE ESTILO PERSONALIZADAS
@@ -127,6 +132,7 @@
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/sweetalert.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/dscountdown.min.js"></script>
         <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/knob.jquery.js"></script>
+        <script type="text/javascript" src="<?php echo $url; ?>vistas/js/plugins/wow.min.js"></script>
         <!--RELACIONADO COM COMPARTIR EM GOOGLE-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -205,6 +211,7 @@
         }
 //        SI O SI DEVEN APARECER
         include "modulos/visitas.php";
+        include "modulos/equipe.php";
         include "modulos/footer.php";
         
         ?>
@@ -299,11 +306,7 @@
     <?php //echo $plantilla["pixelFacebook"]; ?>
 </script>
 
-<!-- BEGIN JIVOSITE CODE {literal} -->
-<script type='text/javascript'>
-(function(){ var widget_id = '72ssXksjOU';var d=document;var w=window;function l(){
-var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
-<!-- {/literal} END JIVOSITE CODE -->
+
 
 
     </body>

@@ -53,7 +53,9 @@ SLIDE
 #slide .slideOpciones h1{
     text-transform: uppercase;
     font-size: 50px;
-    font-family: 'Ubuntu Condensed', sans-serif;
+    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+    /*font-family: 'Fredericka the Great', cursive;*/
+    font-family: 'Cabin Sketch', cursive;
     opacity: 1;
     top:-10%;
     color: #333;
@@ -73,14 +75,14 @@ SLIDE
     right: 15%;*/
 
 }
-#slide .slideOpciones h1{
+/*#slide .slideOpciones h1{
     text-transform: uppercase;
 
     font-family: 'Ubuntu Condensed', sans-serif;
     opacity: 1;
     top:-10%;
-    /*color: #333;*/
-}
+    color: #333;
+}*/
 #slide .slideOpciones h2{
     text-transform: uppercase;
     

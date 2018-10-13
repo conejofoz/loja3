@@ -1,6 +1,6 @@
 <!--FOOTER-->
 <footer class="container-fluid">
-    <div class="container anime anime-start">
+    <div class="container wow fadeInDown" data-wow-duration="2s">
         <div class="row">
             <!--CATEGORIAS E SUBCATEGORIAS-->
             <div class="col-lg-5 col-md-6 col-xs-12 footerCategorias">
@@ -88,7 +88,7 @@
 </footer>
 
 
-<div class="container-fluid final anime anime-start" id="mapaLocalizacao">
+<div class="container-fluid final anime anime-start" id="mapaLocalizacao" data-wow-duration='3s'>
     <!--<div class="container">-->
         <div class="row">
             <div class="col-xs-12 text-left text-muted">

@@ -78,6 +78,12 @@ header #logotipo img{
     padding-left: 0px;
 }
 
+header #logotipo img:hover{
+    transition: .3s all ease;
+    opacity:.8;
+    transform: scale(1.1,1.1);
+}
+
 
 
 header #btnCategorias{
@@ -202,8 +208,15 @@ header #categorias hr{
 }
 
 .menuLinha{
+    border-top: solid 3px rgba(255, 255, 255, .5);
+    padding: 10px;
+    /*margin-top: 15px;*/
     width: 100%;
     background: black;
+    
+}
+.menuLinha:hover{
+    background: rgba(0, 0, 0, .8);
 }
 .menuLinha ul{
     text-align: center;
@@ -211,14 +224,23 @@ header #categorias hr{
 .menuLinha ul li{
     display: inline-block;
 }
+.menuLinha ul li a:hover{
+    
+    border-top: solid 3px #fff;
+    opacity: 0.3;
+}
 .menuLinha a{
-    padding: 10px 40px;
+    padding: 0 1em;
     text-decoration: none;
     color: white;
     font-size: 1.5em;
+    font-family: 'Poiret One', cursive;
 }
 .menuLinha a:hover{
-    color: red;
+    font-size: 1.6em;
+    transition: .3s all ease;
+    opacity:.8;
+    transform: scale(1.1,1.1);
 }
 
 
@@ -458,6 +480,14 @@ MOVIL (XS revisamos en 320px)
 
     header #carrito{
         margin:0px;
+    }
+    
+    .menuLinha a{
+        padding: 0 0.2em;
+        font-size: 1em;
+    }
+    .menuLinha a:hover{
+        font-size: 1.2em;
     }
 
     .modalFormulario .google p{

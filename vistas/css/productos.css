@@ -65,10 +65,15 @@ VITRINA PRODUCTOS CUADRÍCULA
 .tituloDestacado h1{
 	margin-top:-5px;
         
+        
 }
 
 .tituloDestacado button span{
 	margin-left:5px;
+}
+
+.productos .tituloDestacado h1 small{
+    font-family: 'Poiret One', cursive;
 }
 
 .productos ul li figure{
@@ -121,6 +126,7 @@ VITRINA PRODUCTOS LISTA
 }
 
 .productos ul li h1 small{
+    
 	text-transform: uppercase;
 	font-size:20px;
 	font-weight: 700;

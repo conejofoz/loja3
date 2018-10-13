@@ -197,7 +197,7 @@ if ($cliente->getAccessToken()) {
             <!--=====================================
             =            LOGOTIPO                   =
             ======================================-->
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 anime anime-start" id="logotipo">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 wow flip" data-wow-duration="2s" data-wow-delay="3s" id="logotipo">
                 <a href="<?php echo $url; ?>">
                     <img src="<?php echo $servidor . $social["logo"]; ?>" class="">
                 </a>
@@ -324,7 +324,7 @@ if ($cliente->getAccessToken()) {
     <ul>
         <li><a href="#empresa">EMPRESA</a></li>
         <li><a href="#equipe">EQUIPE</a></li>
-        <li><a href="#mapaLocalizacao">LOCALIZAÇÃO</a></li>
+        <li><a href="#mapaLocalizacao" id="menuMapaLocalizacao">LOCALIZAÇÃO</a></li>
         <li><a href="#formContacto">CONTATO</a></li>
         
     </ul>

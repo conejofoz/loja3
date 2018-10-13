@@ -62,7 +62,7 @@ if ($titulosModulos[2] == "LO MÁS VISTO") {
 $modulos = array($gratis, $ventas, $vistas);
 
 for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não mostrar os gratuitos
-
+    $efeito = ($titulosModulos[$i]=='LO MÁS VISTO')?(' wow fadeInLeft'):(' wow fadeInDown');
     echo    '<div class="container-fluid well well-sm barraProductos">
 
 		<div class="container">
@@ -94,7 +94,7 @@ for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não most
             </div>
 
 
-            <div class="container productos">
+            <div class="container productos'. $efeito .'">
 	
 		<div class="container">
 		
@@ -128,6 +128,7 @@ for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não most
                     <ul class="grid' . $i . '">';
 
                     foreach ($modulos[$i] as $key => $value) {
+                        
 
                         if ($value["estado"] != 0) {
 
