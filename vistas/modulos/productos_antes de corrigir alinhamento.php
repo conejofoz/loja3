@@ -383,12 +383,12 @@ LISTAR PRODUCTOS
 			}else{
 
 				echo '<ul class="grid0">';
-                                        $contadorDeFotos = 0;
+
 					foreach ($productos as $key => $value) {
-                                            
+
 					if($value["estado"] != 0){
 					
-						echo '<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						echo '<li class="col-md-3 col-sm-6 col-xs-12">
 
 							<figure>
 								
@@ -511,15 +511,8 @@ LISTAR PRODUCTOS
 							</div>
 
 						</li>';
-                                                
 
 					}
-                                        $contadorDeFotos++;
-                                        if($contadorDeFotos >=4){
-                                            $contadorDeFotos = 0;
-                                            echo '<div class="clearfix"></div>';
-                                            //exit;
-                                        }
 				}
 
 				echo '</ul>
@@ -665,8 +658,7 @@ LISTAR PRODUCTOS
 
 			?>
 
-			<!--<div class="clearfix"></div>-->
-                        <div class="clearfix visible-lg"></div>
+			<div class="clearfix"></div>
 
 			<center>
 
