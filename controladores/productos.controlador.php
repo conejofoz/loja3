@@ -28,6 +28,12 @@ class ControladorProductos {
         return $respuesta;
     }
 
+    static public function ctrMostrarProductosNovo($ordenar, $item, $valor, $base, $tope, $modo) {
+        $tabla = "productos";
+        $respuesta = ModeloProductos::mdlMostrarProductosNovo($tabla, $ordenar, $item, $valor, $base, $tope, $modo);
+        return $respuesta;
+    }
+
     /*
      * MOSTRAR INFO PRODUTO
      */

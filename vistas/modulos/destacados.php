@@ -27,7 +27,7 @@ $titulosModulos = array("ARTÍCULOS GRATUITOS", "LO MÁS VENDIDO", "LO MÁS VIST
 $rutaModulos = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
 
 $base = 0;
-$tope = 4;
+$tope = 12;
 
 if ($titulosModulos[0] == "ARTÍCULOS GRATUITOS") {
 
@@ -46,7 +46,8 @@ if ($titulosModulos[1] == "LO MÁS VENDIDO") {
     $valor = 1;
     $modo = "DESC";
 
-    $ventas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+    //$ventas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+    $ventas = ControladorProductos::ctrMostrarProductosNovo($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
 if ($titulosModulos[2] == "LO MÁS VISTO") {
@@ -56,7 +57,7 @@ if ($titulosModulos[2] == "LO MÁS VISTO") {
     $valor = 1;
     $modo = "DESC";
 
-    $vistas = ControladorProductos::ctrMostrarProductos($ordenar, $item, $valor, $base, $tope, $modo);
+    $vistas = ControladorProductos::ctrMostrarProductosNovo($ordenar, $item, $valor, $base, $tope, $modo);
 }
 
 $modulos = array($gratis, $ventas, $vistas);
@@ -126,7 +127,9 @@ for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não most
                     </div>
 
                     <ul class="grid' . $i . '">';
-
+    
+    
+                    $contadorDeFotos = 0;
                     foreach ($modulos[$i] as $key => $value) {
                         
 
@@ -245,6 +248,14 @@ for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não most
 
                                     </li>';
                         }
+                        
+                        
+                        $contadorDeFotos++;
+                                        if($contadorDeFotos >=4){
+                                            $contadorDeFotos = 0;
+                                            echo '<div class="clearfix"></div>';
+                                            //exit;
+                                        }
                     }
 
                     echo '</ul>
