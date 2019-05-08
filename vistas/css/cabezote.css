@@ -244,6 +244,43 @@ header #categorias hr{
 }
 
 
+.menuProduto{
+    /*border-top: solid 3px rgba(255, 255, 255, .5);*/
+    padding: 10px;
+    /*margin-top: 15px;*/
+    width: 100%;
+    background: black;
+    
+}
+.menuProduto:hover{
+    background: rgba(0, 0, 0, .8);
+}
+.menuProduto ul{
+    text-align: center;
+}
+.menuProduto ul li{
+    /*display: inline-block;*/
+}
+.menuProduto ul li a:hover{
+    
+    /*border-top: solid 3px #fff;*/
+    opacity: 0.3;
+}
+.menuProduto a{
+    padding: 0 1em;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+    font-family: 'Poiret One', cursive;
+}
+.menuProduto a:hover{
+    font-size: 1.6em;
+    transition: .3s all ease;
+    opacity:.8;
+    transform: scale(1.1,1.1);
+}
+
+
 /*=============================================
 VENTANAS MODALES
 =============================================*/

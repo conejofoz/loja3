@@ -142,7 +142,7 @@ for ($i = 1; $i < count($titulosModulos); $i ++) { //começa de 1 para não most
                                             <a href="' . $value["ruta"] . '" class="pixelProducto" >
 									
                                                 <center>
-                                                    <img src="' . $servidor . $value["portada"] . '" class="img-responsive" width="100%">
+                                                    <img src="' . $servidor . $value["portada"] . '" class="img-responsive thumbnail" width="100%">
                                                 </center>
                                             </a>
 

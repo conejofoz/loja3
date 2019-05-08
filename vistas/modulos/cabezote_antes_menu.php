@@ -1,4 +1,3 @@
-
 <?php
 $servidor = ruta::ctrRutaServidor();
 $url = ruta::ctrRuta();
@@ -213,13 +212,13 @@ if ($cliente->getAccessToken()) {
                 <!--======================================
                 =            BOTON CATEGORIAS            =
                 =======================================-->
-<!--                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="btnCategorias">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="btnCategorias">
                     <p>CATEGORIAS
                         <span class="pull-right">
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </span>
                     </p>
-                </div>-->
+                </div>
 
                 <!--==============================
                 =            BUSCADOR            =
@@ -269,6 +268,7 @@ if ($cliente->getAccessToken()) {
         =              CATEGORIAS            =
         ======================================-->
         <div class="col-xs-12" id="categorias">
+
             <?php
             $item = null;
             $valor = null;
@@ -318,6 +318,9 @@ if ($cliente->getAccessToken()) {
     </div>
 
 </header>
+<!--menu novo-->
+
+<!--menu novo fim-->
 
 
 <div id="menuLinha" class="container-fluid menuLinha">
@@ -539,7 +542,6 @@ if ($cliente->getAccessToken()) {
 
 
 
-
 <!--================================
 VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
 =================================-->
@@ -601,94 +603,6 @@ VENTANA MODAL PARA OLVIDO DE CONTRASEÑA
 
 
 
-<!--menu novo-->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid menuProduto">
-      <div class="col-xs-4"></div>
-      <div class="">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <!--<a class="navbar-brand" href="#"><img alt="Brand" width="100" height="30" src="<?php //echo $servidor . $social["logo"]; ?>"></a>-->
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-<!--        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-        <!--<li><a href="#">PRODUTOS</a></li>-->
-          
-            <?php
-            $item = null;
-            $valor = null;
-            $categorias = ControladorProductos::ctrMostrarCategorias($item, $valor);
-
-            foreach ($categorias as $key => $value) {
-
-                if ($value["estado"] != 0) {
-
-            ?>
-        <li class="dropdown">
-            
-            <a href="<?php echo $url .$value["ruta"] ;?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $value["categoria"] ;?> <span class="caret"></span></a>
-                
-                <ul class="dropdown-menu">
-                    
-                    <?php
-                    $item = "id_categoria";
-                    $valor = $value["id"];
-                    $subcategorias = ControladorProductos::ctrMostrarSubCategorias($item, $valor);
-
-                    foreach ($subcategorias as $key => $value) {
-                        if ($value["estado"] != 0) {
-                        ?>          
-                            <li><a href="<?php echo $url . $value["ruta"] ;?>"><?php echo $value["subcategoria"] ;?></a></li>
-                        <?php  
-                        }
-                    };?>
-
-                </ul>
-        </li>
-            <?php
-                }
-            };?>
-        
-        
-        
-        
-        
-      </ul>
-<!--      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>-->
-    </div><!-- /.navbar-collapse -->
-      </div>
-      <div class="col-xs-4"></div>
-  </div><!-- /.container-fluid -->
-</nav>
-</div>
-<!--menu novo fim-->
 
 
 

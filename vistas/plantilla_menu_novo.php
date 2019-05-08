@@ -95,9 +95,7 @@
         PLUGINS DE CSS
         ==========================================================-->
         <link rel="icon" href="<?php echo $url; ?>vistas/img/plantilla/icono.png">
-        <link rel="stylesheet" type="text/css" href="<?php  echo $url; ?>vistas/css/plugins/bootstrap.min.css">
-<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed" rel="stylesheet">
@@ -108,7 +106,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/dscountdown.css">
         <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/plugins/animate.css">
-        <!--<link rel="stylesheet" type="text/css" href="<?php //echo $url; ?>vistas/css/style.css">-->
+        <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>vistas/css/style.css">
         
         <!--=========================================================
         FOLHAS DE ESTILO PERSONALIZADAS

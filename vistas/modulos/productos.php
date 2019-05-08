@@ -394,7 +394,7 @@ LISTAR PRODUCTOS
 								
 								<a href="'.$url.$value["ruta"].'" class="pixelProducto">
 									
-									<img src="'.$servidor.$value["portada"].'" class="img-responsive">
+									<img src="'.$servidor.$value["portada"].'" class="img-responsive thumbnail">
 
 								</a>
 
