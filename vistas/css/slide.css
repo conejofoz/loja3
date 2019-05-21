@@ -18,6 +18,7 @@ SLIDE
     width: 100%;
     overflow: hidden;
     padding: 0;
+    margin-top: -20px;
 }
 #slide ul{
     position: relative;
